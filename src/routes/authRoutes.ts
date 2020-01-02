@@ -1,64 +1,14 @@
-import { Router, Request, Response } from 'express';
-
+import { Router, Request, Response, NextFunction } from 'express';
+import passport from 'passport';
 const router = Router();
 
-interface LoginRequest extends Request {
-    body: {
-        email: string;
-        password: string;
-    };
-}
+router.get(
+    '/auth/google',
+    passport.authenticate('google', {
+        scope: ['profile', 'email']
+    })
+);
 
-router.get('/login', (req, res) => {
-    res.send(`
-        <div>
-            <form method="POST">
-                <h1>Login</h1>
-                <div>
-                    <label>Email</label>
-                    <input name="email" />
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input type="password" name="password" />
-                </div>
-                <button>Submit</button>
-            </form>
-        </div>
-    `);
-});
+router.get('/auth/google/callback', passport.authenticate('google'));
 
-router.post('/login', (req: LoginRequest, res: Response) => {
-    const { email, password } = req.body;
-    if (email && password && email === 'asdf' && password === 'asdf') {
-        req.session = { loggedIn: true };
-        res.redirect('/');
-    } else {
-        res.status(403).send('Invalid email or password.');
-    }
-});
-
-router.get('/', (req: Request, res: Response) => {
-    if (req.session && req.session.loggedIn) {
-        res.send(`
-            <div>
-                <h1>Log Out</h1>
-                <a href="/logout">Log Out</a>
-            </div>
-        `);
-    } else {
-        res.send(`
-            <div>
-                <h1>Log In</h1>
-                <a href="/login">Log In</a>
-            </div>
-        `);
-    }
-});
-
-router.get('/logout', (req: Request, res: Response) => {
-    req.session = undefined;
-    res.redirect('/');
-});
-
-export { router };
+export { router as authRoutes };
