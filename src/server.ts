@@ -19,7 +19,7 @@ mongoose
     })
     .then(() => console.log('MongoDB running...'));
 
-// Express
+// Express App
 const app = express();
 
 // Middleware
