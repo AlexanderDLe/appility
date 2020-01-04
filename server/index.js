@@ -6,6 +6,7 @@ const keys = require('./config/keys');
 require('./models/User');
 require('./services/passport');
 
+// Connect to database
 mongoose
     .connect(keys.mongoURI, {
         useNewUrlParser: true,
@@ -14,8 +15,10 @@ mongoose
     .then(() => console.log('MongoDB running...'))
     .catch(err => console.error(err));
 
+// Create express app
 const app = express();
 
+// Set up middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
@@ -27,8 +30,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/authRoutes')(app);
+// Define routes
+app.use('/', require('./routes/authRoutes'));
 
+// If in production, use build directories
 if (process.env.NODE_ENV === 'production') {
     // Ensure express serves production assets
     // like main.js file, or main.css file

@@ -4,16 +4,19 @@ const keys = require('../config/keys');
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
+// Serialize user data and stuff into cookie
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
 
+// Deserialize to Extract user data from cookie
 passport.deserializeUser((id, done) => {
     User.findById(id).then(user => {
         done(null, user);
     });
 });
 
+// Google auth configuration
 passport.use(
     new GoogleStrategy(
         {
