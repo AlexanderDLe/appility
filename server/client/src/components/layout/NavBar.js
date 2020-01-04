@@ -48,6 +48,10 @@ const useStyles = makeStyles(theme =>
     })
 );
 
+let logoStyle = {
+    paddingRight: '20px'
+};
+
 function ScrollTop(props) {
     const { children, window } = props;
     const classes = useStyles();
@@ -77,10 +81,6 @@ function ScrollTop(props) {
     );
 }
 
-let logoStyle = {
-    paddingRight: '20px'
-};
-
 export default function NavBar() {
     const classes = useStyles();
 
@@ -99,7 +99,23 @@ export default function NavBar() {
                                     className={classes.navButtons}
                                     href="/auth/google"
                                 >
+                                    Tests
+                                </a>
+                            </Button>
+                            <Button color="inherit">
+                                <a
+                                    className={classes.navButtons}
+                                    href="/auth/google"
+                                >
                                     Login
+                                </a>
+                            </Button>
+                            <Button color="inherit">
+                                <a
+                                    className={classes.navButtons}
+                                    href="/auth/google"
+                                >
+                                    Register
                                 </a>
                             </Button>
                         </Toolbar>

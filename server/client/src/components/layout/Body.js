@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 const stylez = {
-    height: '300vh'
+    height: '300vh',
+    padding: '24px'
 };
 
 const Dashboard = () => <h1>Dashboard</h1>;
