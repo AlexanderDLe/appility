@@ -18,6 +18,7 @@ router.get('/api/logout', (req: Request, res: Response) => {
 
 router.get('/api/current_user', (req: Request, res: Response) => {
     res.send(req.user);
+    // res.send('hello');
 });
 
 export { router as authRoutes };

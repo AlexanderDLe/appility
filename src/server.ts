@@ -17,7 +17,8 @@ mongoose
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-    .then(() => console.log('MongoDB running...'));
+    .then(() => console.log('MongoDB running...'))
+    .catch(err => console.log(err));
 
 // Express App
 const app = express();

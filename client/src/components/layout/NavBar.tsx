@@ -10,6 +10,7 @@ import Slide from '@material-ui/core/Slide';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
+import logo from '../../img/Logo.png';
 
 interface Props {
     window?: () => Window;
@@ -75,6 +76,10 @@ function ScrollTop(props: Props) {
     );
 }
 
+let logoStyle = {
+    paddingRight: '20px'
+};
+
 export default function NavBar() {
     const classes = useStyles();
 
@@ -84,13 +89,14 @@ export default function NavBar() {
                 <AppBar position="sticky">
                     <Container>
                         <Toolbar>
+                            <img style={logoStyle} alt="logo" src={logo} />
                             <Typography variant="h6" className={classes.title}>
                                 &lt;REACTOR&gt;
                             </Typography>
                             <Button color="inherit">
                                 <a
                                     className={classes.title}
-                                    href="http://locahost:5000/auth/google"
+                                    href="http://localhost:5000/auth/google"
                                 >
                                     Login
                                 </a>

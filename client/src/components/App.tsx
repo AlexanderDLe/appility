@@ -1,10 +1,20 @@
 import '../styles/main.sass';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavBar, Body } from './layout';
-import { Container } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Container, CssBaseline } from '@material-ui/core';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
-const App = (): JSX.Element => {
+interface Props {
+    fetchUser: Function;
+}
+
+const App = (props: Props): JSX.Element => {
+    useEffect(() => {
+        props.fetchUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <React.Fragment>
             <div id="back-to-top-anchor"></div>
@@ -17,4 +27,4 @@ const App = (): JSX.Element => {
     );
 };
 
-export default App;
+export default connect(null, actions)(App);
