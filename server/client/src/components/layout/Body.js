@@ -5,7 +5,9 @@ import Landing from './Landing';
 
 const stylez = {
     height: '300vh',
-    padding: '24px'
+    padding: '24px',
+    backgroundColor: 'rgb(31, 31, 31)',
+    boxShadow: '0px 0px 25px -15px #000'
 };
 
 export default function Body() {

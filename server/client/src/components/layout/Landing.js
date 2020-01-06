@@ -1,6 +1,6 @@
 import React from 'react';
-import Mascot from '../../img/Mascot.png';
 import { Grid, makeStyles } from '@material-ui/core';
+import AnimatedMascot from '../misc/AnimatedMascot';
 
 const useStyles = makeStyles(theme => ({
     img: {
@@ -10,11 +10,11 @@ const useStyles = makeStyles(theme => ({
     text: {
         textAlign: 'center',
         fontFamily: 'Audiowide',
-        color: '#e6ce72'
+        color: theme.palette.secondary.main
     },
     h3text: {
         fontFamily: 'Roboto',
-        color: '#d4bf6a'
+        color: theme.palette.secondary.light
     }
 }));
 
@@ -26,16 +26,16 @@ export default function Landing() {
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <div className={classes.img}>
-                        <img alt="Mascot" src={Mascot} />
+                        <AnimatedMascot />
                     </div>
                 </Grid>
                 <Grid item xs={12}>
                     <div className={classes.text}>
                         <h1>Welcome to Reactor</h1>
-                        <h3 className={classes.h3text}>
+                        <p className={classes.h3text}>
                             This site is dedicated to improving your knowledge
                             in full stack development.
-                        </h3>
+                        </p>
                     </div>
                 </Grid>
             </Grid>
