@@ -11,6 +11,7 @@ import reducers from './reducers';
 import { ThemeProvider } from '@material-ui/core';
 import { theme } from './styles/theme';
 
+console.log('Theme Object:');
 console.log(theme);
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 

@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import { logoutUser } from '../../actions';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -22,35 +25,6 @@ function HideOnScroll(props) {
         </Slide>
     );
 }
-
-const useStyles = makeStyles(theme =>
-    createStyles({
-        root: {
-            flexGrow: 1
-        },
-        menuButton: {
-            marginRight: theme.spacing(2)
-        },
-        title: {
-            flexGrow: 1,
-            fontFamily: 'Audiowide'
-        },
-        buttons: {
-            fontFamily: 'Audiowide',
-            textDecoration: 'none',
-            color: 'white'
-        },
-        backToTopRoot: {
-            position: 'fixed',
-            bottom: theme.spacing(2),
-            right: theme.spacing(2)
-        }
-    })
-);
-let logoStyle = {
-    paddingRight: '20px'
-};
-
 function ScrollTop(props) {
     const { children, window } = props;
     const classes = useStyles();
@@ -80,8 +54,66 @@ function ScrollTop(props) {
     );
 }
 
-export default function NavBar() {
+const useStyles = makeStyles(theme =>
+    createStyles({
+        root: {
+            flexGrow: 1
+        },
+        menuButton: {
+            marginRight: theme.spacing(2)
+        },
+        title: {
+            flexGrow: 1,
+            fontFamily: 'Audiowide'
+        },
+        buttons: {
+            fontFamily: 'Audiowide',
+            textDecoration: 'none',
+            color: 'white'
+        },
+        backToTopRoot: {
+            position: 'fixed',
+            bottom: theme.spacing(2),
+            right: theme.spacing(2)
+        },
+        logoStyle: {
+            paddingRight: '25px'
+        }
+    })
+);
+
+const NavBar = props => {
     const classes = useStyles();
+    console.log('NavBar props');
+    console.log(props);
+
+    const logOutUser = () => {
+        props.logoutUser();
+    };
+
+    const renderNavigation = () => {
+        if (props.auth) {
+            return (
+                <Button color="inherit">
+                    <Link
+                        to="/"
+                        onClick={logOutUser}
+                        className={classes.buttons}
+                    >
+                        Sign Out
+                    </Link>
+                </Button>
+            );
+        } else {
+            return (
+                <Button color="inherit">
+                    <Link to="/auth" className={classes.buttons}>
+                        Sign In
+                    </Link>
+                </Button>
+            );
+        }
+    };
 
     return (
         <React.Fragment>
@@ -90,18 +122,18 @@ export default function NavBar() {
                     <Container>
                         <Toolbar>
                             <Link to="/">
-                                <img style={logoStyle} alt="logo" src={logo} />
+                                <img
+                                    className={classes.logoStyle}
+                                    alt="logo"
+                                    src={logo}
+                                />
                             </Link>
                             <Typography variant="h6" className={classes.title}>
                                 <Link to="/" className={classes.buttons}>
                                     &lt;REACTOR&gt;
                                 </Link>
                             </Typography>
-                            <Button color="inherit">
-                                <Link className={classes.buttons} to="/auth">
-                                    Sign In
-                                </Link>
-                            </Button>
+                            {renderNavigation()}
                         </Toolbar>
                     </Container>
                 </AppBar>
@@ -117,4 +149,12 @@ export default function NavBar() {
             </ScrollTop>
         </React.Fragment>
     );
-}
+};
+
+const mapStateToProps = state => {
+    return {
+        auth: state.auth
+    };
+};
+
+export default connect(mapStateToProps, { logoutUser })(NavBar);

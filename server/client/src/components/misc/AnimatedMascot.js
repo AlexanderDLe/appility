@@ -17,7 +17,6 @@ export default function AnimatedMascot() {
             }
         >
             <animated.img
-                class="card1"
                 style={{
                     transform: props.xy.interpolate(trans1)
                 }}
