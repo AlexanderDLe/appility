@@ -6,18 +6,11 @@ const useStyles = makeStyles({
     textField: {
         width: '85%',
         maxWidth: '350px',
-        margin: '15px',
-        borderColor: 'green'
+        margin: '10px'
     },
     notchedOutline: {
         borderWidth: '1px',
         borderColor: theme.palette.secondary.light
-    },
-    textDiv: {
-        padding: '20px'
-    },
-    pointer: {
-        cursor: 'pointer'
     }
 });
 

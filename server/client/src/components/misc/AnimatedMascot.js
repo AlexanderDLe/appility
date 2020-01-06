@@ -6,6 +6,12 @@ const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
 const trans1 = (x, y) => `translate3d(${x / 10}px,${y / 10}px,0)`;
 
 export default function AnimatedMascot() {
+    const fall = useSpring({
+        transform: 'translateY(0%)',
+        from: {
+            transform: 'translateY(-100%)'
+        }
+    });
     const [props, set] = useSpring(() => ({
         xy: [0, 0],
         config: { mass: 10, tension: 550, friction: 140 }
@@ -19,12 +25,14 @@ export default function AnimatedMascot() {
                 set({ xy: calc(x, y) })
             }
         >
-            <animated.img
-                style={{
-                    transform: props.xy.interpolate(trans1)
-                }}
-                src={Mascot}
-            />
+            <animated.div style={fall}>
+                <animated.img
+                    style={{
+                        transform: props.xy.interpolate(trans1)
+                    }}
+                    src={Mascot}
+                />
+            </animated.div>
         </div>
     );
 }

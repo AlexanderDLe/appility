@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import MyTextField from './MyTextField';
 import MyButton from './MyButton';
+import AuthHeader from './AuthHeader';
 import { useForm } from 'react-hook-form';
 import { EmailRegex } from '../misc/EmailRegex';
 
@@ -22,11 +23,6 @@ const useStyles = makeStyles({
     iconPadding: {
         paddingLeft: '15px',
         display: 'inline'
-    },
-    textField: {
-        width: '85%',
-        maxWidth: '350px',
-        margin: '15px'
     },
     textDiv: {
         padding: '20px',
@@ -55,11 +51,13 @@ export default function AuthForm() {
         console.log(data);
     };
     let authText = '';
-    if (authState === 'LOGIN') {
-        authText = 'SIGN IN';
-    } else {
-        authText = 'REGISTER';
-    }
+    const setAuthText = () => {
+        if (authState === 'LOGIN') {
+            authText = 'SIGN IN';
+        } else {
+            authText = 'REGISTER';
+        }
+    };
     const changeAuthState = () => {
         if (authState === auth.LOGIN) {
             setAuthState(auth.REGISTER);
@@ -67,6 +65,7 @@ export default function AuthForm() {
             setAuthState(auth.LOGIN);
         }
     };
+    setAuthText();
 
     // Form Error Handlers //
     const nameErrorHandler = () => {
@@ -107,31 +106,13 @@ export default function AuthForm() {
             }
         }
     };
-    // Auth Form Helper //
-    const renderFormHelper = () => {
-        if (authState === 'LOGIN') {
-            return (
-                <React.Fragment>
-                    <p>Forgot your password?</p>
-                    <div onClick={changeAuthState} className={classes.pointer}>
-                        <p>Don't have an account? Register here.</p>
-                    </div>
-                </React.Fragment>
-            );
-        } else {
-            return (
-                <React.Fragment>
-                    <div onClick={changeAuthState} className={classes.pointer}>
-                        <p>Have an account? Sign in here.</p>
-                    </div>
-                </React.Fragment>
-            );
-        }
-    };
 
     return (
         <div>
-            <h1 className={classes.header}>{authText}</h1>
+            {/* <h1 className={classes.header}>{authText}</h1> */}
+            <h1 className={classes.header}>
+                <AuthHeader authState={authState} />
+            </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <MyTextField
                     registration={register({
@@ -191,7 +172,28 @@ export default function AuthForm() {
                 </div>
             </MyButton>
             <div className={classes.textDiv}>
-                {renderFormHelper()}
+                {authState === 'LOGIN' ? (
+                    <React.Fragment>
+                        <div className={classes.pointer}>
+                            <p>Forgot your password?</p>
+                        </div>
+                        <div
+                            onClick={changeAuthState}
+                            className={classes.pointer}
+                        >
+                            <p>Don't have an account? Register here.</p>
+                        </div>
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment>
+                        <div
+                            onClick={changeAuthState}
+                            className={classes.pointer}
+                        >
+                            <p>Have an account? Sign in here.</p>
+                        </div>
+                    </React.Fragment>
+                )}
                 <Link className={classes.privacyPolicy} to="/privacy-policy">
                     Click here to read our privacy policy.
                 </Link>
