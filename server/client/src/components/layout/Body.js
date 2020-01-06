@@ -2,6 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Authentication from '../auth/Authentication';
 import Landing from './Landing';
+import PrivacyPolicy from '../misc/PrivacyPolicy';
 
 const stylez = {
     height: '300vh',
@@ -15,6 +16,7 @@ export default function Body() {
         <div style={stylez}>
             <Route exact path="/" component={Landing} />
             <Route exact path="/auth" component={Authentication} />
+            <Route exact path="/privacy-policy" component={PrivacyPolicy} />
         </div>
     );
 }

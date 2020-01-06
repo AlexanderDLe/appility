@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
 import AnimatedMascot from '../misc/AnimatedMascot';
 
@@ -18,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function Landing() {
+function Landing(props) {
     const classes = useStyles();
 
     return (
@@ -31,7 +32,12 @@ export default function Landing() {
                 </Grid>
                 <Grid item xs={12}>
                     <div className={classes.text}>
-                        <h1>Welcome to Reactor</h1>
+                        <h1>
+                            Welcome{' '}
+                            {props.auth
+                                ? ` ${props.auth.username}`
+                                : ' to Reactor'}
+                        </h1>
                         <p className={classes.h3text}>
                             This site is dedicated to improving your knowledge
                             in full stack development.
@@ -42,3 +48,11 @@ export default function Landing() {
         </div>
     );
 }
+
+const mapStateToProps = state => {
+    return {
+        auth: state.auth
+    };
+};
+
+export default connect(mapStateToProps)(Landing);

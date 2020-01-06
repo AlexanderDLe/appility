@@ -26,29 +26,25 @@ export default function MyTextField(props) {
 
     return (
         <TextField
+            /// PROPERTIES ///
+            error={props.error}
+            helperText={props.helperText}
+            name={props.name}
+            inputRef={props.registration}
             label={props.label}
             type={props.type}
-            id="outlined-basic"
             variant="outlined"
             color="secondary"
             className={classes.textField}
+            /// STYLES ///
             InputLabelProps={{
-                style: {
-                    color: theme.palette.secondary.light
-                }
+                style: { color: theme.palette.secondary.light }
             }}
             InputProps={{
-                classes: {
-                    notchedOutline: classes.notchedOutline
-                }
+                classes: { notchedOutline: classes.notchedOutline }
             }}
             inputProps={{
-                style: {
-                    '&:hover': {
-                        borderColor: theme.palette.secondary.light
-                    },
-                    color: 'white'
-                }
+                style: { color: 'white' }
             }}
         />
     );

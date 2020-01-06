@@ -12,6 +12,9 @@ export default function AnimatedMascot() {
     }));
     return (
         <div
+            style={{
+                padding: '30px'
+            }}
             onMouseMove={({ clientX: x, clientY: y }) =>
                 set({ xy: calc(x, y) })
             }
