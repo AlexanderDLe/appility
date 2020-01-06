@@ -14,7 +14,6 @@ const useStyles = makeStyles({
         fontWeight: 'lighter'
     },
     icon: {
-        
         color: 'white'
     },
     iconPadding: {
@@ -90,7 +89,7 @@ export default function AuthForm(props) {
                     </div>
                 </div>
             </MyButton>
-            <MyButton variant="contained" href="/auth/google" color="#5b5bff">
+            <MyButton variant="contained" href="/auth/facebook" color="#5b5bff">
                 <div className={classes.icon}>
                     <FontAwesomeIcon icon={faFacebookF} />
                     <div className={classes.iconPadding}>

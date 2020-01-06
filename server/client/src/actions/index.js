@@ -9,6 +9,6 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const logoutUser = () => async dispatch => {
-    const response = await axios.get('/api/logout');
+    axios.get('/api/logout');
     dispatch({ type: LOGOUT_USER });
 };

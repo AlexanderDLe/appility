@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const passport = require('passport');
 
+/**
+ * Google Authentication
+ */
 router.get(
     '/auth/google',
     passport.authenticate('google', {
@@ -14,6 +17,22 @@ router.get(
         res.redirect('/');
     }
 );
+/**
+ * Facebook Authentication
+ */
+router.get('/auth/facebook', passport.authenticate('facebook'));
+
+router.get(
+    '/auth/facebook/callback',
+    passport.authenticate('facebook'),
+    (req, res) => {
+        res.redirect('/');
+    }
+);
+
+/**
+ * General
+ */
 
 router.get('/api/logout', (req, res) => {
     req.logout();
