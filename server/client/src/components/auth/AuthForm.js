@@ -8,7 +8,7 @@ import MyTextField from './MyTextField';
 import MyButton from './MyButton';
 import AuthHeader from './AuthHeader';
 import { useForm } from 'react-hook-form';
-import { EmailRegex } from '../misc/EmailRegex';
+import { EmailRegex, PasswordRegex } from '../misc/Regex';
 
 const useStyles = makeStyles({
     header: {
@@ -45,7 +45,7 @@ const auth = {
 export default function AuthForm() {
     const classes = useStyles();
     const [authState, setAuthState] = useState(auth.LOGIN);
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, errors, watch } = useForm();
 
     const onSubmit = data => {
         console.log(data);
@@ -68,9 +68,9 @@ export default function AuthForm() {
     setAuthText();
 
     // Form Error Handlers //
-    const nameErrorHandler = () => {
-        if (errors.name) {
-            switch (errors.name.type) {
+    const usernameErrorHandler = () => {
+        if (errors.username) {
+            switch (errors.username.type) {
                 case 'required':
                     return 'This field is required.';
                 case 'minLength':
@@ -85,8 +85,6 @@ export default function AuthForm() {
             switch (errors.email.type) {
                 case 'required':
                     return 'This field is required.';
-                case 'minLength':
-                    return 'Must be at least 3 characters.';
                 case 'pattern':
                     return 'Must be a valid email';
                 default:
@@ -101,54 +99,105 @@ export default function AuthForm() {
                     return 'This field is required.';
                 case 'minLength':
                     return 'Must be at least 6 characters.';
+                case 'maxLength':
+                    return 'Must be at most 20 characters.';
+                case 'pattern':
+                    return 'Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 digit, 1 special character, and be 6-20 characters.';
                 default:
                     return '';
             }
         }
     };
+    const confirmPasswordErrorHandler = () => {
+        if (errors.confirmPassword) {
+            switch (errors.confirmPassword.type) {
+                case 'required':
+                    return 'This field is required.';
+                case 'validate':
+                    return 'Passwords must match.';
+                default:
+                    return '';
+            }
+        }
+    };
+    const validatePasswordMatch = value => {
+        return value === watch('password');
+    };
+    // Set Form Field Error Registrations
+    let emailRegistration;
+    let usernameRegistration;
+    let passwordRegistration;
+    let confirmPasswordRegistration;
+    const setRegistration = () => {
+        if (authState === 'LOGIN') {
+            emailRegistration = { required: true };
+            passwordRegistration = { required: true };
+        } else {
+            emailRegistration = { required: true, pattern: EmailRegex };
+            usernameRegistration = {
+                required: true,
+                minLength: 3
+            };
+            passwordRegistration = {
+                required: true,
+                minLength: 6,
+                maxLength: 20,
+                pattern: PasswordRegex
+            };
+            confirmPasswordRegistration = {
+                required: true,
+                validate: validatePasswordMatch
+            };
+        }
+    };
+    setRegistration();
 
     return (
         <div>
-            {/* <h1 className={classes.header}>{authText}</h1> */}
             <h1 className={classes.header}>
                 <AuthHeader authState={authState} />
             </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <MyTextField
-                    registration={register({
-                        required: true,
-                        minLength: 3,
-                        pattern: EmailRegex
-                    })}
+                    registration={register(emailRegistration)}
                     label="Email"
                     name="email"
                     type="text"
-                    error={errors.email}
+                    error={errors.email ? true : false}
                     helperText={emailErrorHandler()}
                 />
                 {authState === 'REGISTER' ? (
                     <MyTextField
-                        registration={register({
-                            required: true,
-                            minLength: 3
-                        })}
+                        registration={register(usernameRegistration)}
                         label="Username"
-                        name="name"
+                        name="username"
                         type="text"
-                        error={errors.name}
-                        helperText={nameErrorHandler()}
+                        error={errors.username ? true : false}
+                        helperText={usernameErrorHandler()}
                     />
                 ) : (
                     ''
                 )}
                 <MyTextField
-                    registration={register({ required: true, minLength: 6 })}
+                    registration={register(passwordRegistration)}
                     label="Password"
                     name="password"
                     type="password"
-                    error={errors.password}
+                    error={errors.password ? true : false}
                     helperText={passwordErrorHandler()}
                 />
+                {authState === 'REGISTER' ? (
+                    <MyTextField
+                        registration={register(confirmPasswordRegistration)}
+                        label="Confirm Password"
+                        name="confirmPassword"
+                        type="password"
+                        error={errors.confirmPassword ? true : false}
+                        helperText={confirmPasswordErrorHandler()}
+                    />
+                ) : (
+                    ''
+                )}
                 <MyButton type="submit" variant="contained" color="#7ac57a">
                     <div className={classes.icon}>
                         <div className={classes.iconPadding}>{authText}</div>
