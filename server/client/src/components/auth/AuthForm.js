@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { registerUser, loginUser } from '../../actions';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import { theme } from '../../styles/theme';
@@ -42,22 +44,12 @@ const auth = {
     REGISTER: 'REGISTER'
 };
 
-export default function AuthForm() {
+const AuthForm = props => {
     const classes = useStyles();
     const [authState, setAuthState] = useState(auth.LOGIN);
     const { register, handleSubmit, errors, watch } = useForm();
 
-    const onSubmit = data => {
-        console.log(data);
-    };
-    let authText = '';
-    const setAuthText = () => {
-        if (authState === 'LOGIN') {
-            authText = 'SIGN IN';
-        } else {
-            authText = 'REGISTER';
-        }
-    };
+    // Change Auth State Handler
     const changeAuthState = () => {
         if (authState === auth.LOGIN) {
             setAuthState(auth.REGISTER);
@@ -65,9 +57,19 @@ export default function AuthForm() {
             setAuthState(auth.LOGIN);
         }
     };
-    setAuthText();
 
-    // Form Error Handlers //
+    // Form Submit Handler
+    const onSubmit = data => {
+        console.log('Sending data:');
+        console.log(data);
+        if (authState === 'LOGIN') {
+            props.loginUser(data);
+        } else {
+            props.registerUser(data);
+        }
+    };
+
+    // Form Error Handlers
     const usernameErrorHandler = () => {
         if (errors.username) {
             switch (errors.username.type) {
@@ -123,16 +125,22 @@ export default function AuthForm() {
     const validatePasswordMatch = value => {
         return value === watch('password');
     };
-    // Set Form Field Error Registrations
+    // Set Form Variables Based On Login/Register
+    let formAction;
+    let authText;
     let emailRegistration;
     let usernameRegistration;
     let passwordRegistration;
     let confirmPasswordRegistration;
     const setRegistration = () => {
         if (authState === 'LOGIN') {
+            formAction = '/api/login';
+            authText = 'SIGN IN';
             emailRegistration = { required: true };
             passwordRegistration = { required: true };
         } else {
+            formAction = '/api/register';
+            authText = 'REGISTER';
             emailRegistration = { required: true, pattern: EmailRegex };
             usernameRegistration = {
                 required: true,
@@ -157,7 +165,11 @@ export default function AuthForm() {
             <h1 className={classes.header}>
                 <AuthHeader authState={authState} />
             </h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+                action={formAction}
+                onSubmit={handleSubmit(onSubmit)}
+                method="post"
+            >
                 <MyTextField
                     registration={register(emailRegistration)}
                     label="Email"
@@ -249,4 +261,6 @@ export default function AuthForm() {
             </div>
         </div>
     );
-}
+};
+
+export default connect(null, { registerUser, loginUser })(AuthForm);

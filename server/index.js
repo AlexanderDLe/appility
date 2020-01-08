@@ -19,14 +19,14 @@ mongoose
 const app = express();
 
 // Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(
     cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 1000,
         keys: [keys.cookieKey]
     })
 );
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 

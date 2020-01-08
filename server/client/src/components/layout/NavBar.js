@@ -84,8 +84,8 @@ const useStyles = makeStyles(theme =>
 
 const NavBar = props => {
     const classes = useStyles();
-    console.log('NavBar props');
-    console.log(props);
+    // console.log('NavBar props');
+    // console.log(props);
 
     const logOutUser = () => {
         props.logoutUser();
