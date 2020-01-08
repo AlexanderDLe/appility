@@ -13,10 +13,10 @@ router.post('/api/login', (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
         console.log('Within passport.authenticate');
         if (err) return next(err);
-        if (!user) return res.redirect('/');
+        if (!user) res.status(400).json({ message: 'Invalid Credentials.' });
         req.logIn(user, err => {
             if (err) return next(err);
-            return res.redirect('/');
+            return res.send('Login Success.');
         });
     })(req, res, next);
 });

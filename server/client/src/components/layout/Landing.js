@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
 import AnimatedMascot from './LandingWelcome';
@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
 
 function Landing(props) {
     const classes = useStyles();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div>

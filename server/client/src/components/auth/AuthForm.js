@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { registerUser, loginUser } from '../../actions';
-import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core';
-import { theme } from '../../styles/theme';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { registerUser, loginUser, removeAlert } from '../../actions';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import MyTextField from './MyTextField';
 import MyButton from './MyButton';
 import AuthHeader from './AuthHeader';
+import AuthAlert from './AuthAlert';
+import { theme } from '../../styles/theme';
+import { makeStyles } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useForm } from 'react-hook-form';
 import { EmailRegex, PasswordRegex } from '../misc/Regex';
 
@@ -51,6 +52,7 @@ const AuthForm = props => {
 
     // Change Auth State Handler
     const changeAuthState = () => {
+        props.removeAlert();
         if (authState === auth.LOGIN) {
             setAuthState(auth.REGISTER);
         } else {
@@ -60,8 +62,6 @@ const AuthForm = props => {
 
     // Form Submit Handler
     const onSubmit = data => {
-        console.log('Sending data:');
-        console.log(data);
         if (authState === 'LOGIN') {
             props.loginUser(data);
         } else {
@@ -160,6 +160,14 @@ const AuthForm = props => {
     };
     setRegistration();
 
+    // Redirect if authenticated
+    let history = useHistory();
+    let location = useLocation();
+    if (props.isAuthenticated) {
+        let { from } = location.state || { from: { pathname: '/' } };
+        history.replace(from);
+    }
+
     return (
         <div>
             <h1 className={classes.header}>
@@ -210,6 +218,7 @@ const AuthForm = props => {
                 ) : (
                     ''
                 )}
+                <AuthAlert alert={props.alert} />
                 <MyButton type="submit" variant="contained" color="#7ac57a">
                     <div className={classes.icon}>
                         <div className={classes.iconPadding}>{authText}</div>
@@ -263,4 +272,15 @@ const AuthForm = props => {
     );
 };
 
-export default connect(null, { registerUser, loginUser })(AuthForm);
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.isAuthenticated,
+        alert: state.alert
+    };
+};
+
+export default connect(mapStateToProps, {
+    registerUser,
+    loginUser,
+    removeAlert
+})(AuthForm);

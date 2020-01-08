@@ -7,8 +7,6 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-    // console.log('Incoming Action');
-    // console.log(action);
     const { type, payload } = action;
 
     switch (type) {

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { AUTH_SUCCESS, AUTH_FAIL, LOGOUT_USER } from './types';
+import { setAlert } from './alert';
 
 export const fetchUser = () => async dispatch => {
     const response = await axios.get('/api/current_user');
@@ -27,11 +28,11 @@ export const loginUser = data => async dispatch => {
     const { email, password } = data;
     const body = JSON.stringify({ email, password });
     try {
-        const response = await axios.post('/api/login', body, config);
-        console.log(response);
+        await axios.post('/api/login', body, config);
+        dispatch(fetchUser());
     } catch (error) {
-        console.log('Reached error');
-        console.log(error);
+        dispatch({ type: AUTH_FAIL });
+        dispatch(setAlert('Invalid Credentials.'));
     }
 };
 
@@ -45,10 +46,10 @@ export const registerUser = data => async dispatch => {
     const { email, username, password } = data;
     const body = JSON.stringify({ username, email, password });
     try {
-        const response = await axios.post('/api/register', body, config);
+        await axios.post('/api/register', body, config);
+        console.log('Registration Success');
         dispatch(loginUser(data));
-        console.log(response);
     } catch (error) {
-        console.log(error);
+        dispatch(setAlert('Registration Failed.'));
     }
 };
