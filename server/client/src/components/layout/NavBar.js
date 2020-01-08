@@ -92,7 +92,7 @@ const NavBar = props => {
     };
 
     const renderNavigation = () => {
-        if (props.auth) {
+        if (props.auth.isAuthenticated) {
             return (
                 <Button color="inherit">
                     <Link

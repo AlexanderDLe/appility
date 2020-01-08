@@ -1,13 +1,32 @@
-import { FETCH_USER, LOGOUT_USER } from '../actions/types';
+import { AUTH_SUCCESS, AUTH_FAIL, LOGOUT_USER } from '../actions/types';
 
-export default function(state = null, action) {
+const initialState = {
+    user: null,
+    isAuthenticated: null,
+    loading: true
+};
+
+export default function(state = initialState, action) {
     // console.log('Incoming Action');
     // console.log(action);
-    switch (action.type) {
-        case FETCH_USER:
-            return action.payload || false;
+    const { type, payload } = action;
+
+    switch (type) {
+        case AUTH_SUCCESS:
+            return {
+                ...state,
+                username: payload.username,
+                isAuthenticated: true,
+                loading: false
+            };
         case LOGOUT_USER:
-            return false;
+        case AUTH_FAIL:
+            return {
+                ...state,
+                user: null,
+                isAuthenticated: null,
+                loading: false
+            };
         default:
             return state;
     }

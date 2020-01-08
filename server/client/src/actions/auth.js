@@ -1,9 +1,15 @@
 import axios from 'axios';
-import { FETCH_USER, LOGOUT_USER } from './types';
+import { AUTH_SUCCESS, AUTH_FAIL, LOGOUT_USER } from './types';
 
 export const fetchUser = () => async dispatch => {
     const response = await axios.get('/api/current_user');
-    dispatch({ type: FETCH_USER, payload: response.data });
+    if (response.data) {
+        console.log('User is logged in.');
+        dispatch({ type: AUTH_SUCCESS, payload: response.data });
+    } else {
+        console.log('No user logged in.');
+        dispatch({ type: AUTH_FAIL });
+    }
 };
 
 export const logoutUser = () => async dispatch => {

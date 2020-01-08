@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
-import AnimatedMascot from '../misc/AnimatedMascot';
+import AnimatedMascot from './LandingWelcome';
 
 const useStyles = makeStyles(theme => ({
     img: {
@@ -27,21 +27,7 @@ function Landing(props) {
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <div className={classes.img}>
-                        <AnimatedMascot />
-                    </div>
-                </Grid>
-                <Grid item xs={12}>
-                    <div className={classes.text}>
-                        <h1>
-                            Welcome{' '}
-                            {props.auth
-                                ? ` ${props.auth.username}`
-                                : ' to Reactor'}
-                        </h1>
-                        <p className={classes.h3text}>
-                            This site is dedicated to improving your knowledge
-                            in full stack development.
-                        </p>
+                        <AnimatedMascot auth={props.auth} />
                     </div>
                 </Grid>
             </Grid>
