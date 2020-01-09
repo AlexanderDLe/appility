@@ -21,13 +21,6 @@ const useStyles = makeStyles(theme => ({
 export default function AnimatedMascot(props) {
     const classes = useStyles();
 
-    const fall = useSpring({
-        transform: 'translateY(0%)',
-        from: {
-            transform: 'translateY(-100%)'
-        }
-    });
-
     const [spring, set] = useSpring(() => ({
         xy: [0, 0],
         config: { mass: 10, tension: 550, friction: 140 }
@@ -42,14 +35,12 @@ export default function AnimatedMascot(props) {
                 set({ xy: calc(x, y) })
             }
         >
-            <animated.div style={fall}>
-                <animated.img
-                    style={{
-                        transform: spring.xy.interpolate(trans1)
-                    }}
-                    src={Mascot}
-                />
-            </animated.div>
+            <animated.img
+                style={{
+                    transform: spring.xy.interpolate(trans1)
+                }}
+                src={Mascot}
+            />
             <div className={classes.text}>
                 <h1>
                     Welcome{' '}
