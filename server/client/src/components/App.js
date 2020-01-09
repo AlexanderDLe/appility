@@ -21,4 +21,11 @@ const App = props => {
         </React.Fragment>
     );
 };
-export default connect(null, actions)(App);
+
+const mapStateToProps = state => {
+    return {
+        username: state.auth.username
+    };
+};
+
+export default connect(mapStateToProps, actions)(App);

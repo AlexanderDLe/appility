@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { registerUser, loginUser, removeAlert } from '../../actions';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { makeStyles } from '@material-ui/core';
+import { registerUser, loginUser } from '../../actions';
+import { removeAlert, setLoading } from '../../actions';
+import { Link, useLocation, Redirect } from 'react-router-dom';
 import MyTextField from './MyTextField';
 import MyButton from './MyButton';
 import AuthHeader from './AuthHeader';
 import AuthAlert from './AuthAlert';
 import { theme } from '../../styles/theme';
-import { makeStyles } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { useForm } from 'react-hook-form';
 import { EmailRegex, PasswordRegex } from '../misc/Regex';
 
 const useStyles = makeStyles({
@@ -62,6 +63,8 @@ const AuthForm = props => {
 
     // Form Submit Handler
     const onSubmit = data => {
+        props.removeAlert();
+        props.setLoading();
         if (authState === 'LOGIN') {
             props.loginUser(data);
         } else {
@@ -132,7 +135,7 @@ const AuthForm = props => {
     let usernameRegistration;
     let passwordRegistration;
     let confirmPasswordRegistration;
-    const setRegistration = () => {
+    const setFormVariables = () => {
         if (authState === 'LOGIN') {
             formAction = '/api/login';
             authText = 'SIGN IN';
@@ -158,14 +161,13 @@ const AuthForm = props => {
             };
         }
     };
-    setRegistration();
+    setFormVariables();
 
     // Redirect if authenticated
-    let history = useHistory();
     let location = useLocation();
     if (props.isAuthenticated) {
         let { from } = location.state || { from: { pathname: '/' } };
-        history.replace(from);
+        return <Redirect to={from} />;
     }
 
     return (
@@ -218,7 +220,7 @@ const AuthForm = props => {
                 ) : (
                     ''
                 )}
-                <AuthAlert alert={props.alert} />
+                <AuthAlert feedback={props.feedback} />
                 <MyButton type="submit" variant="contained" color="#7ac57a">
                     <div className={classes.icon}>
                         <div className={classes.iconPadding}>{authText}</div>
@@ -275,12 +277,13 @@ const AuthForm = props => {
 const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.isAuthenticated,
-        alert: state.alert
+        feedback: state.feedback
     };
 };
 
 export default connect(mapStateToProps, {
     registerUser,
     loginUser,
-    removeAlert
+    removeAlert,
+    setLoading
 })(AuthForm);

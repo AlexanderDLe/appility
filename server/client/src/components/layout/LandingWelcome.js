@@ -58,7 +58,7 @@ export default function AnimatedMascot(props) {
                         : ' to Reactor'}
                 </h1>
                 <p className={classes.h3text}>
-                    This site is dedicated to improving your knowledge in full
+                    This site is dedicated to improving your knowledge of full
                     stack development.
                 </p>
             </div>

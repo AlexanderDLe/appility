@@ -9,7 +9,6 @@ const useStyles = makeStyles({
     root: {
         '& > *': {
             margin: '0 auto',
-            marginTop: '40px',
             paddingTop: '25px',
             paddingBottom: '25px',
             width: '90%',

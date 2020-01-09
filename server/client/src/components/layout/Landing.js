@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
-import AnimatedMascot from './LandingWelcome';
+import LandingWelcome from './LandingWelcome';
 
 const useStyles = makeStyles(theme => ({
     img: {
@@ -30,7 +30,7 @@ function Landing(props) {
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <div className={classes.img}>
-                        <AnimatedMascot auth={props.auth} />
+                        <LandingWelcome auth={props.auth} />
                     </div>
                 </Grid>
             </Grid>

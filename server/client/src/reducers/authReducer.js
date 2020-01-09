@@ -1,9 +1,8 @@
 import { AUTH_SUCCESS, AUTH_FAIL, LOGOUT_USER } from '../actions/types';
 
 const initialState = {
-    user: null,
-    isAuthenticated: null,
-    loading: true
+    username: null,
+    isAuthenticated: null
 };
 
 export default function(state = initialState, action) {
@@ -14,16 +13,14 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 username: payload.username,
-                isAuthenticated: true,
-                loading: false
+                isAuthenticated: true
             };
         case LOGOUT_USER:
         case AUTH_FAIL:
             return {
                 ...state,
-                user: null,
-                isAuthenticated: null,
-                loading: false
+                username: null,
+                isAuthenticated: null
             };
         default:
             return state;

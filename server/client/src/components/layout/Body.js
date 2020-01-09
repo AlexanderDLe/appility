@@ -5,10 +5,14 @@ import Landing from './Landing';
 import PrivacyPolicy from '../misc/PrivacyPolicy';
 
 const stylez = {
-    height: '300vh',
+    minHeight: 'calc(100vh - 64px)',
     padding: '24px',
+    paddingBottom: '64px',
     backgroundColor: 'rgb(31, 31, 31)',
-    boxShadow: '0px 0px 25px -15px #000'
+    boxShadow: '0px 0px 25px -15px #000',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
 };
 
 export default function Body() {
