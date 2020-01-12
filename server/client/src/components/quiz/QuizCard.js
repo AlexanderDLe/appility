@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -40,7 +41,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function RecipeReviewCard() {
+export default ({ data }) => {
+    console.log(data);
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
@@ -52,23 +54,26 @@ export default function RecipeReviewCard() {
         <Card className={classes.card}>
             <CardHeader
                 avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
+                    <Avatar aria-label="JavaScript" className={classes.avatar}>
                         -
                     </Avatar>
                 }
-                title="JavaScript Fundamentals"
+                title={data.title}
             />
             <CardMedia
                 className={classes.media}
-                image={require('../../img/JavaScript.png')}
-                title="Paella dish"
+                image={require(`../../img/${data.image}`)}
+                title="JavaScript"
             />
             <CardContent>
                 <Typography variant="body2" component="p">
-                    Test your JavaScript fundamentals in this JavaScript quiz!
+                    {data.description}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
+                <Button size="large" color="secondary">
+                    Take Quiz
+                </Button>
                 <IconButton
                     className={clsx(classes.expand, {
                         [classes.expandOpen]: expanded
@@ -81,19 +86,8 @@ export default function RecipeReviewCard() {
                 </IconButton>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                    <Typography paragraph>Method:</Typography>
-                    <Typography paragraph>
-                        Heat 1/2 cup of the broth in a pot until simmering, add
-                        saffron and set aside for 10 minutes.
-                    </Typography>
-
-                    <Typography>
-                        Set aside off of the heat to let rest for 10 minutes,
-                        and then serve.
-                    </Typography>
-                </CardContent>
+                <CardContent>{data.dropdownText()}</CardContent>
             </Collapse>
         </Card>
     );
-}
+};

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
 
 import LandingWelcome from './LandingWelcome';
-import QuizCard from '../quiz/QuizCard';
+import QuizLayout from '../quiz/QuizGrid';
 
 const useStyles = makeStyles(theme => ({
     img: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Landing(props) {
+const Landing = props => {
     const classes = useStyles();
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -35,16 +35,11 @@ function Landing(props) {
                         <LandingWelcome auth={props.auth} />
                     </div>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    <QuizCard />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <QuizCard />
-                </Grid>
+                <QuizLayout />
             </Grid>
         </div>
     );
-}
+};
 
 const mapStateToProps = state => {
     return {

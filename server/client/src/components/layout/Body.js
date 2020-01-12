@@ -7,7 +7,7 @@ import Landing from './Landing';
 import PrivacyPolicy from '../misc/PrivacyPolicy';
 
 const stylez = {
-    minHeight: 'calc(100vh - 64px)',
+    minHeight: 'calc(101vh - 64px)',
     padding: '24px',
     paddingBottom: '64px',
     backgroundColor: 'rgb(31, 31, 31)',
