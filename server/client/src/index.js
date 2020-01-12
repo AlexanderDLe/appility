@@ -11,6 +11,8 @@ import reducers from './reducers';
 import { ThemeProvider } from '@material-ui/core';
 import { theme } from './styles/theme';
 
+console.log(theme);
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
     reducers,

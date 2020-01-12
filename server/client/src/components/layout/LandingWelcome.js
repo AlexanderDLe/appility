@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function AnimatedMascot(props) {
+export default props => {
     const classes = useStyles();
 
     const [spring, set] = useSpring(() => ({
@@ -55,4 +55,4 @@ export default function AnimatedMascot(props) {
             </div>
         </div>
     );
-}
+};

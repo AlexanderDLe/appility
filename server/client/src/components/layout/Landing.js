@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
+
 import LandingWelcome from './LandingWelcome';
+import QuizCard from '../quiz/QuizCard';
 
 const useStyles = makeStyles(theme => ({
     img: {
@@ -32,6 +34,12 @@ function Landing(props) {
                     <div className={classes.img}>
                         <LandingWelcome auth={props.auth} />
                     </div>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <QuizCard />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <QuizCard />
                 </Grid>
             </Grid>
         </div>

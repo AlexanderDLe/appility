@@ -58,7 +58,7 @@ router.post(
             // Before saving new user, encrypt password
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(password, salt);
-
+            
             // Save user into database
             await user.save();
 
