@@ -1,4 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setQuiz } from '../../actions';
+
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -38,16 +42,24 @@ const useStyles = makeStyles(theme => ({
     },
     avatar: {
         backgroundColor: red[500]
+    },
+    link: {
+        textDecoration: 'none',
+        color: theme.palette.secondary.main
     }
 }));
 
-export default ({ data }) => {
-    console.log(data);
+const QuizCard = ({ data, setQuiz }) => {
+    console.log(setQuiz);
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
+    };
+
+    const handleQuizClick = () => {
+        setQuiz(data.label);
     };
 
     return (
@@ -71,8 +83,14 @@ export default ({ data }) => {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <Button size="large" color="secondary">
-                    Take Quiz
+                <Button
+                    onClick={handleQuizClick}
+                    size="large"
+                    color="secondary"
+                >
+                    <Link className={classes.link} to="/quiz">
+                        Take Quiz
+                    </Link>
                 </Button>
                 <IconButton
                     className={clsx(classes.expand, {
@@ -91,3 +109,5 @@ export default ({ data }) => {
         </Card>
     );
 };
+
+export default connect(null, { setQuiz })(QuizCard);

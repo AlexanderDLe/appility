@@ -5,6 +5,7 @@ import { useTransition, animated } from 'react-spring';
 import Authentication from '../auth/Authentication';
 import Landing from './Landing';
 import PrivacyPolicy from '../misc/PrivacyPolicy';
+import QuizSheet from '../quiz/QuizSheet';
 
 const stylez = {
     minHeight: 'calc(101vh - 64px)',
@@ -46,6 +47,7 @@ const Body = () => {
                             path="/privacy-policy"
                             component={PrivacyPolicy}
                         />
+                        <Route exact path="/quiz" component={QuizSheet} />
                     </Switch>
                 </animated.div>
             ))}

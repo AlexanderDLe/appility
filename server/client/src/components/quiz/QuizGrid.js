@@ -6,7 +6,7 @@ import JavaScriptData from './data/JavaScriptData';
 import TypeScriptData from './data/TypeScriptData';
 import ReactData from './data/ReactData';
 import ReduxData from './data/ReduxData';
-import NodeExpress from './data/NodeExpress';
+import NodeExpressData from './data/NodeExpressData';
 import GitData from './data/GitData';
 
 export default () => {
@@ -25,7 +25,7 @@ export default () => {
                 <QuizCard data={TypeScriptData} />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-                <QuizCard data={NodeExpress} />
+                <QuizCard data={NodeExpressData} />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
                 <QuizCard data={GitData} />
