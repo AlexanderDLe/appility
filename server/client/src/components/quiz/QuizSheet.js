@@ -4,16 +4,11 @@ import { Grid, Paper, makeStyles } from '@material-ui/core';
 import QuizContents from './QuizContents';
 
 const useStyles = makeStyles(theme => ({
-    grid: {
-        textAlign: 'center'
-    },
     root: {
         '& > *': {
             margin: '0 auto',
-            paddingBottom: '25px',
             width: '90%',
             minWidth: '600px',
-            minHeight: '850px',
             borderRadius: '3px'
         }
     },
@@ -22,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default props => {
+export default () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -31,14 +26,10 @@ export default props => {
 
     return (
         <Grid container spacing={3}>
-            <Grid item xs={12}>
-                <div className={classes.grid}>
-                    <div className={classes.root}>
-                        <Paper className={classes.paper} elevation={1}>
-                            <QuizContents />
-                        </Paper>
-                    </div>
-                </div>
+            <Grid item className={classes.root} xs={12}>
+                <Paper className={classes.paper} elevation={1}>
+                    <QuizContents />
+                </Paper>
             </Grid>
         </Grid>
     );

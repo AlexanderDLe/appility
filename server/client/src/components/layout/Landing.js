@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
 
 import LandingWelcome from './LandingWelcome';
-import QuizLayout from '../quiz/QuizGrid';
+import QuizGrid from '../quiz/QuizGrid';
 
 const useStyles = makeStyles(theme => ({
     img: {
@@ -35,7 +35,7 @@ const Landing = props => {
                         <LandingWelcome auth={props.auth} />
                     </div>
                 </Grid>
-                <QuizLayout />
+                <QuizGrid />
             </Grid>
         </div>
     );
