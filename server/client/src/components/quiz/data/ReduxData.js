@@ -4,6 +4,7 @@ const ReactData = {
     title: 'React With Redux',
     label: 'Redux',
     image: 'Redux.png',
+    color: '#9d42c3',
     description: 'Test your Redux fundamentals with this quiz!',
     dropdownText: () => {
         return (

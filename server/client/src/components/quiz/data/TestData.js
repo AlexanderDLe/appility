@@ -4,6 +4,7 @@ const TestData = {
     title: 'Test Fundamentals',
     label: 'Test',
     image: 'Test.png',
+    color: '#ffe082',
     description: 'Test your Test fundamentals with this quiz!',
     dropdownText: () => {
         return (

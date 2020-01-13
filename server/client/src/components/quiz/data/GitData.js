@@ -4,6 +4,7 @@ const GitData = {
     title: 'Version Control With Git/Github',
     label: 'Git',
     image: 'Git.png',
+    color: '#f44c28',
     description: 'Test your Git fundamentals with this quiz!',
     dropdownText: () => {
         return (

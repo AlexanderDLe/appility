@@ -1,9 +1,10 @@
 import React from 'react';
 
 const ReactData = {
-    title: 'React Fundamentals',
+    title: 'Modern React',
     label: 'React',
     image: 'React.png',
+    color: '#61dafb',
     description: 'Test your React fundamentals with this quiz!',
     dropdownText: () => {
         return (

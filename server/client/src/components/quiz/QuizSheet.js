@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
             paddingBottom: '25px',
             width: '90%',
             minWidth: '600px',
-            minHeight: '650px',
+            minHeight: '850px',
             borderRadius: '3px'
         }
     },

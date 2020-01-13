@@ -4,6 +4,7 @@ const JavaScriptData = {
     title: 'JavaScript Fundamentals',
     label: 'JavaScript',
     image: 'JavaScript.png',
+    color: '#f0da50',
     description: 'Test your JavaScript fundamentals with this quiz!',
     dropdownText: () => {
         return (
