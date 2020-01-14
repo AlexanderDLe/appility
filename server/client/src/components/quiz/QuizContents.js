@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import { Fab } from '@material-ui/core';
 import { ArrowBack, ArrowForward, Check } from '@material-ui/icons';
 
-import QuizQuestions from './QuizQuestions';
+import QuestionPresenter from './QuestionPresenter';
 
 const useStyles = makeStyles(theme => ({
     margin: {
@@ -25,41 +25,71 @@ const useStyles = makeStyles(theme => ({
     },
     quizBody: {
         padding: '24px 24px',
-        minHeight: '500px'
+        minHeight: '500px',
+        color: 'white'
     }
 }));
 
+const fetchQuizData = label => {
+    if (label) return require(`./data/${label}Data`);
+    else return require(`./data/TestData`);
+};
 const QuizContents = ({ quiz }) => {
     const classes = useStyles();
-    const fetchQuizData = label => {
-        if (label) return require(`./data/${label}Data`);
-        else return require(`./data/TestData`);
-    };
     const data = fetchQuizData(quiz.label).default;
-    const headerStyle = {
-        color: 'white',
-        fontFamily: 'Audiowide',
-        textTransform: 'uppercase',
-        borderBottom: `1px solid ${data.color}`
+    const style = {
+        header: {
+            color: 'white',
+            fontFamily: 'Audiowide',
+            textTransform: 'uppercase',
+            borderBottom: `1px solid ${data.color}`,
+            textAlign: 'center'
+        },
+        footer: {
+            borderTop: `1px solid ${data.color}`
+        }
     };
-    const footerStyle = {
-        borderTop: `1px solid ${data.color}`
+    const [questionCount, setQuestionCount] = useState(0);
+    const incrementCounter = () => {
+        if (questionCount < data.items.length - 1) {
+            setQuestionCount(questionCount + 1);
+        }
     };
+    const decrementCounter = () => {
+        if (questionCount > 0) {
+            setQuestionCount(questionCount - 1);
+        }
+    };
+
     console.log(data);
     return (
         <React.Fragment>
-            <div className={classes.block} style={headerStyle}>
+            <div className={classes.block} style={style.header}>
                 <h1>{data.title}</h1>
             </div>
             <div className={classes.quizBody}>
-                <QuizQuestions data={data.items} />
+                <p>
+                    Question {questionCount + 1} of {data.items.length}
+                </p>
+                <QuestionPresenter
+                    count={questionCount}
+                    data={data.items[questionCount]}
+                />
             </div>
-            <div className={classes.block} style={footerStyle}>
+            <div className={classes.block} style={style.footer}>
                 <div className={classes.buttons}>
-                    <Fab size="medium" className={classes.margin}>
+                    <Fab
+                        onClick={decrementCounter}
+                        size="medium"
+                        className={classes.margin}
+                    >
                         <ArrowBack />
                     </Fab>
-                    <Fab size="medium" className={classes.margin}>
+                    <Fab
+                        onClick={incrementCounter}
+                        size="medium"
+                        className={classes.margin}
+                    >
                         <ArrowForward />
                     </Fab>
                     <Fab variant="extended" className={classes.submitButton}>

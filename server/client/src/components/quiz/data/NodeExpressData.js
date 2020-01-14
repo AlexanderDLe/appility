@@ -26,28 +26,19 @@ const NodeExpressData = {
         {
             id: 1,
             Question: 'Is Earth round?',
-            Option1: 'Yes',
-            Option2: 'No',
-            Option3: 'Not anymore.',
-            Option4: 'The Earth is flat.',
+            Options: ['Yes', 'No', 'Not anymore.', 'The Earth is flat.'],
             AnswerDescription: 'Yes. The Earth is actually round.'
         },
         {
             id: 2,
             Question: 'Who is the punkiest monkie?',
-            Option1: 'Vivian',
-            Option2: 'Peter',
-            Option3: 'You.',
-            Option4: 'A monkey.',
+            Options: ['Yes', 'No', 'Not anymore.', 'The Earth is flat.'],
             AnswerDescription: 'Vivian is of course the punkiest.'
         },
         {
             id: 3,
             Question: 'Are you sick?',
-            Option1: 'Yes I am',
-            Option2: 'Nope',
-            Option3: 'Not anymore.',
-            Option4: "I don't know.",
+            Options: ['Yes', 'No', 'Not anymore.', 'The Earth is flat.'],
             AnswerDescription: 'Yes, I havea the cold.'
         }
     ]
