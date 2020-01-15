@@ -27,12 +27,11 @@ const useStyles = makeStyles(theme => ({
     submitButton: {
         margin: theme.spacing(1),
         backgroundColor: '#87c643',
-        color: 'white',
-        padding: '0px 30px'
+        color: 'white'
     },
     quizBody: {
         padding: '24px 24px',
-        minHeight: '384px',
+        minHeight: '400px',
         color: 'white'
     },
     modal: {
@@ -53,7 +52,7 @@ const fetchQuizData = label => {
     else return require(`./data/TestData`);
 };
 
-// Quiz State
+// Quiz States
 const QUIZ = 'QUIZ';
 const RESULTS = 'RESULTS';
 
@@ -77,6 +76,7 @@ const QuizContents = ({ quiz }) => {
     };
     const [contentState, setContentState] = useState(QUIZ);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showAnswer, setShowAnswer] = useState(false);
     const [questionCount, setQuestionCount] = useState(0);
     const [answerArray, setAnswerArray] = useState(
         data.items.map(item => {
@@ -96,16 +96,24 @@ const QuizContents = ({ quiz }) => {
         setAnswerArray(newArray);
     };
 
+    // Handle Show Answer
+    const handleShowAnswer = () => {
+        if (showAnswer) setShowAnswer(false);
+        else setShowAnswer(true);
+    };
+
     // Handle Counter
     const incrementCounter = () => {
         if (questionCount < data.items.length - 1) {
             setQuestionCount(questionCount + 1);
         }
+        setShowAnswer(false);
     };
     const decrementCounter = () => {
         if (questionCount > 0) {
             setQuestionCount(questionCount - 1);
         }
+        setShowAnswer(false);
     };
 
     // Handle Modal
@@ -131,6 +139,7 @@ const QuizContents = ({ quiz }) => {
         if (contentState === QUIZ) {
             return (
                 <QuestionPresenter
+                    showAnswer={showAnswer}
                     countTotal={data.items.length}
                     handleAnswer={handleAnswer}
                     count={questionCount}
@@ -152,15 +161,24 @@ const QuizContents = ({ quiz }) => {
             <div className={classes.block} style={style.footer}>
                 <div className={classes.buttons}>
                     <Fab
-                        onClick={decrementCounter}
+                        style={{ width: '140px' }}
+                        variant="extended"
+                        onClick={handleShowAnswer}
                         size="medium"
+                        className={classes.margin}
+                    >
+                        {showAnswer ? 'Hide' : 'Show'} Answer
+                    </Fab>
+                    <Fab
+                        onClick={decrementCounter}
+                        size="small"
                         className={classes.margin}
                     >
                         <ArrowBack />
                     </Fab>
                     <Fab
                         onClick={incrementCounter}
-                        size="medium"
+                        size="small"
                         className={classes.margin}
                     >
                         <ArrowForward />
@@ -168,6 +186,8 @@ const QuizContents = ({ quiz }) => {
                     <Fab
                         onClick={submitQuiz}
                         variant="extended"
+                        size="medium"
+                        style={{ width: '140px' }}
                         className={classes.submitButton}
                     >
                         <Check style={{ paddingRight: '10px' }} />

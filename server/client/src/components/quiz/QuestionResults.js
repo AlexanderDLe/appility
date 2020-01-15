@@ -5,7 +5,7 @@ import scoreRender from './scoreRender';
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
-        minHeight: '336px',
+        minHeight: '400px',
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',

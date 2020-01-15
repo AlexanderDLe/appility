@@ -8,13 +8,23 @@ const useStyles = makeStyles(theme => ({
         fontSize: '1.15em',
         paddingBottom: '10px'
     },
+    seeAnswer: {
+        cursor: 'pointer'
+    },
     checkbox: {
         color: 'white'
     }
 }));
 
-const QuizQuestions = ({ count, countTotal, data, handleAnswer }) => {
+const QuizQuestions = ({
+    count,
+    countTotal,
+    data,
+    handleAnswer,
+    showAnswer
+}) => {
     const classes = useStyles();
+
     return (
         <React.Fragment>
             <p>
@@ -39,6 +49,9 @@ const QuizQuestions = ({ count, countTotal, data, handleAnswer }) => {
                     );
                 })}
             </RadioGroup>
+            <p className={classes.seeAnswer}>
+                {showAnswer ? data.answerDescription : ''}
+            </p>
         </React.Fragment>
     );
 };
