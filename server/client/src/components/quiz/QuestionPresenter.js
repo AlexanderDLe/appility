@@ -13,10 +13,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const QuizQuestions = ({ count, data, handleAnswer }) => {
+const QuizQuestions = ({ count, countTotal, data, handleAnswer }) => {
     const classes = useStyles();
     return (
         <React.Fragment>
+            <p>
+                Question {count + 1} of {countTotal}
+            </p>
             <div className={classes.question}>
                 {count + 1}. {data.question}
             </div>

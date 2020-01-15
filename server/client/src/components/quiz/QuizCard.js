@@ -50,7 +50,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const QuizCard = ({ data, setQuiz }) => {
-    console.log(setQuiz);
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 

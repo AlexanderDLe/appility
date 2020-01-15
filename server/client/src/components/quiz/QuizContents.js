@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import { Fab } from '@material-ui/core';
-import { ArrowBack, ArrowForward, Check } from '@material-ui/icons';
+import {
+    ArrowBack,
+    ArrowForward,
+    Check,
+    ErrorOutline
+} from '@material-ui/icons';
+import { Modal } from '@material-ui/core';
 
 import QuestionPresenter from './QuestionPresenter';
+import QuestionResults from './QuestionResults';
 
 const useStyles = makeStyles(theme => ({
     margin: {
@@ -25,8 +32,19 @@ const useStyles = makeStyles(theme => ({
     },
     quizBody: {
         padding: '24px 24px',
-        minHeight: '500px',
+        minHeight: '384px',
         color: 'white'
+    },
+    modal: {
+        backgroundColor: theme.palette.primary.main,
+        color: 'white',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        textAlign: 'center',
+        padding: '24px',
+        transform: 'translate(-50%, -50%)',
+        outline: 'none'
     }
 }));
 
@@ -34,6 +52,11 @@ const fetchQuizData = label => {
     if (label) return require(`./data/${label}Data`);
     else return require(`./data/TestData`);
 };
+
+// Quiz State
+const QUIZ = 'QUIZ';
+const RESULTS = 'RESULTS';
+
 const QuizContents = ({ quiz }) => {
     const classes = useStyles();
     const data = fetchQuizData(quiz.label).default;
@@ -47,14 +70,19 @@ const QuizContents = ({ quiz }) => {
         },
         footer: {
             borderTop: `1px solid ${data.color}`
+        },
+        modal: {
+            border: `1px solid ${data.color}`
         }
     };
+    const [contentState, setContentState] = useState(QUIZ);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [questionCount, setQuestionCount] = useState(0);
     const [answerArray, setAnswerArray] = useState(
         data.items.map(item => {
             return {
                 ...item,
-                correct: false,
+                correct: null,
                 chosenAnswer: null
             };
         })
@@ -64,7 +92,7 @@ const QuizContents = ({ quiz }) => {
     const handleAnswer = (index, answer) => {
         const newArray = [...answerArray];
         newArray[index].chosenAnswer = answer;
-        newArray[index].correct = answer === newArray[index].Answer;
+        newArray[index].correct = answer === newArray[index].answer;
         setAnswerArray(newArray);
     };
 
@@ -80,23 +108,47 @@ const QuizContents = ({ quiz }) => {
         }
     };
 
+    // Handle Modal
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    // Submit Quiz Or Open Warning Modal
+    const submitQuiz = () => {
+        for (let item of answerArray) {
+            if (item.correct === null) {
+                return openModal();
+            }
+        }
+        setContentState(RESULTS);
+    };
+
+    // Render Quiz/Results Content
+    const renderContentBody = () => {
+        if (contentState === QUIZ) {
+            return (
+                <QuestionPresenter
+                    countTotal={data.items.length}
+                    handleAnswer={handleAnswer}
+                    count={questionCount}
+                    data={answerArray[questionCount]}
+                />
+            );
+        } else if (contentState === RESULTS) {
+            return <QuestionResults data={answerArray} />;
+        }
+    };
+
     console.log(answerArray);
-    // console.log(data);
     return (
         <React.Fragment>
             <div className={classes.block} style={style.header}>
                 <h1>{data.title}</h1>
             </div>
-            <div className={classes.quizBody}>
-                <p>
-                    Question {questionCount + 1} of {data.items.length}
-                </p>
-                <QuestionPresenter
-                    handleAnswer={handleAnswer}
-                    count={questionCount}
-                    data={answerArray[questionCount]}
-                />
-            </div>
+            <div className={classes.quizBody}>{renderContentBody()}</div>
             <div className={classes.block} style={style.footer}>
                 <div className={classes.buttons}>
                     <Fab
@@ -113,12 +165,28 @@ const QuizContents = ({ quiz }) => {
                     >
                         <ArrowForward />
                     </Fab>
-                    <Fab variant="extended" className={classes.submitButton}>
+                    <Fab
+                        onClick={submitQuiz}
+                        variant="extended"
+                        className={classes.submitButton}
+                    >
                         <Check style={{ paddingRight: '10px' }} />
                         SUBMIT
                     </Fab>
                 </div>
             </div>
+            <Modal
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                open={isModalOpen}
+                onClose={closeModal}
+            >
+                <div style={style.modal} className={classes.modal}>
+                    <ErrorOutline style={{ fontSize: '3em' }} />
+                    <h2>Quiz Incomplete</h2>
+                    <p>You must answer all questions before submitting.</p>
+                </div>
+            </Modal>
         </React.Fragment>
     );
 };

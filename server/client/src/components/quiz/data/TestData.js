@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TestData = {
-    title: 'Test Fundamentals',
+    title: 'Test JavaScript Fundamentals',
     label: 'Test',
     image: 'Test.png',
     color: '#ffe082',
