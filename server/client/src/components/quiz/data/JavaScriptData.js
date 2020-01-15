@@ -24,22 +24,25 @@ const JavaScriptData = {
     },
     items: [
         {
+            id: 0,
+            question: 'Is Earth round?',
+            options: ['Yes', 'No', 'Not anymore.', 'The Earth is flat.'],
+            answer: 'Yes',
+            answerDescription: 'Yes. The Earth is actually round.'
+        },
+        {
             id: 1,
-            Question: 'Is Earth round?',
-            Options: ['Yes', 'No', 'Not anymore.', 'The Earth is flat.'],
-            AnswerDescription: 'Yes. The Earth is actually round.'
+            question: 'Is Earth flat?',
+            options: ['Yes', 'No', 'Not anymore.', 'The Earth is a square.'],
+            answer: 'No',
+            answerDescription: 'Vivian is of course the punkiest.'
         },
         {
             id: 2,
-            Question: 'Who is the punkiest monkie?',
-            Options: ['Yes', 'No', 'Not anymore.', 'The Earth is flat.'],
-            AnswerDescription: 'Vivian is of course the punkiest.'
-        },
-        {
-            id: 3,
-            Question: 'Are you sick?',
-            Options: ['Yes', 'No', 'Not anymore.', 'The Earth is flat.'],
-            AnswerDescription: 'Yes, I havea the cold.'
+            question: 'Are you sick?',
+            options: ['Yes', 'No', 'Not anymore.', 'Never.'],
+            answer: 'Yes',
+            answerDescription: 'Yes, I have a the cold.'
         }
     ]
 };

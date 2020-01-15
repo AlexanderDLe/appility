@@ -50,6 +50,25 @@ const QuizContents = ({ quiz }) => {
         }
     };
     const [questionCount, setQuestionCount] = useState(0);
+    const [answerArray, setAnswerArray] = useState(
+        data.items.map(item => {
+            return {
+                ...item,
+                correct: false,
+                chosenAnswer: null
+            };
+        })
+    );
+
+    // Handle Answer Array
+    const handleAnswer = (index, answer) => {
+        const newArray = [...answerArray];
+        newArray[index].chosenAnswer = answer;
+        newArray[index].correct = answer === newArray[index].Answer;
+        setAnswerArray(newArray);
+    };
+
+    // Handle Counter
     const incrementCounter = () => {
         if (questionCount < data.items.length - 1) {
             setQuestionCount(questionCount + 1);
@@ -61,7 +80,8 @@ const QuizContents = ({ quiz }) => {
         }
     };
 
-    console.log(data);
+    console.log(answerArray);
+    // console.log(data);
     return (
         <React.Fragment>
             <div className={classes.block} style={style.header}>
@@ -72,8 +92,9 @@ const QuizContents = ({ quiz }) => {
                     Question {questionCount + 1} of {data.items.length}
                 </p>
                 <QuestionPresenter
+                    handleAnswer={handleAnswer}
                     count={questionCount}
-                    data={data.items[questionCount]}
+                    data={answerArray[questionCount]}
                 />
             </div>
             <div className={classes.block} style={style.footer}>
