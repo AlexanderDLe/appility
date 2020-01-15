@@ -47,6 +47,24 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const dynamicStyles = color => {
+    return {
+        header: {
+            color: 'white',
+            fontFamily: 'Audiowide',
+            textTransform: 'uppercase',
+            borderBottom: `1px solid ${color}`,
+            textAlign: 'center'
+        },
+        footer: {
+            borderTop: `1px solid ${color}`
+        },
+        modal: {
+            borderBottom: `1px solid ${color}`
+        }
+    };
+};
+
 const fetchQuizData = label => {
     if (label) return require(`./data/${label}Data`);
     else return require(`./data/TestData`);
@@ -59,21 +77,8 @@ const RESULTS = 'RESULTS';
 const QuizContents = ({ quiz }) => {
     const classes = useStyles();
     const data = fetchQuizData(quiz.label).default;
-    const style = {
-        header: {
-            color: 'white',
-            fontFamily: 'Audiowide',
-            textTransform: 'uppercase',
-            borderBottom: `1px solid ${data.color}`,
-            textAlign: 'center'
-        },
-        footer: {
-            borderTop: `1px solid ${data.color}`
-        },
-        modal: {
-            border: `1px solid ${data.color}`
-        }
-    };
+    const style = dynamicStyles(data.color);
+
     const [contentState, setContentState] = useState(QUIZ);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showAnswer, setShowAnswer] = useState(false);
@@ -195,12 +200,7 @@ const QuizContents = ({ quiz }) => {
                     </Fab>
                 </div>
             </div>
-            <Modal
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                open={isModalOpen}
-                onClose={closeModal}
-            >
+            <Modal open={isModalOpen} onClose={closeModal}>
                 <div style={style.modal} className={classes.modal}>
                     <ErrorOutline style={{ fontSize: '3em' }} />
                     <h2>Quiz Incomplete</h2>

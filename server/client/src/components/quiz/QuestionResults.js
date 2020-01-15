@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import scoreRender from './scoreRender';
+import getScoreGrade from './getScoreGrade';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -35,9 +35,9 @@ const QuestionResults = ({ data }) => {
         return item.correct ? accumulator + 1 : accumulator;
     }, 0);
     const percent = corrects ? Math.floor((corrects / data.length) * 100) : 0;
-    const renderResult = () => {
-        const { color, scoreLetter, boxPadding } = scoreRender(percent);
 
+    const renderResult = () => {
+        const { color, scoreLetter, boxPadding } = getScoreGrade(percent);
         return (
             <div
                 style={{ paddingLeft: boxPadding, borderColor: color }}
@@ -49,6 +49,7 @@ const QuestionResults = ({ data }) => {
             </div>
         );
     };
+
     return (
         <div className={classes.root}>
             <div>
