@@ -61,6 +61,7 @@ const QuizCard = ({ data, setQuiz }) => {
         setQuiz(data.label);
     };
 
+    const param = data.param;
     return (
         <Card className={classes.card}>
             <CardHeader
@@ -87,7 +88,7 @@ const QuizCard = ({ data, setQuiz }) => {
                     size="large"
                     color="secondary"
                 >
-                    <Link className={classes.link} to="/quiz">
+                    <Link className={classes.link} to={`/quiz/${param}`}>
                         Take Quiz
                     </Link>
                 </Button>

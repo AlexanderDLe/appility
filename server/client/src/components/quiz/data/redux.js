@@ -1,23 +1,25 @@
 import React from 'react';
 
-const NodeExpressData = {
-    title: 'APIs With Node & Express',
-    label: 'NodeExpress',
-    image: 'NodeExpress.png',
-    color: '#87c643',
-    description: 'Test your backend prowess!',
+const ReactData = {
+    title: 'React With Redux',
+    label: 'Redux',
+    param: 'redux',
+    image: 'Redux.png',
+    color: '#9d42c3',
+    description: 'Test your Redux fundamentals with this quiz!',
     dropdownText: () => {
         return (
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
                     <li>
-                        Basics such as variables, functions, arrays, objects,
+                        Fundamental React concepts such as the Virtual DOM,
+                        stateful components, conditional rendering, JSX, etc.
+                    </li>
+                    <li>
+                        New React Hooks such as useState, useEffect, Suspense,
                         etc.
                     </li>
-                    <li>Functional Programming concepts.</li>
-                    <li>Object Orientation concepts.</li>
-                    <li>Promises and Async-Await.</li>
                 </ul>
             </>
         );
@@ -47,4 +49,4 @@ const NodeExpressData = {
     ]
 };
 
-export default NodeExpressData;
+export default ReactData;

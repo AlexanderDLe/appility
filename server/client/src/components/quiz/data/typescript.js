@@ -3,6 +3,7 @@ import React from 'react';
 const TypeScriptData = {
     title: 'TypeScript',
     label: 'TypeScript',
+    param: 'typescript',
     image: 'TypeScript.png',
     color: '#007acc',
     description: 'Test your TypeScript knowledge with this quiz!',

@@ -66,17 +66,17 @@ const dynamicStyles = color => {
 };
 
 const fetchQuizData = label => {
-    if (label) return require(`./data/${label}Data`);
-    else return require(`./data/TestData`);
+    if (label) return require(`./data/${label}`);
+    else return require(`./data/test`);
 };
 
 // Quiz States
 const QUIZ = 'QUIZ';
 const RESULTS = 'RESULTS';
 
-const QuizContents = ({ quiz }) => {
+const QuizContents = ({ quiz, param }) => {
     const classes = useStyles();
-    const data = fetchQuizData(quiz.label).default;
+    const data = fetchQuizData(param).default;
     const style = dynamicStyles(data.color);
 
     const [contentState, setContentState] = useState(QUIZ);
@@ -156,15 +156,10 @@ const QuizContents = ({ quiz }) => {
         }
     };
 
-    console.log(answerArray);
-    return (
-        <React.Fragment>
-            <div className={classes.block} style={style.header}>
-                <h1>{data.title}</h1>
-            </div>
-            <div className={classes.quizBody}>{renderContentBody()}</div>
-            <div className={classes.block} style={style.footer}>
-                <div className={classes.buttons}>
+    const renderActions = () => {
+        if (contentState === QUIZ) {
+            return (
+                <React.Fragment>
                     <Fab
                         style={{ width: '140px' }}
                         variant="extended"
@@ -198,7 +193,34 @@ const QuizContents = ({ quiz }) => {
                         <Check style={{ paddingRight: '10px' }} />
                         SUBMIT
                     </Fab>
-                </div>
+                </React.Fragment>
+            );
+        } else if (contentState === RESULTS) {
+            return (
+                <React.Fragment>
+                    <Fab
+                        style={{ width: '140px' }}
+                        variant="extended"
+                        onClick={handleShowAnswer}
+                        size="medium"
+                        className={classes.margin}
+                    >
+                        Back Home
+                    </Fab>
+                </React.Fragment>
+            );
+        }
+    };
+
+    console.log(answerArray);
+    return (
+        <React.Fragment>
+            <div className={classes.block} style={style.header}>
+                <h1>{data.title}</h1>
+            </div>
+            <div className={classes.quizBody}>{renderContentBody()}</div>
+            <div className={classes.block} style={style.footer}>
+                <div className={classes.buttons}>{renderActions()}</div>
             </div>
             <Modal open={isModalOpen} onClose={closeModal}>
                 <div style={style.modal} className={classes.modal}>

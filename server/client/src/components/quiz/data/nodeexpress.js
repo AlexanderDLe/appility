@@ -1,11 +1,12 @@
 import React from 'react';
 
-const GitData = {
-    title: 'Version Control With Git/Github',
-    label: 'Git',
-    image: 'Git.png',
-    color: '#f44c28',
-    description: 'Test your Git fundamentals with this quiz!',
+const NodeExpressData = {
+    title: 'APIs With Node & Express',
+    label: 'NodeExpress',
+    param: 'nodeexpress',
+    image: 'NodeExpress.png',
+    color: '#87c643',
+    description: 'Test your backend prowess!',
     dropdownText: () => {
         return (
             <>
@@ -47,4 +48,4 @@ const GitData = {
     ]
 };
 
-export default GitData;
+export default NodeExpressData;

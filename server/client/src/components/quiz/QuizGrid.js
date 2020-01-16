@@ -2,12 +2,12 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 
 import QuizCard from './QuizCard';
-import JavaScriptData from './data/JavaScriptData';
-import TypeScriptData from './data/TypeScriptData';
-import ReactData from './data/ReactData';
-import ReduxData from './data/ReduxData';
-import NodeExpressData from './data/NodeExpressData';
-import GitData from './data/GitData';
+import JavaScriptData from './data/javascript';
+import TypeScriptData from './data/typescript';
+import ReactData from './data/react';
+import ReduxData from './data/redux';
+import NodeExpressData from './data/nodeexpress';
+import GitData from './data/git';
 
 export default () => {
     return (

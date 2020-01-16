@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default () => {
+export default ({ match }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -28,7 +28,7 @@ export default () => {
         <Grid container spacing={3}>
             <Grid item className={classes.root} xs={12}>
                 <Paper className={classes.paper} elevation={1}>
-                    <QuizContents />
+                    <QuizContents param={match.params.id} />
                 </Paper>
             </Grid>
         </Grid>

@@ -1,24 +1,24 @@
 import React from 'react';
 
-const ReactData = {
-    title: 'React With Redux',
-    label: 'Redux',
-    image: 'Redux.png',
-    color: '#9d42c3',
-    description: 'Test your Redux fundamentals with this quiz!',
+const TestData = {
+    title: 'Test JavaScript Fundamentals',
+    label: 'Test',
+    param: 'test',
+    image: 'Test.png',
+    color: '#ffe082',
+    description: 'Test your Test fundamentals with this quiz!',
     dropdownText: () => {
         return (
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
                     <li>
-                        Fundamental React concepts such as the Virtual DOM,
-                        stateful components, conditional rendering, JSX, etc.
-                    </li>
-                    <li>
-                        New React Hooks such as useState, useEffect, Suspense,
+                        Basics such as variables, functions, arrays, objects,
                         etc.
                     </li>
+                    <li>Functional Programming concepts.</li>
+                    <li>Object Orientation concepts.</li>
+                    <li>Promises and Async-Await.</li>
                 </ul>
             </>
         );
@@ -48,4 +48,4 @@ const ReactData = {
     ]
 };
 
-export default ReactData;
+export default TestData;

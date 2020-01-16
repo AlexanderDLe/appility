@@ -1,11 +1,12 @@
 import React from 'react';
 
-const TestData = {
-    title: 'Test JavaScript Fundamentals',
-    label: 'Test',
-    image: 'Test.png',
-    color: '#ffe082',
-    description: 'Test your Test fundamentals with this quiz!',
+const JavaScriptData = {
+    title: 'JavaScript Fundamentals',
+    label: 'JavaScript',
+    param: 'javascript',
+    image: 'JavaScript.png',
+    color: '#f0da50',
+    description: 'Test your JavaScript fundamentals with this quiz!',
     dropdownText: () => {
         return (
             <>
@@ -47,4 +48,4 @@ const TestData = {
     ]
 };
 
-export default TestData;
+export default JavaScriptData;

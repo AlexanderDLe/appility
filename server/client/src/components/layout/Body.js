@@ -47,7 +47,7 @@ const Body = () => {
                             path="/privacy-policy"
                             component={PrivacyPolicy}
                         />
-                        <Route exact path="/quiz" component={QuizSheet} />
+                        <Route exact path="/quiz/:id" component={QuizSheet} />
                     </Switch>
                 </animated.div>
             ))}
