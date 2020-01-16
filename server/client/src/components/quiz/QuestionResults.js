@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import getScoreGrade from './getScoreGrade';
+import { saveScore } from '../../actions';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,15 +31,19 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const QuestionResults = ({ data }) => {
+const QuestionResults = ({ data, subject }) => {
     const classes = useStyles();
     const corrects = data.reduce((accumulator, item) => {
         return item.correct ? accumulator + 1 : accumulator;
     }, 0);
-    const percent = corrects ? Math.floor((corrects / data.length) * 100) : 0;
+    const score = corrects ? Math.floor((corrects / data.length) * 100) : 0;
+
+    useEffect(() => {
+        saveScore(subject, score);
+    }, [subject, score]);
 
     const renderResult = () => {
-        const { color, scoreLetter, boxPadding } = getScoreGrade(percent);
+        const { color, scoreLetter, boxPadding } = getScoreGrade(score);
         return (
             <div
                 style={{ paddingLeft: boxPadding, borderColor: color }}
@@ -49,12 +55,12 @@ const QuestionResults = ({ data }) => {
             </div>
         );
     };
-
+    console.log('hi');
     return (
         <div className={classes.root}>
             <div>
                 {renderResult()}
-                <h1>Your Results: {percent}%</h1>
+                <h1>Your Results: {score}%</h1>
                 <p>
                     You scored {corrects} out of {data.length}
                 </p>
@@ -63,4 +69,4 @@ const QuestionResults = ({ data }) => {
     );
 };
 
-export default QuestionResults;
+export default connect(null, { saveScore })(QuestionResults);

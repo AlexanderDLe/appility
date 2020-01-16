@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core';
 import { Fab } from '@material-ui/core';
 import {
@@ -15,7 +17,8 @@ import QuestionResults from './QuestionResults';
 
 const useStyles = makeStyles(theme => ({
     margin: {
-        margin: theme.spacing(1)
+        margin: theme.spacing(1),
+        textDecoration: 'none'
     },
     block: {
         width: '100%',
@@ -92,7 +95,6 @@ const QuizContents = ({ quiz, param }) => {
             };
         })
     );
-
     // Handle Answer Array
     const handleAnswer = (index, answer) => {
         const newArray = [...answerArray];
@@ -152,10 +154,11 @@ const QuizContents = ({ quiz, param }) => {
                 />
             );
         } else if (contentState === RESULTS) {
-            return <QuestionResults data={answerArray} />;
+            return <QuestionResults subject={data.label} data={answerArray} />;
         }
     };
 
+    // Render Action Buttons
     const renderActions = () => {
         if (contentState === QUIZ) {
             return (
@@ -198,15 +201,17 @@ const QuizContents = ({ quiz, param }) => {
         } else if (contentState === RESULTS) {
             return (
                 <React.Fragment>
-                    <Fab
-                        style={{ width: '140px' }}
-                        variant="extended"
-                        onClick={handleShowAnswer}
-                        size="medium"
-                        className={classes.margin}
-                    >
-                        Back Home
-                    </Fab>
+                    <Link to="/">
+                        <Fab
+                            style={{ width: '140px' }}
+                            variant="extended"
+                            onClick={handleShowAnswer}
+                            size="medium"
+                            className={classes.margin}
+                        >
+                            Back Home
+                        </Fab>
+                    </Link>
                 </React.Fragment>
             );
         }

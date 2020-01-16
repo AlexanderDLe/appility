@@ -4,13 +4,15 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
 require('./models/User');
+require('./models/Scores');
 require('./services/passport');
 
 // Database
 mongoose
     .connect(keys.mongoURI, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
     })
     .then(() => console.log('MongoDB running...'))
     .catch(err => console.error(err));
@@ -32,6 +34,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/', require('./routes/authRoutes'));
+app.use('/', require('./routes/scoreRoutes'));
 
 // Production
 if (process.env.NODE_ENV === 'production') {
