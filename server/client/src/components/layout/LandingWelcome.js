@@ -48,9 +48,7 @@ export default props => {
                         ? ` ${props.auth.username}`
                         : ' to Reactor'}
                 </h1>
-                <p className={classes.h3text}>
-                    Are you ready for your interview?
-                </p>
+                <p className={classes.h3text}>Ready to test your knowledge?</p>
             </div>
         </div>
     );

@@ -11,7 +11,7 @@ export default percent => {
         scoreLetter = 'C';
     }
     if (percent < 70) {
-        color = '#ffc400';
+        color = '#ff8b48';
         scoreLetter = 'D';
         boxPadding = '5px';
     }
@@ -22,6 +22,7 @@ export default percent => {
     }
     if (percent === null) {
         scoreLetter = '-';
+        color = '#424242';
     }
     return {
         color,

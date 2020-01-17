@@ -15,7 +15,6 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 
@@ -42,7 +41,7 @@ const useStyles = makeStyles(theme => ({
         transform: 'rotate(180deg)'
     },
     avatar: {
-        backgroundColor: red[500]
+        backgroundColor: 'rgb(22, 22, 22)'
     },
     link: {
         textDecoration: 'none',
@@ -63,14 +62,21 @@ const QuizCard = ({ score, data, setQuiz }) => {
     };
 
     console.log(score);
-    const { scoreLetter } = getScoreGrade(score);
+    const { scoreLetter, color } = getScoreGrade(score);
+    const avatarStyle = {
+        backgroundColor: 'rgb(22, 22, 22)',
+        color: color,
+        fontFamily: 'Audiowide',
+        // border: `1px solid ${color}`,
+        fontSize: '1.8em'
+    };
 
     const param = data.param;
     return (
         <Card className={classes.card}>
             <CardHeader
                 avatar={
-                    <Avatar aria-label="JavaScript" className={classes.avatar}>
+                    <Avatar aria-label="JavaScript" style={avatarStyle}>
                         {scoreLetter ? scoreLetter : '-'}
                     </Avatar>
                 }
