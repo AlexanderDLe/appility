@@ -6,19 +6,16 @@ const GitData = {
     param: 'git',
     image: 'Git.png',
     color: '#f44c28',
-    description: 'Test your Git fundamentals with this quiz!',
+    description: 'Test your git knowledge.',
     dropdownText: () => {
         return (
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
-                    <li>
-                        Basics such as variables, functions, arrays, objects,
-                        etc.
-                    </li>
-                    <li>Functional Programming concepts.</li>
-                    <li>Object Orientation concepts.</li>
-                    <li>Promises and Async-Await.</li>
+                    <li>Version control systems.</li>
+                    <li>Push and pull requests.</li>
+                    <li>Staging and committing.</li>
+                    <li>Branching and merging.</li>
                 </ul>
             </>
         );

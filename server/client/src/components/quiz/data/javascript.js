@@ -6,7 +6,7 @@ const JavaScriptData = {
     param: 'javascript',
     image: 'JavaScript.png',
     color: '#f0da50',
-    description: 'Test your JavaScript fundamentals with this quiz!',
+    description: 'Test your JavaScript fundamentals.',
     dropdownText: () => {
         return (
             <>

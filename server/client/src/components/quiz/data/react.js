@@ -6,19 +6,17 @@ const ReactData = {
     param: 'react',
     image: 'React.png',
     color: '#61dafb',
-    description: 'Test your React fundamentals with this quiz!',
+    description: 'Test your Modern React knowledge.',
     dropdownText: () => {
         return (
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
+                    <li>The Virtual DOM and performance.</li>
+                    <li>Stateful components and conditional rendering.</li>
+                    <li>Rendering JSX.</li>
                     <li>
-                        Fundamental React concepts such as the Virtual DOM,
-                        stateful components, conditional rendering, JSX, etc.
-                    </li>
-                    <li>
-                        New React Hooks such as useState, useEffect, Suspense,
-                        etc.
+                        React Hooks such as useState, useEffect, Suspense, etc.
                     </li>
                 </ul>
             </>

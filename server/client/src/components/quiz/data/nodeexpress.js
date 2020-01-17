@@ -6,19 +6,16 @@ const NodeExpressData = {
     param: 'nodeexpress',
     image: 'NodeExpress.png',
     color: '#87c643',
-    description: 'Test your backend prowess!',
+    description: 'Test your Node & Express knowledge.',
     dropdownText: () => {
         return (
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
-                    <li>
-                        Basics such as variables, functions, arrays, objects,
-                        etc.
-                    </li>
-                    <li>Functional Programming concepts.</li>
-                    <li>Object Orientation concepts.</li>
-                    <li>Promises and Async-Await.</li>
+                    <li>API CRUD operations.</li>
+                    <li>The request and response cycle.</li>
+                    <li>Cookie/Token authentication.</li>
+                    <li>The Node.js event loop.</li>
                 </ul>
             </>
         );

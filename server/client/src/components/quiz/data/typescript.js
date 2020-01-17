@@ -6,19 +6,16 @@ const TypeScriptData = {
     param: 'typescript',
     image: 'TypeScript.png',
     color: '#007acc',
-    description: 'Test your TypeScript knowledge with this quiz!',
+    description: 'Test your TypeScript knowledge.',
     dropdownText: () => {
         return (
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
-                    <li>
-                        Basics such as variables, functions, arrays, objects,
-                        etc.
-                    </li>
-                    <li>Functional Programming concepts.</li>
-                    <li>Object Orientation concepts.</li>
-                    <li>Promises and Async-Await.</li>
+                    <li>Type annotations and inference.</li>
+                    <li>TypeScript configuration.</li>
+                    <li>Features such as generics, interfaces, etc.</li>
+                    <li>Decorators, modules, etc.</li>
                 </ul>
             </>
         );

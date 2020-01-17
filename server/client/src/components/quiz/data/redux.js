@@ -6,20 +6,16 @@ const ReactData = {
     param: 'redux',
     image: 'Redux.png',
     color: '#9d42c3',
-    description: 'Test your Redux fundamentals with this quiz!',
+    description: 'Test your knowledge of React & Redux.',
     dropdownText: () => {
         return (
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
-                    <li>
-                        Fundamental React concepts such as the Virtual DOM,
-                        stateful components, conditional rendering, JSX, etc.
-                    </li>
-                    <li>
-                        New React Hooks such as useState, useEffect, Suspense,
-                        etc.
-                    </li>
+                    <li>The redux data flow.</li>
+                    <li>Action creators.</li>
+                    <li>Application state and reducers.</li>
+                    <li>Data immutability.</li>
                 </ul>
             </>
         );
