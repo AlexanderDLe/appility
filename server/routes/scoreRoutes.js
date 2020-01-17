@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const Scores = require('../models/Scores');
 const User = require('../models/User');
+const requireAuth = require('../services/requireAuth');
 
-router.get('/scores', async (req, res) => {
+router.get('/scores', requireAuth, async (req, res) => {
     try {
         const scores = await Scores.findOne({
             user: req.user.id
@@ -18,7 +19,7 @@ router.get('/scores', async (req, res) => {
     }
 });
 
-router.post('/scores', async (req, res) => {
+router.post('/scores', requireAuth, async (req, res) => {
     console.log(req.body);
     const { subject, score } = req.body;
     const scoreFields = { [subject]: score };

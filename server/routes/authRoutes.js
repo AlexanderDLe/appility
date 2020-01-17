@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../models/User');
 /**
- * Email Authentication
+ * Email/Password Authentication
  */
 
 router.post('/api/login', (req, res, next) => {
@@ -58,7 +58,7 @@ router.post(
             // Before saving new user, encrypt password
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(password, salt);
-            
+
             // Save user into database
             await user.save();
 

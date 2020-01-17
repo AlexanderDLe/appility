@@ -20,21 +20,17 @@ passport.deserializeUser((id, done) => {
 passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
         User.findOne({ email }, function(err, user) {
-            console.log('Within Local Strategy.');
             if (err) {
                 return done(err);
             }
             if (!user) {
-                console.log('Username Incorrect.');
                 return done(null, false, { message: 'Invalid email.' });
             }
             bcrypt.compare(password, user.password, (err, isMatch) => {
                 if (err) throw err;
                 if (!isMatch) {
-                    console.log('Password Incorrect');
                     return done(null, false, { message: 'Incorrect Password' });
                 }
-                console.log('Password Correct.');
                 return done(null, user);
             });
         });

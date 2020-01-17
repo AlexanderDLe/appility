@@ -61,13 +61,11 @@ const QuizCard = ({ score, data, setQuiz }) => {
         setQuiz(data.label);
     };
 
-    console.log(score);
     const { scoreLetter, color } = getScoreGrade(score);
     const avatarStyle = {
         backgroundColor: 'rgb(22, 22, 22)',
         color: color,
         fontFamily: 'Audiowide',
-        // border: `1px solid ${color}`,
         fontSize: '1.8em'
     };
 

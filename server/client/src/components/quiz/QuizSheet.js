@@ -29,7 +29,6 @@ const QuizSheet = ({ match, auth }) => {
         return <Redirect to="/auth" />;
     }
 
-    console.log(auth);
     return (
         <Grid container spacing={3}>
             <Grid item className={classes.root} xs={12}>

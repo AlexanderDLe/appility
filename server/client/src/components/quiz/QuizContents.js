@@ -209,7 +209,7 @@ const QuizContents = ({ quiz, param }) => {
                             size="medium"
                             className={classes.margin}
                         >
-                            Back Home
+                            Home
                         </Fab>
                     </Link>
                 </React.Fragment>

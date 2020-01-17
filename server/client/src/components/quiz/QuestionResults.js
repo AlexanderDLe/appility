@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import getScoreGrade from './getScoreGrade';
 import { saveScore } from '../../actions';
+import { useSpring, animated } from 'react-spring';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -42,24 +43,42 @@ const QuestionResults = ({ saveScore, data, subject }) => {
         saveScore({ subject, score });
     }, [subject, score, saveScore]);
 
-    const renderResult = () => {
+    const spring = useSpring({
+        config: {
+            mass: 2,
+            tension: 250
+        },
+        opacity: 1,
+        transform: 'translateY(0%)',
+        from: {
+            opacity: 0,
+            transform: 'translateY(-100%)'
+        }
+    });
+
+    const renderScore = () => {
         const { color, scoreLetter, boxPadding } = getScoreGrade(score);
         return (
-            <div
-                style={{ paddingLeft: boxPadding, borderColor: color }}
-                className={classes.box}
-            >
-                <div style={{ color: color }} className={classes.scoreLetter}>
-                    {scoreLetter}
+            <animated.div style={spring}>
+                <div
+                    style={{ paddingLeft: boxPadding, borderColor: color }}
+                    className={classes.box}
+                >
+                    <div
+                        style={{ color: color }}
+                        className={classes.scoreLetter}
+                    >
+                        {scoreLetter}
+                    </div>
                 </div>
-            </div>
+            </animated.div>
         );
     };
     console.log('hi');
     return (
         <div className={classes.root}>
             <div>
-                {renderResult()}
+                {renderScore()}
                 <h1>Your Results: {score}%</h1>
                 <p>
                     You scored {corrects} out of {data.length}
