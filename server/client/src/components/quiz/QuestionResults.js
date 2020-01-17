@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const QuestionResults = ({ data, subject }) => {
+const QuestionResults = ({ saveScore, data, subject }) => {
     const classes = useStyles();
     const corrects = data.reduce((accumulator, item) => {
         return item.correct ? accumulator + 1 : accumulator;
@@ -39,8 +39,8 @@ const QuestionResults = ({ data, subject }) => {
     const score = corrects ? Math.floor((corrects / data.length) * 100) : 0;
 
     useEffect(() => {
-        saveScore(subject, score);
-    }, [subject, score]);
+        saveScore({ subject, score });
+    }, [subject, score, saveScore]);
 
     const renderResult = () => {
         const { color, scoreLetter, boxPadding } = getScoreGrade(score);

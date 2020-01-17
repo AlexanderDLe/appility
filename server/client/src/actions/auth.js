@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { AUTH_SUCCESS, AUTH_FAIL, LOGOUT_USER } from './types';
 import { setAlert } from './feedback';
+import { getScores } from './quiz';
 
 const config = {
     headers: {
@@ -12,6 +13,7 @@ export const fetchUser = () => async dispatch => {
     const response = await axios.get('/api/current_user');
     if (response.data) {
         dispatch({ type: AUTH_SUCCESS, payload: response.data });
+        dispatch(getScores());
     } else {
         dispatch({ type: AUTH_FAIL });
     }

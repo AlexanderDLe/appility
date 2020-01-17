@@ -9,9 +9,7 @@ router.get('/scores', async (req, res) => {
         });
 
         if (!scores) {
-            return res
-                .status(400)
-                .json({ msg: 'There is no scores for this user' });
+            return res.json({ msg: 'There are no scores for this user' });
         }
         res.json(scores);
     } catch (error) {
@@ -21,6 +19,7 @@ router.get('/scores', async (req, res) => {
 });
 
 router.post('/scores', async (req, res) => {
+    console.log(req.body);
     const { subject, score } = req.body;
     const scoreFields = { [subject]: score };
     scoreFields.user = req.user.id;
