@@ -16,7 +16,6 @@ export const setQuiz = label => {
 
 export const getScores = () => async dispatch => {
     const response = await axios.get('/scores');
-    console.log(response.data);
     dispatch({
         type: GET_SCORES,
         payload: response.data
@@ -26,7 +25,6 @@ export const getScores = () => async dispatch => {
 export const saveScore = data => async dispatch => {
     const { subject, score } = data;
     const body = JSON.stringify({ subject, score });
-    console.log(`Saving ${score} for ${subject}`);
 
     try {
         const response = await axios.post('/scores', body, config);

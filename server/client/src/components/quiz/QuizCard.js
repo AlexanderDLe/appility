@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setQuiz } from '../../actions';
+import getScoreGrade from './getScoreGrade';
 
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -49,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const QuizCard = ({ data, setQuiz }) => {
+const QuizCard = ({ score, data, setQuiz }) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
@@ -61,13 +62,16 @@ const QuizCard = ({ data, setQuiz }) => {
         setQuiz(data.label);
     };
 
+    console.log(score);
+    const { scoreLetter } = getScoreGrade(score);
+
     const param = data.param;
     return (
         <Card className={classes.card}>
             <CardHeader
                 avatar={
                     <Avatar aria-label="JavaScript" className={classes.avatar}>
-                        -
+                        {scoreLetter ? scoreLetter : '-'}
                     </Avatar>
                 }
                 title={data.title}

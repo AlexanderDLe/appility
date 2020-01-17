@@ -20,6 +20,9 @@ export default percent => {
         scoreLetter = 'F';
         boxPadding = '0px';
     }
+    if (percent === null) {
+        scoreLetter = '-';
+    }
     return {
         color,
         scoreLetter,
