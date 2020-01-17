@@ -28,12 +28,15 @@ router.post('/scores', requireAuth, async (req, res) => {
     try {
         let scores = await Scores.findOne({ user: req.user.id });
         if (scores) {
-            // Update if exists
-            scores = await Scores.findOneAndUpdate(
-                { user: req.user.id },
-                { $set: scoreFields },
-                { new: true }
-            );
+            // Update new score is better
+            if (score > scores[subject]) {
+                scores = await Scores.findOneAndUpdate(
+                    { user: req.user.id },
+                    { $set: scoreFields },
+                    { new: true }
+                );
+            }
+
             return res.json(scores);
         }
         // Create if it doesn't exist
