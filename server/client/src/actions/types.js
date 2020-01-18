@@ -17,3 +17,4 @@ export const SET_LOADING = 'SET_LOADING';
  */
 export const REMOVE_QUIZ = 'REMOVE_QUIZ';
 export const GET_SCORES = 'GET_SCORES';
+export const RESET_SCORE = 'RESET_SCORE';

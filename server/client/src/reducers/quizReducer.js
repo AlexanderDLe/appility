@@ -1,4 +1,4 @@
-import { GET_SCORES, LOGOUT_USER } from '../actions/types';
+import { GET_SCORES, LOGOUT_USER, RESET_SCORE } from '../actions/types';
 
 const initialState = {
     JavaScript: null,
@@ -6,7 +6,6 @@ const initialState = {
     Redux: null,
     Git: null,
     NodeExpress: null,
-    Test: null,
     TypeScript: null
 };
 
@@ -21,10 +20,13 @@ export default (state = initialState, action) => {
                 Redux: payload.Redux || null,
                 Git: payload.Git || null,
                 NodeExpress: payload.NodeExpress || null,
-                Test: payload.Test || null,
                 TypeScript: payload.TypeScript || null
             };
-
+        case RESET_SCORE:
+            return {
+                ...state,
+                [payload]: null
+            };
         case LOGOUT_USER:
             return {
                 ...initialState

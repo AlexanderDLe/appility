@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_SCORES } from './types';
+import { GET_SCORES, RESET_SCORE } from './types';
 
 const config = {
     headers: {
@@ -28,4 +28,15 @@ export const saveScore = data => async dispatch => {
     } catch (error) {
         console.log(error);
     }
+};
+
+export const resetScore = quiz => async dispatch => {
+    const body = JSON.stringify({ quiz });
+    try {
+        await axios.put('/scores', body, config);
+        dispatch({ type: RESET_SCORE, payload: quiz });
+    } catch (error) {
+        console.log(error);
+    }
+    dispatch({ type: RESET_SCORE });
 };

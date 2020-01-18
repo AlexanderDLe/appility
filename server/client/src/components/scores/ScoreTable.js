@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import getScoreGrade from '../misc/getScoreGrade';
+import { resetScore } from '../../actions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,6 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import LoopIcon from '@material-ui/icons/Loop';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     table: {
@@ -27,13 +29,9 @@ const createScoreRows = data => {
     let result = [];
 
     for (let item in data) {
-        // if (data[item] !== null) {
         const { scoreLetter } = getScoreGrade(data[item]);
-        console.log(scoreLetter);
         result.push({ name: item, score: data[item], grade: scoreLetter });
-        // }
     }
-    console.log(result);
     return result;
 };
 
@@ -46,18 +44,26 @@ const MyTableCell = ({ children }) => {
     );
 };
 
-const ScoreTable = ({ quiz }) => {
+const ScoreTable = ({ quiz, resetScore }) => {
     const classes = useStyles();
-    console.log(quiz);
     let rows = createScoreRows(quiz);
+
+    const handleResetScore = (quiz, score) => {
+        if (score !== null) {
+            resetScore(quiz);
+        }
+    };
+
     return (
         <Table className={classes.table} aria-label="caption table">
             <TableHead>
                 <TableRow>
                     <TableCell className={classes.cell}>Quiz Name</TableCell>
-                    <MyTableCell align="right">Highest Score</MyTableCell>
-                    <MyTableCell align="right">Grade</MyTableCell>
-                    <MyTableCell align="right">Reset</MyTableCell>
+                    <MyTableCell>Highest Score</MyTableCell>
+                    <MyTableCell>Grade</MyTableCell>
+                    <MyTableCell>
+                        <p style={{ marginRight: '18px' }}>Reset</p>
+                    </MyTableCell>
                 </TableRow>
             </TableHead>
             <TableBody style={{ width: '100%' }}>
@@ -70,23 +76,20 @@ const ScoreTable = ({ quiz }) => {
                         >
                             {row.name}
                         </TableCell>
-                        <MyTableCell align="right">{row.score}</MyTableCell>
-                        <MyTableCell align="right">{row.grade}</MyTableCell>
-                        <MyTableCell align="right">
-                            <LoopIcon className={classes.resetIcon} />
+                        <MyTableCell>{row.score}</MyTableCell>
+                        <MyTableCell>{row.grade}</MyTableCell>
+                        <MyTableCell>
+                            <Button
+                                onClick={() =>
+                                    handleResetScore(row.name, row.score)
+                                }
+                                style={{ color: 'white' }}
+                            >
+                                <LoopIcon className={classes.resetIcon} />
+                            </Button>
                         </MyTableCell>
                     </TableRow>
                 ))}
-
-                <div
-                    style={{
-                        width: '100%',
-                        padding: '15px',
-                        fontWeight: 'bold'
-                    }}
-                >
-                    Reset All
-                </div>
             </TableBody>
         </Table>
     );
@@ -98,4 +101,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(ScoreTable);
+export default connect(mapStateToProps, { resetScore })(ScoreTable);
