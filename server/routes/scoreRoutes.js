@@ -54,11 +54,9 @@ router.put('/scores', requireAuth, async (req, res) => {
 
     try {
         const scores = await Scores.findOne({ user: req.user.id });
-        if (scores) {
-            scores[quiz] = undefined;
-            scores.save();
-        }
-        return res.send('Success');
+        scores[quiz] = undefined;
+        await scores.save();
+        res.json(scores);
     } catch (error) {
         console.log(error);
         return res.status(500).json({ msg: 'Server error' });

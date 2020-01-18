@@ -1,4 +1,4 @@
-import { GET_SCORES, LOGOUT_USER, RESET_SCORE } from '../actions/types';
+import { SET_SCORES, LOGOUT_USER } from '../actions/types';
 
 const initialState = {
     JavaScript: null,
@@ -12,7 +12,7 @@ const initialState = {
 export default (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
-        case GET_SCORES:
+        case SET_SCORES:
             return {
                 ...state,
                 JavaScript: payload.JavaScript || null,
@@ -22,11 +22,7 @@ export default (state = initialState, action) => {
                 NodeExpress: payload.NodeExpress || null,
                 TypeScript: payload.TypeScript || null
             };
-        case RESET_SCORE:
-            return {
-                ...state,
-                [payload]: null
-            };
+
         case LOGOUT_USER:
             return {
                 ...initialState

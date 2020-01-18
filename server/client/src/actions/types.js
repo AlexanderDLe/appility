@@ -16,5 +16,5 @@ export const SET_LOADING = 'SET_LOADING';
  * QUIZ TYPES
  */
 export const REMOVE_QUIZ = 'REMOVE_QUIZ';
-export const GET_SCORES = 'GET_SCORES';
+export const SET_SCORES = 'SET_SCORES';
 export const RESET_SCORE = 'RESET_SCORE';

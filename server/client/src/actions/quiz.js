@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_SCORES, RESET_SCORE } from './types';
+import { SET_SCORES, RESET_SCORE } from './types';
 
 const config = {
     headers: {
@@ -10,7 +10,7 @@ const config = {
 export const getScores = () => async dispatch => {
     const response = await axios.get('/scores');
     dispatch({
-        type: GET_SCORES,
+        type: SET_SCORES,
         payload: response.data
     });
 };
@@ -22,7 +22,7 @@ export const saveScore = data => async dispatch => {
     try {
         const response = await axios.post('/scores', body, config);
         dispatch({
-            type: GET_SCORES,
+            type: SET_SCORES,
             payload: response.data
         });
     } catch (error) {
@@ -33,8 +33,11 @@ export const saveScore = data => async dispatch => {
 export const resetScore = quiz => async dispatch => {
     const body = JSON.stringify({ quiz });
     try {
-        await axios.put('/scores', body, config);
-        dispatch({ type: RESET_SCORE, payload: quiz });
+        const response = await axios.put('/scores', body, config);
+        dispatch({
+            type: SET_SCORES,
+            payload: response.data
+        });
     } catch (error) {
         console.log(error);
     }
