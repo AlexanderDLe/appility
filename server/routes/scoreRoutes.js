@@ -19,7 +19,7 @@ router.get('/scores', requireAuth, async (req, res) => {
     }
 });
 
-router.post('/scores', requireAuth, async (req, res) => {
+router.post('/scores', async (req, res) => {
     console.log(req.body);
     const { subject, score } = req.body;
     const scoreFields = { [subject]: score };
@@ -29,7 +29,7 @@ router.post('/scores', requireAuth, async (req, res) => {
         let scores = await Scores.findOne({ user: req.user.id });
         if (scores) {
             // Update new score is better
-            if (score > scores[subject]) {
+            if (!scores[subject] || score > scores[subject]) {
                 scores = await Scores.findOneAndUpdate(
                     { user: req.user.id },
                     { $set: scoreFields },
