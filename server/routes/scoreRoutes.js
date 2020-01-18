@@ -28,7 +28,7 @@ router.post('/scores', async (req, res) => {
     try {
         let scores = await Scores.findOne({ user: req.user.id });
         if (scores) {
-            // Update new score is better
+            // Update new score if better
             if (!scores[subject] || score > scores[subject]) {
                 scores = await Scores.findOneAndUpdate(
                     { user: req.user.id },

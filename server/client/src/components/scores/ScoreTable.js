@@ -29,8 +29,13 @@ const createScoreRows = data => {
     let result = [];
 
     for (let item in data) {
-        const { scoreLetter } = getScoreGrade(data[item]);
-        result.push({ name: item, score: data[item], grade: scoreLetter });
+        const { scoreLetter, color } = getScoreGrade(data[item]);
+        result.push({
+            name: item,
+            score: data[item],
+            grade: scoreLetter,
+            color: color
+        });
     }
     return result;
 };
@@ -77,7 +82,9 @@ const ScoreTable = ({ quiz, resetScore }) => {
                             {row.name}
                         </TableCell>
                         <MyTableCell>{row.score}</MyTableCell>
-                        <MyTableCell>{row.grade}</MyTableCell>
+                        <MyTableCell>
+                            <p style={{ color: row.color }}>{row.grade}</p>
+                        </MyTableCell>
                         <MyTableCell>
                             <Button
                                 onClick={() =>
