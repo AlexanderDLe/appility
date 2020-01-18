@@ -1,7 +1,6 @@
-import { SET_QUIZ, GET_SCORES, LOGOUT_USER } from '../actions/types';
+import { GET_SCORES, LOGOUT_USER } from '../actions/types';
 
 const initialState = {
-    label: null,
     JavaScript: null,
     React: null,
     Redux: null,
@@ -25,11 +24,7 @@ export default (state = initialState, action) => {
                 Test: payload.Test || null,
                 TypeScript: payload.TypeScript || null
             };
-        case SET_QUIZ:
-            return {
-                ...state,
-                label: payload
-            };
+
         case LOGOUT_USER:
             return {
                 ...initialState

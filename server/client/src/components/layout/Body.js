@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import { Route, Switch, __RouterContext } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
 
-import Authentication from '../auth/Authentication';
+import AuthSheet from '../auth/AuthSheet';
 import Landing from './Landing';
 import PrivacyPolicy from '../misc/PrivacyPolicy';
 import QuizSheet from '../quiz/QuizSheet';
+import ScoreSheet from '../scores/ScoreSheet';
 
 const stylez = {
     minHeight: 'calc(101vh - 64px)',
@@ -41,13 +42,18 @@ const Body = () => {
                 <animated.div key={key} style={props}>
                     <Switch location={item}>
                         <Route exact path="/" component={Landing} />
-                        <Route exact path="/auth" component={Authentication} />
+                        <Route exact path="/auth" component={AuthSheet} />
                         <Route
                             exact
                             path="/privacy-policy"
                             component={PrivacyPolicy}
                         />
                         <Route exact path="/quiz/:id" component={QuizSheet} />
+                        <Route
+                            exact
+                            path="/quizscores"
+                            component={ScoreSheet}
+                        />
                     </Switch>
                 </animated.div>
             ))}

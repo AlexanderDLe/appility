@@ -91,15 +91,23 @@ const NavBar = props => {
     const renderNavigation = () => {
         if (props.auth.isAuthenticated) {
             return (
-                <Button color="inherit">
-                    <Link
-                        to="/"
-                        onClick={logOutUser}
-                        className={classes.buttons}
-                    >
-                        Sign Out
-                    </Link>
-                </Button>
+                <React.Fragment>
+                    <Button color="inherit">
+                        <Link to="/quizscores" className={classes.buttons}>
+                            Scores
+                        </Link>
+                    </Button>
+                    <Button color="inherit">
+                        <Link
+                            to="/"
+                            onClick={logOutUser}
+                            className={classes.buttons}
+                            style={{ marginLeft: '15px' }}
+                        >
+                            Sign Out
+                        </Link>
+                    </Button>
+                </React.Fragment>
             );
         } else {
             return (

@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { setQuiz } from '../../actions';
 import getScoreGrade from './getScoreGrade';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,16 +47,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const QuizCard = ({ score, data, setQuiz }) => {
+const QuizCard = ({ score, data }) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
-    };
-
-    const handleQuizClick = () => {
-        setQuiz(data.label);
     };
 
     const { scoreLetter, color } = getScoreGrade(score);
@@ -91,11 +85,7 @@ const QuizCard = ({ score, data, setQuiz }) => {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <Button
-                    onClick={handleQuizClick}
-                    size="large"
-                    color="secondary"
-                >
+                <Button size="large" color="secondary">
                     <Link className={classes.link} to={`/quiz/${param}`}>
                         Take Quiz
                     </Link>
@@ -118,4 +108,4 @@ const QuizCard = ({ score, data, setQuiz }) => {
     );
 };
 
-export default connect(null, { setQuiz })(QuizCard);
+export default QuizCard;
