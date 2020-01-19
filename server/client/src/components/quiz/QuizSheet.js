@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import { Grid, Paper, makeStyles } from '@material-ui/core';
 
 import QuizContents from './QuizContents';
@@ -9,8 +9,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
             margin: '0 auto',
-            width: '90%',
-            minWidth: '600px',
+            width: '600px',
             borderRadius: '3px'
         }
     },
@@ -25,9 +24,9 @@ const QuizSheet = ({ match, auth }) => {
         window.scrollTo(0, 0);
     }, []);
 
-    if (!auth.isAuthenticated) {
-        return <Redirect to="/auth" />;
-    }
+    // if (!auth.isAuthenticated) {
+    //     return <Redirect to="/auth" />;
+    // }
 
     return (
         <Grid container spacing={3}>

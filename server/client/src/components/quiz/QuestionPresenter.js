@@ -6,7 +6,12 @@ const useStyles = makeStyles(theme => ({
     question: {
         color: 'white',
         fontSize: '1.15em',
-        paddingBottom: '10px'
+        paddingBottom: '10px',
+        display: 'flex',
+        alignItems: 'start'
+    },
+    questionOption: {
+        paddingTop: '10px'
     },
     seeAnswer: {
         cursor: 'pointer'
@@ -31,7 +36,8 @@ const QuizQuestions = ({
                 Question {count + 1} of {countTotal}
             </p>
             <div className={classes.question}>
-                {count + 1}. {data.question}
+                <div className="">{count + 1}.</div>
+                <div style={{ paddingLeft: '10px' }}>{data.question}</div>
             </div>
             <RadioGroup>
                 {data.options.map((answer, index) => {
@@ -44,7 +50,9 @@ const QuizQuestions = ({
                                 className={classes.checkbox}
                                 onChange={() => handleAnswer(data.id, answer)}
                             />
-                            {answer}
+                            <div className={classes.questionOption}>
+                                {answer}
+                            </div>
                         </div>
                     );
                 })}
