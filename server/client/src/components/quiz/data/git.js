@@ -1,7 +1,7 @@
 import React from 'react';
 
 const GitData = {
-    title: 'Version Control With Git/Github',
+    title: 'Version Control With Git',
     label: 'Git',
     param: 'git',
     image: 'Git.png',
@@ -81,7 +81,7 @@ const GitData = {
             question: 'The command to list, create, or delete branches:',
             options: ['git tree', 'git branch', 'git path', 'git fork'],
             answer: 'git branch',
-            answerDescription: 'git branch lists, creates, or deletes branches.'
+            answerDescription: 'git-branch lists, creates, or deletes branches.'
         },
         {
             id: 7,
@@ -107,7 +107,8 @@ const GitData = {
                 'The command to update remote refs along with associated objects:',
             options: ['git update', 'git pull', 'git merge', 'git push'],
             answer: 'git push',
-            answerDescription: ''
+            answerDescription:
+                'git push updates remote refs along with associated objects.'
         }
     ]
 };
