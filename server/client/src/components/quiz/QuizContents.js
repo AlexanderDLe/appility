@@ -217,7 +217,6 @@ const QuizContents = ({ quiz, param }) => {
         }
     };
 
-    console.log(answerArray);
     return (
         <React.Fragment>
             <div className={classes.block} style={style.header}>

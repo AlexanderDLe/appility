@@ -32,7 +32,7 @@ const TypeScriptData = {
         },
         {
             id: 1,
-            question: 'JavaScript code is ___ TypeScript code.',
+            question: 'JavaScript code is ___  within TypeScript code.',
             options: ['invalid', 'valid'],
             answer: 'valid',
             answerDescription: 'JavaScript code is valid TypeScript code.'
@@ -48,7 +48,7 @@ const TypeScriptData = {
         {
             id: 3,
             question:
-                'Generics are able to create a component or function to work over a variety of types rather than a single one.',
+                '___ are able to create a component or function to work over a variety of types rather than a single one.',
             options: ['Generics', 'Actions', 'Variables', 'Decorators'],
             answer: 'Generics',
             answerDescription:
@@ -83,7 +83,7 @@ const TypeScriptData = {
             question:
                 '___ files are source map files that let tools map between the emitted JavaScript code and the TypeScript source files that created it.',
             options: ['.ts', '.map', '.object', '.set'],
-            answer: '',
+            answer: '.map',
             answerDescription:
                 ".map files are source map files that let tools map between the emitted JavaScript code and the TypeScript source files that created it. Many debuggers (e.g. Visual Studio or Chrome's dev tools) can consume these files so you can debug the TypeScript file instead of the JavaScript file."
         },
@@ -92,7 +92,7 @@ const TypeScriptData = {
             question:
                 'TypeScript supports ___ as a way of intercepting accesses to a member of an object.',
             options: ['retrievers', 'mailers', 'actions', 'getters/setters'],
-            answer: '',
+            answer: 'getters/setters',
             answerDescription:
                 'TypeScript supports getters/setters as a way of intercepting accesses to a member of an object. This gives you a way of having finer-grained control over how a member is accessed on each object.'
         },
@@ -145,7 +145,7 @@ const TypeScriptData = {
         {
             id: 12,
             question:
-                '___ are functions that support annotating or modifying classes and thier members. It allows a way to add both annotations and a meta-programming syntax for class declarations and members.',
+                '___ are functions that support annotating or modifying classes and their members. It allows a way to add both annotations and a meta-programming syntax for class declarations and members.',
             options: ['Interfaces', 'Decorators', 'Generics', 'Templates'],
             answer: 'Decorators',
             answerDescription:
@@ -172,7 +172,7 @@ const TypeScriptData = {
         {
             id: 15,
             question:
-                'Can an interface extends a class just like a classimplements interface?',
+                'Can an interface extends a class just like a class implements interface?',
             options: ['Yes', 'No'],
             answer: 'Yes',
             answerDescription:

@@ -39,7 +39,7 @@ const JavaScriptData = {
             options: ['Number', 'String', 'Float', 'Boolean'],
             answer: 'Float',
             answerDescription:
-                'Although float is valid is many other languages, it is consolidated into Number along with integers.'
+                'Although float is valid is many other languages, it is consolidated into Number along with integers in JavaScript.'
         },
         {
             id: 2,

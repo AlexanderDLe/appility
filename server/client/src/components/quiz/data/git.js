@@ -36,6 +36,13 @@ const GitData = {
             answerDescription: ''
         },
         {
+            id: 2,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
             id: 3,
             question: '',
             options: ['', '', '', ''],
@@ -219,13 +226,6 @@ const GitData = {
         },
         {
             id: 29,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
-        },
-        {
-            id: 30,
             question: '',
             options: ['', '', '', ''],
             answer: '',
