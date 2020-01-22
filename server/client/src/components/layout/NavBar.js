@@ -135,7 +135,7 @@ const NavBar = props => {
                             </Link>
                             <Typography variant="h6" className={classes.title}>
                                 <Link to="/" className={classes.buttons}>
-                                    &lt;REACTOR&gt;
+                                    &lt;QUIZZER&gt;
                                 </Link>
                             </Typography>
                             {renderNavigation()}

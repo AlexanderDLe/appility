@@ -46,7 +46,7 @@ export default props => {
                     Welcome{' '}
                     {props.auth.isAuthenticated
                         ? ` ${props.auth.username}`
-                        : ' to Reactor'}
+                        : ' to Quizzer'}
                 </h1>
                 <p className={classes.h3text}>Ready to test your knowledge?</p>
             </div>
