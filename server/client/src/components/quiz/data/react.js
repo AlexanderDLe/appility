@@ -16,7 +16,7 @@ const ReactData = {
                     <li>Stateful components and conditional rendering.</li>
                     <li>Rendering JSX.</li>
                     <li>
-                        React Hooks such as useState, useEffect, Suspense, etc.
+                        React Hooks such as useState, useEffect, context, etc.
                     </li>
                 </ul>
             </>
@@ -162,11 +162,11 @@ const ReactData = {
         {
             id: 12,
             question:
-                '___ let you return/redner a group a list of children without adding extra nodes to the DOM.',
+                '___ let you return/render a group of children without adding extra nodes to the DOM.',
             options: ['Refs', 'Fragments', 'Props', 'Nodes'],
-            answer: '',
+            answer: 'Fragments',
             answerDescription:
-                'A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.'
+                'A common pattern in React is for a component to return multiple elements. Fragments let you group of children without adding extra nodes to the DOM.'
         },
         {
             id: 13,

@@ -67,7 +67,7 @@ const NodeExpressData = {
             id: 5,
             question:
                 '___ is used for installing/updating packages and modules of Javascript.',
-            options: ['Yarn', 'NPM', 'Mod', 'Pack'],
+            options: ['Zeit', 'NPM', 'Mod', 'Pack'],
             answer: 'NPM',
             answerDescription:
                 'NPM is used for installing/updating packages and modules of Javascript.'

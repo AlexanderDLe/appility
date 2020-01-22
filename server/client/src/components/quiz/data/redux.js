@@ -94,7 +94,7 @@ const ReactData = {
             options: ['pure', 'flexible', 'responsive', 'true'],
             answer: 'pure',
             answerDescription:
-                'Things you should never do inside a reducer: mutate its arguments; perform side effects like API calls and routing transitions; call non-pure functions, e.g. Date.now() or Math.random().'
+                'A reducer should stay pure. Things you should never do inside a reducer: mutate its arguments; perform side effects like API calls and routing transitions; call non-pure functions, e.g. Date.now() or Math.random().'
         },
         {
             id: 8,
@@ -132,14 +132,14 @@ const ReactData = {
             question:
                 'Redux works especially well with libraries like React because React lets you describe UI as a function of ___.',
             options: ['storage', 'state', 'properties', 'components'],
-            answer: '',
+            answer: 'state',
             answerDescription:
                 'Redux works especially well with libraries like React because React lets you describe UI as a function of state, and Redux emits state updates in response to actions.'
         },
         {
             id: 12,
             question:
-                'To connect a React component, you must utilize ___ from "react-redux"',
+                'To connect a React component to Redux, you must utilize ___ from "react-redux"',
             options: [
                 'mapStateToProps',
                 'connect()',
@@ -249,9 +249,9 @@ const ReactData = {
         {
             id: 22,
             question:
-                'Shallow equality checking cannot be used to detect if a function mutates an object passed into it if that object is mutable. This is because two variables that reference the same object will always be ___. If react-redux does not detect a new object, it will not retrigger a rerender.',
+                'Shallow equality checking cannot be used to detect if a function mutates an object passed into it if that object is mutable. This is because two variables that reference the same object will always be ___.',
             options: ['shallow', 'separate', 'different', 'equal'],
-            answer: '',
+            answer: 'equal',
             answerDescription:
                 "Shallow equality checking cannot be used to detect if a function mutates an object passed into it if that object is mutable. This is because two variables that reference the same object will always be equal, regardless of whether the object’s values changes or not, as they're both referencing the same object."
         },

@@ -240,7 +240,7 @@ const TypeScriptData = {
             options: ['leverage', 'utilize', 'use', 'declare'],
             answer: 'declare',
             answerDescription:
-                'The ___ keyword is used for ambient declarations and methods where we want to define a variable that may exist elsewhere.'
+                'The declare keyword is used for ambient declarations and methods where we want to define a variable that may exist elsewhere.'
         },
         {
             id: 23,
