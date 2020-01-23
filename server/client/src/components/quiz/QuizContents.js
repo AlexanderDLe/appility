@@ -218,7 +218,7 @@ const QuizContents = ({ quiz, param }) => {
     };
 
     return (
-        <React.Fragment>
+        <div>
             <div className={classes.block} style={style.header}>
                 <h1>{data.title}</h1>
             </div>
@@ -233,7 +233,7 @@ const QuizContents = ({ quiz, param }) => {
                     <p>You must answer all questions before submitting.</p>
                 </div>
             </Modal>
-        </React.Fragment>
+        </div>
     );
 };
 

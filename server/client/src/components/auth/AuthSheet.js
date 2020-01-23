@@ -2,25 +2,18 @@ import React from 'react';
 import { Grid, Paper, makeStyles } from '@material-ui/core';
 import AuthForm from './AuthForm';
 
-const useStyles = makeStyles({
-    grid: {
-        textAlign: 'center'
-    },
+const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
             margin: '0 auto',
-            paddingTop: '25px',
-            paddingBottom: '25px',
-            width: '90%',
-            maxWidth: '450px',
-            minHeight: '650px',
-            borderRadius: '3px'
+            width: '100%',
+            maxWidth: '450px'
         }
     },
     paper: {
-        backgroundColor: 'rgb(22, 22, 22)'
+        backgroundColor: theme.palette.primary.main
     }
-});
+}));
 
 export default function Authentication() {
     const classes = useStyles();

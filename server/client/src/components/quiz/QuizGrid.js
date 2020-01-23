@@ -3,12 +3,14 @@ import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 
 import QuizCard from './QuizCard';
-import JavaScriptData from './data/javascript';
-import TypeScriptData from './data/typescript';
-import ReactData from './data/react';
-import ReduxData from './data/redux';
-import NodeExpressData from './data/nodeexpress';
-import GitData from './data/git';
+import {
+    JavaScriptData,
+    TypeScriptData,
+    ReactData,
+    ReduxData,
+    NodeExpressData,
+    GitData
+} from './data/cardData';
 
 const QuizGrid = ({ quiz }) => {
     return (

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Switch, __RouterContext } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
+import { makeStyles } from '@material-ui/core';
 
 import AuthSheet from '../auth/AuthSheet';
 import Landing from './Landing';
@@ -8,9 +9,14 @@ import PrivacyPolicy from '../misc/PrivacyPolicy';
 import QuizSheet from '../quiz/QuizSheet';
 import ScoreSheet from '../scores/ScoreSheet';
 
-const stylez = {
+const useStyles = makeStyles(theme => ({
+    div: {
+        width: '100%'
+    }
+}));
+
+const bodyStyle = {
     minHeight: 'calc(101vh - 64px)',
-    padding: '24px',
     paddingBottom: '64px',
     backgroundColor: 'rgb(31, 31, 31)',
     boxShadow: '0px 0px 25px -15px #000',
@@ -21,6 +27,7 @@ const stylez = {
 };
 
 const Body = () => {
+    const classes = useStyles();
     const { location } = useContext(__RouterContext);
     const transitions = useTransition(location, location => location.pathname, {
         from: {
@@ -37,9 +44,9 @@ const Body = () => {
     });
 
     return (
-        <div style={stylez}>
+        <div style={bodyStyle}>
             {transitions.map(({ item, props, key }) => (
-                <animated.div key={key} style={props}>
+                <animated.div className={classes.div} key={key} style={props}>
                     <Switch location={item}>
                         <Route exact path="/" component={Landing} />
                         <Route exact path="/auth" component={AuthSheet} />

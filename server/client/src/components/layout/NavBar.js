@@ -4,6 +4,10 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { logoutUser } from '../../actions';
 
+import { useMediaQuery, IconButton } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -78,17 +82,34 @@ const useStyles = makeStyles(theme =>
         },
         logoStyle: {
             paddingRight: '25px'
+        },
+        menuIcon: {
+            color: 'white'
+        },
+        menuItem: {
+            fontFamily: 'Audiowide',
+            color: 'black',
+            textAlign: 'left'
         }
     })
 );
 
 const NavBar = props => {
     const classes = useStyles();
+    const navMediaQuery = useMediaQuery('(min-width:500px)');
     const logOutUser = () => {
         props.logoutUser();
     };
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget);
+    };
 
-    const renderNavigation = () => {
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const renderFullNav = () => {
         if (props.auth.isAuthenticated) {
             return (
                 <React.Fragment>
@@ -120,6 +141,54 @@ const NavBar = props => {
         }
     };
 
+    const renderMenuNav = () => {
+        const renderMenuItems = () => {
+            if (props.auth.isAuthenticated) {
+                let navArray = [
+                    <MenuItem key={0} onClick={handleClose}>
+                        <Link className={classes.menuItem} to="/quizscores">
+                            Scores
+                        </Link>
+                    </MenuItem>,
+                    <MenuItem key={1} onClick={handleClose}>
+                        <Link
+                            className={classes.menuItem}
+                            to="/"
+                            onClick={logOutUser}
+                        >
+                            Sign Out
+                        </Link>
+                    </MenuItem>
+                ];
+                return navArray.map(element => element);
+            } else {
+                return (
+                    <MenuItem onClick={handleClose}>
+                        <Link className={classes.menuItem} to="/auth">
+                            Sign In
+                        </Link>
+                    </MenuItem>
+                );
+            }
+        };
+
+        return (
+            <React.Fragment>
+                <IconButton onClick={handleClick}>
+                    <MenuIcon className={classes.menuIcon} />
+                </IconButton>
+                <Menu
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                >
+                    {renderMenuItems()}
+                </Menu>
+            </React.Fragment>
+        );
+    };
+
     return (
         <React.Fragment>
             <HideOnScroll>
@@ -138,7 +207,7 @@ const NavBar = props => {
                                     &lt;APPILITY&gt;
                                 </Link>
                             </Typography>
-                            {renderNavigation()}
+                            {navMediaQuery ? renderFullNav() : renderMenuNav()}
                         </Toolbar>
                     </Container>
                 </AppBar>

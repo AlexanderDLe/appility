@@ -9,9 +9,8 @@ const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
             margin: '0 auto',
-            width: '90%',
-            minWidth: '600px',
-            borderRadius: '3px'
+            width: '100%',
+            maxWidth: '600px'
         }
     },
     paper: {

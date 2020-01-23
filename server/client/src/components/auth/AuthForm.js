@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core';
 import { registerUser, loginUser } from '../../actions';
 import { removeAlert, setLoading } from '../../actions';
-import { Link, useLocation, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import MyTextField from './MyTextField';
 import MyButton from './MyButton';
 import AuthHeader from './AuthHeader';
@@ -15,6 +15,11 @@ import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { EmailRegex, PasswordRegex } from '../misc/Regex';
 
 const useStyles = makeStyles({
+    root: {
+        textAlign: 'center',
+        paddingTop: '25px',
+        paddingBottom: '25px'
+    },
     header: {
         fontFamily: 'Audiowide',
         color: theme.palette.secondary.light,
@@ -60,7 +65,6 @@ const AuthForm = props => {
             setAuthState(auth.LOGIN);
         }
     };
-
     // Form Submit Handler
     const onSubmit = data => {
         props.removeAlert();
@@ -71,7 +75,6 @@ const AuthForm = props => {
             props.registerUser(data);
         }
     };
-
     // Form Error Handlers
     const usernameErrorHandler = () => {
         if (errors.username) {
@@ -164,14 +167,12 @@ const AuthForm = props => {
     setFormVariables();
 
     // Redirect if authenticated
-    let location = useLocation();
     if (props.isAuthenticated) {
-        let { from } = location.state || { from: { pathname: '/' } };
-        return <Redirect to={from} />;
+        return <Redirect to="/" />;
     }
 
     return (
-        <div>
+        <div className={classes.root}>
             <h1 className={classes.header}>
                 <AuthHeader authState={authState} />
             </h1>
@@ -257,14 +258,9 @@ const AuthForm = props => {
                         </div>
                     </React.Fragment>
                 ) : (
-                    <React.Fragment>
-                        <div
-                            onClick={changeAuthState}
-                            className={classes.pointer}
-                        >
-                            <p>Have an account? Sign in here.</p>
-                        </div>
-                    </React.Fragment>
+                    <div onClick={changeAuthState} className={classes.pointer}>
+                        <p>Have an account? Sign in here.</p>
+                    </div>
                 )}
                 <Link className={classes.privacyPolicy} to="/privacy-policy">
                     Click here to read our privacy policy.

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReactData = {
+const ReduxData = {
     title: 'React With Redux',
     label: 'Redux',
     param: 'redux',
@@ -336,4 +336,4 @@ const ReactData = {
     ]
 };
 
-export default ReactData;
+export default ReduxData;
