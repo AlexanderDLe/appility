@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { makeStyles, ButtonGroup, Button } from '@material-ui/core';
+import {
+    makeStyles,
+    ButtonGroup,
+    Button,
+    useMediaQuery
+} from '@material-ui/core';
 import { Fab } from '@material-ui/core';
 import {
-    ArrowBack,
-    ArrowForward,
+    ChevronLeft,
+    ChevronRight,
     Check,
     ErrorOutline
 } from '@material-ui/icons';
@@ -33,7 +38,7 @@ const useStyles = makeStyles(theme => ({
         color: 'white'
     },
     quizBody: {
-        padding: '24px 24px',
+        // padding: '24px 24px',
         minHeight: '400px',
         color: 'white'
     },
@@ -50,7 +55,8 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         color: 'white',
-        borderColor: 'white'
+        borderColor: 'white',
+        borderWidth: '1px'
     }
 }));
 
@@ -59,7 +65,6 @@ const dynamicStyles = color => {
         header: {
             color: 'white',
             fontFamily: 'Audiowide',
-            textTransform: 'uppercase',
             borderBottom: `1px solid ${color}`,
             textAlign: 'center'
         },
@@ -70,6 +75,11 @@ const dynamicStyles = color => {
             borderBottom: `1px solid ${color}`
         }
     };
+};
+
+const mediaQueryStyles = query => {
+    if (query) return { padding: '24px' };
+    else return { padding: '6px' };
 };
 
 const fetchQuizData = label => {
@@ -85,6 +95,8 @@ const QuizContents = ({ quiz, param }) => {
     const classes = useStyles();
     const data = fetchQuizData(param).default;
     const style = dynamicStyles(data.color);
+    const minWidthQuery = useMediaQuery('(min-width: 600px');
+    const dynamicPadding = mediaQueryStyles(minWidthQuery);
 
     const [contentState, setContentState] = useState(QUIZ);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -106,13 +118,11 @@ const QuizContents = ({ quiz, param }) => {
         newArray[index].correct = answer === newArray[index].answer;
         setAnswerArray(newArray);
     };
-
     // Handle Show Answer
     const handleShowAnswer = () => {
         if (showAnswer) setShowAnswer(false);
         else setShowAnswer(true);
     };
-
     // Handle Counter
     const incrementCounter = () => {
         if (questionCount < data.items.length - 1) {
@@ -126,7 +136,6 @@ const QuizContents = ({ quiz, param }) => {
         }
         setShowAnswer(false);
     };
-
     // Handle Modal
     const openModal = () => {
         setIsModalOpen(true);
@@ -134,7 +143,6 @@ const QuizContents = ({ quiz, param }) => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
-
     // Submit Quiz Or Open Warning Modal
     const submitQuiz = () => {
         for (let item of answerArray) {
@@ -144,7 +152,6 @@ const QuizContents = ({ quiz, param }) => {
         }
         setContentState(RESULTS);
     };
-
     // Render Quiz/Results Content
     const renderContentBody = () => {
         if (contentState === QUIZ) {
@@ -161,7 +168,6 @@ const QuizContents = ({ quiz, param }) => {
             return <QuestionResults subject={data.label} data={answerArray} />;
         }
     };
-
     // Render Action Buttons
     const renderActions = () => {
         if (contentState === QUIZ) {
@@ -181,13 +187,13 @@ const QuizContents = ({ quiz, param }) => {
                         className={classes.button}
                         onClick={decrementCounter}
                     >
-                        <ArrowBack />
+                        <ChevronLeft />
                     </Button>
                     <Button
                         className={classes.button}
                         onClick={incrementCounter}
                     >
-                        <ArrowForward />
+                        <ChevronRight />
                     </Button>
                     <Button
                         className={classes.button}
@@ -223,7 +229,9 @@ const QuizContents = ({ quiz, param }) => {
             <div className={classes.block} style={style.header}>
                 <h1>{data.title}</h1>
             </div>
-            <div className={classes.quizBody}>{renderContentBody()}</div>
+            <div style={dynamicPadding} className={classes.quizBody}>
+                {renderContentBody()}
+            </div>
             <div className={classes.block} style={style.footer}>
                 <div className={classes.buttons}>{renderActions()}</div>
             </div>

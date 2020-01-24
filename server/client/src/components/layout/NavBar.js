@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme =>
 
 const NavBar = props => {
     const classes = useStyles();
-    const navMediaQuery = useMediaQuery('(min-width:500px)');
+    const navMediaQuery = useMediaQuery('(min-width:600px)');
     const logOutUser = () => {
         props.logoutUser();
     };

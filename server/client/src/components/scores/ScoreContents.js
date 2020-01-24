@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, useMediaQuery } from '@material-ui/core';
 
 import ScoreTable from './ScoreTable';
 
@@ -21,21 +21,28 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center'
     },
     scoreBody: {
-        padding: '24px 24px',
+        // padding: '24px 24px',
         minHeight: '400px',
         color: 'white'
     }
 }));
 
+const useMinWidthQuery = query => {
+    if (query) return { padding: '24px' };
+    else return { padding: '6px' };
+};
+
 const ScoreContents = () => {
     const classes = useStyles();
+    const minWidthQuery = useMediaQuery('(min-width:500px)');
+    const dynamicPadding = useMinWidthQuery(minWidthQuery);
 
     return (
         <React.Fragment>
             <div className={classes.header}>
                 <h1 className={classes.header}>SCORES</h1>
             </div>
-            <div className={classes.scoreBody}>
+            <div style={dynamicPadding} className={classes.scoreBody}>
                 <ScoreTable />
             </div>
         </React.Fragment>

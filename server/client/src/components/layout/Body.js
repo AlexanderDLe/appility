@@ -12,9 +12,9 @@ import ScoreSheet from '../scores/ScoreSheet';
 const useStyles = makeStyles(theme => ({
     body: {
         minHeight: 'calc(101vh - 64px)',
-        paddingBottom: '64px',
+        padding: '0px 6px 64px 6px',
         backgroundColor: 'rgb(31, 31, 31)',
-        boxShadow: '0px 0px 25px -15px #000',
+        boxShadow: '0px 0px 25px -10px #000',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
