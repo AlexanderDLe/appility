@@ -10,21 +10,20 @@ import QuizSheet from '../quiz/QuizSheet';
 import ScoreSheet from '../scores/ScoreSheet';
 
 const useStyles = makeStyles(theme => ({
+    body: {
+        minHeight: 'calc(101vh - 64px)',
+        paddingBottom: '64px',
+        backgroundColor: 'rgb(31, 31, 31)',
+        boxShadow: '0px 0px 25px -15px #000',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflowX: 'hidden'
+    },
     div: {
         width: '100%'
     }
 }));
-
-const bodyStyle = {
-    minHeight: 'calc(101vh - 64px)',
-    paddingBottom: '64px',
-    backgroundColor: 'rgb(31, 31, 31)',
-    boxShadow: '0px 0px 25px -15px #000',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflowX: 'hidden'
-};
 
 const Body = () => {
     const classes = useStyles();
@@ -44,7 +43,7 @@ const Body = () => {
     });
 
     return (
-        <div style={bodyStyle}>
+        <div className={classes.body}>
             {transitions.map(({ item, props, key }) => (
                 <animated.div className={classes.div} key={key} style={props}>
                     <Switch location={item}>

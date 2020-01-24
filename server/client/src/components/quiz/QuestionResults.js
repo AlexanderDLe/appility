@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles, Radio, RadioGroup } from '@material-ui/core';
 import { Check, Close } from '@material-ui/icons';
-import getScoreGrade from './getScoreGrade';
+import getScoreGrade from '../misc/getScoreGrade';
 import { saveScore } from '../../actions';
 import { useSpring, animated } from 'react-spring';
 

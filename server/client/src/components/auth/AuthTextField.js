@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function MyTextField(props) {
+export default props => {
     const classes = useStyles();
 
     return (
@@ -41,4 +41,4 @@ export default function MyTextField(props) {
             }}
         />
     );
-}
+};

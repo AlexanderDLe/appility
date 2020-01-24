@@ -1,6 +1,7 @@
 import '../styles/main.scss';
 import React, { useEffect } from 'react';
-import { NavBar, Body } from './layout';
+import NavBar from './layout/NavBar';
+import Body from './layout/Body';
 import { Container, CssBaseline } from '@material-ui/core';
 import { connect } from 'react-redux';
 import * as actions from '../actions';

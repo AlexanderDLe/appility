@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, ButtonGroup, Button } from '@material-ui/core';
 import { Fab } from '@material-ui/core';
 import {
     ArrowBack,
@@ -47,6 +47,10 @@ const useStyles = makeStyles(theme => ({
         padding: '24px',
         transform: 'translate(-50%, -50%)',
         outline: 'none'
+    },
+    button: {
+        color: 'white',
+        borderColor: 'white'
     }
 }));
 
@@ -162,41 +166,38 @@ const QuizContents = ({ quiz, param }) => {
     const renderActions = () => {
         if (contentState === QUIZ) {
             return (
-                <React.Fragment>
-                    <Fab
-                        style={{ width: '140px' }}
-                        variant="extended"
+                <ButtonGroup
+                    className={classes.buttons}
+                    variant="outlined"
+                    size="medium"
+                >
+                    <Button
+                        className={classes.button}
                         onClick={handleShowAnswer}
-                        size="medium"
-                        className={classes.margin}
                     >
                         {showAnswer ? 'Hide' : 'Show'} Answer
-                    </Fab>
-                    <Fab
+                    </Button>
+                    <Button
+                        className={classes.button}
                         onClick={decrementCounter}
-                        size="small"
-                        className={classes.margin}
                     >
                         <ArrowBack />
-                    </Fab>
-                    <Fab
+                    </Button>
+                    <Button
+                        className={classes.button}
                         onClick={incrementCounter}
-                        size="small"
-                        className={classes.margin}
                     >
                         <ArrowForward />
-                    </Fab>
-                    <Fab
+                    </Button>
+                    <Button
+                        className={classes.button}
                         onClick={submitQuiz}
-                        variant="extended"
-                        size="medium"
-                        style={{ width: '140px' }}
-                        className={classes.submitButton}
+                        style={{ padding: '0 20px' }}
                     >
                         <Check style={{ paddingRight: '10px' }} />
-                        SUBMIT
-                    </Fab>
-                </React.Fragment>
+                        Submit
+                    </Button>
+                </ButtonGroup>
             );
         } else if (contentState === RESULTS) {
             return (

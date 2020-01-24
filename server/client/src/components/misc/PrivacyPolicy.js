@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function PrivacyPolicy() {
     return (
-        <div style={{ color: 'white' }}>
+        <div style={{ color: 'white', padding: '24px' }}>
             <h2>Web Site Terms and Conditions of Use</h2>
 
             <h3>1. Terms</h3>

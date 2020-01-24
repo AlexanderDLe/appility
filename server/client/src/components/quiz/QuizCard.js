@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import getScoreGrade from './getScoreGrade';
+import getScoreGrade from '../misc/getScoreGrade';
 
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';

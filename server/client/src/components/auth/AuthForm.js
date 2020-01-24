@@ -5,13 +5,13 @@ import { makeStyles } from '@material-ui/core';
 import { registerUser, loginUser } from '../../actions';
 import { removeAlert, setLoading } from '../../actions';
 import { Link, Redirect } from 'react-router-dom';
-import MyTextField from './MyTextField';
-import MyButton from './MyButton';
+import AuthTextField from './AuthTextField';
+import AuthButton from './AuthButton';
 import AuthHeader from './AuthHeader';
-import AuthAlert from './AuthAlert';
 import { theme } from '../../styles/theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { LinearProgress } from '@material-ui/core';
 import { EmailRegex, PasswordRegex } from '../misc/Regex';
 
 const useStyles = makeStyles({
@@ -20,29 +20,26 @@ const useStyles = makeStyles({
         paddingTop: '25px',
         paddingBottom: '25px'
     },
-    header: {
-        fontFamily: 'Audiowide',
-        color: theme.palette.secondary.light,
-        fontSize: '2.5em',
-        fontWeight: 'lighter'
-    },
-    icon: {
+    whiteText: {
         color: 'white'
     },
     iconPadding: {
         paddingLeft: '15px',
         display: 'inline'
     },
-    textDiv: {
-        padding: '20px',
+    textColor: {
         color: theme.palette.secondary.light
     },
     pointer: {
         cursor: 'pointer'
     },
-    privacyPolicy: {
-        textDecoration: 'none',
-        color: theme.palette.secondary.light
+    feedback: {
+        margin: '0 auto',
+        width: '95%',
+        maxWidth: '350px'
+    },
+    loader: {
+        backgroundColor: theme.palette.secondary.light
     }
 });
 
@@ -75,6 +72,10 @@ const AuthForm = props => {
             props.registerUser(data);
         }
     };
+    // oAuth Handler
+    const oAuthHandler = () => {
+        props.setLoading();
+    };
     // Form Error Handlers
     const usernameErrorHandler = () => {
         if (errors.username) {
@@ -88,6 +89,30 @@ const AuthForm = props => {
             }
         }
     };
+    // Handle feedback
+    const dislayAuthError = () => {
+        if (props.feedback.authError) {
+            return (
+                <div style={{ color: '#f44336' }} className={classes.feedback}>
+                    {props.feedback.authError}
+                </div>
+            );
+        }
+    };
+    const displayLoadingBar = () => {
+        if (props.feedback.loading) {
+            return (
+                <div className={classes.feedback}>
+                    <LinearProgress
+                        className={classes.loader}
+                        color="primary"
+                    />
+                </div>
+            );
+        }
+    };
+
+    // Form Error Handlers
     const emailErrorHandler = () => {
         if (errors.email) {
             switch (errors.email.type) {
@@ -173,15 +198,13 @@ const AuthForm = props => {
 
     return (
         <div className={classes.root}>
-            <h1 className={classes.header}>
-                <AuthHeader authState={authState} />
-            </h1>
+            <AuthHeader authState={authState} />
             <form
                 action={formAction}
                 onSubmit={handleSubmit(onSubmit)}
                 method="post"
             >
-                <MyTextField
+                <AuthTextField
                     registration={register(emailRegistration)}
                     label="Email"
                     name="email"
@@ -190,7 +213,7 @@ const AuthForm = props => {
                     helperText={emailErrorHandler()}
                 />
                 {authState === 'REGISTER' ? (
-                    <MyTextField
+                    <AuthTextField
                         registration={register(usernameRegistration)}
                         label="Username"
                         name="username"
@@ -201,7 +224,7 @@ const AuthForm = props => {
                 ) : (
                     ''
                 )}
-                <MyTextField
+                <AuthTextField
                     registration={register(passwordRegistration)}
                     label="Password"
                     name="password"
@@ -210,7 +233,7 @@ const AuthForm = props => {
                     helperText={passwordErrorHandler()}
                 />
                 {authState === 'REGISTER' ? (
-                    <MyTextField
+                    <AuthTextField
                         registration={register(confirmPasswordRegistration)}
                         label="Confirm Password"
                         name="confirmPassword"
@@ -221,35 +244,40 @@ const AuthForm = props => {
                 ) : (
                     ''
                 )}
-                <AuthAlert feedback={props.feedback} />
-                <MyButton type="submit" variant="contained" color="#7ac57a">
-                    <div className={classes.icon}>
+                {dislayAuthError()}
+                <AuthButton type="submit" variant="contained" color="#7ac57a">
+                    <div className={classes.whiteText}>
                         <div className={classes.iconPadding}>{authText}</div>
                     </div>
-                </MyButton>
+                </AuthButton>
             </form>
-            <MyButton variant="contained" href="/auth/google" color="#ff6565">
-                <div className={classes.icon}>
+            <AuthButton
+                onClick={oAuthHandler}
+                href="/auth/google"
+                color="#ff6565"
+            >
+                <div className={classes.whiteText}>
                     <FontAwesomeIcon icon={faGoogle} />
                     <div className={classes.iconPadding}>
                         {authText} With Google
                     </div>
                 </div>
-            </MyButton>
-            <MyButton variant="contained" href="/auth/facebook" color="#5b5bff">
-                <div className={classes.icon}>
+            </AuthButton>
+            <AuthButton
+                onClick={oAuthHandler}
+                href="/auth/facebook"
+                color="#5b5bff"
+            >
+                <div className={classes.whiteText}>
                     <FontAwesomeIcon icon={faFacebookF} />
                     <div className={classes.iconPadding}>
                         {authText} With Facebook
                     </div>
                 </div>
-            </MyButton>
-            <div className={classes.textDiv}>
+            </AuthButton>
+            <div style={{ padding: '20px' }} className={classes.textColor}>
                 {authState === 'LOGIN' ? (
                     <React.Fragment>
-                        <div className={classes.pointer}>
-                            <p>Forgot your password?</p>
-                        </div>
                         <div
                             onClick={changeAuthState}
                             className={classes.pointer}
@@ -262,10 +290,11 @@ const AuthForm = props => {
                         <p>Have an account? Sign in here.</p>
                     </div>
                 )}
-                <Link className={classes.privacyPolicy} to="/privacy-policy">
+                <Link className={classes.textColor} to="/privacy-policy">
                     Click here to read our privacy policy.
                 </Link>
             </div>
+            {displayLoadingBar()}
         </div>
     );
 };
