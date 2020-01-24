@@ -25,17 +25,26 @@ const JavaData = {
         },
         {
             id: 2,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                'To create an instance of a class, you have to write ___ before it.',
+            options: ['instance', 'create', 'init', 'new'],
+            answer: 'new',
+            answerDescription:
+                'To create an instance of a class, you have to write new before it.'
         },
         {
             id: 3,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                'The purpose of a constructor is to ___, although you can put any code in there.',
+            options: [
+                'create a class',
+                'initialize fields',
+                'set a class to public',
+                'set a class to private'
+            ],
+            answer: 'initialize fields',
+            answerDescription:
+                'The purpose of a constructor is to initialize fields, although you can put any code in there.'
         },
         {
             id: 4,

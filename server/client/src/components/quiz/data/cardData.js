@@ -138,7 +138,7 @@ export const TypeScriptData = {
 };
 
 export const JavaData = {
-    title: 'Object Orientation With Java',
+    title: 'OOP With Java (Incomplete)',
     label: 'Java',
     param: 'java',
     image: 'Java.jpg',
