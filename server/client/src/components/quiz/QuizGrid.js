@@ -9,7 +9,10 @@ import {
     ReactData,
     ReduxData,
     NodeExpressData,
-    GitData
+    GitData,
+    JavaData,
+    InformationSecurityData,
+    SystemDesignData
 } from './data/cardData';
 
 const QuizGrid = ({ quiz }) => {
@@ -32,6 +35,18 @@ const QuizGrid = ({ quiz }) => {
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
                 <QuizCard score={quiz.Git} data={GitData} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+                <QuizCard score={quiz.Java} data={JavaData} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+                <QuizCard
+                    score={quiz.InformationSecurity}
+                    data={InformationSecurityData}
+                />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+                <QuizCard score={quiz.SystemDesign} data={SystemDesignData} />
             </Grid>
         </React.Fragment>
     );

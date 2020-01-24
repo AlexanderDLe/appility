@@ -1,27 +1,8 @@
-import React from 'react';
-
 const ReactData = {
     title: 'Modern React',
     label: 'React',
     param: 'react',
-    image: 'React.png',
     color: '#61dafb',
-    description: 'Test your Modern React knowledge.',
-    dropdownText: () => {
-        return (
-            <>
-                <h3>This Quiz Covers:</h3>
-                <ul>
-                    <li>The Virtual DOM and performance.</li>
-                    <li>Stateful components and conditional rendering.</li>
-                    <li>Rendering JSX.</li>
-                    <li>
-                        React Hooks such as useState, useEffect, context, etc.
-                    </li>
-                </ul>
-            </>
-        );
-    },
     items: [
         {
             id: 0,

@@ -1,28 +1,8 @@
-import React from 'react';
-
 const JavaScriptData = {
     title: 'JavaScript Fundamentals',
     label: 'JavaScript',
     param: 'javascript',
-    image: 'JavaScript.png',
     color: '#f0da50',
-    description: 'Test your JavaScript fundamentals.',
-    dropdownText: () => {
-        return (
-            <>
-                <h3>This Quiz Covers:</h3>
-                <ul>
-                    <li>
-                        Basics such as variables, functions, arrays, objects,
-                        etc.
-                    </li>
-                    <li>Functional Programming concepts.</li>
-                    <li>Object Orientation concepts.</li>
-                    <li>Promises and Async-Await.</li>
-                </ul>
-            </>
-        );
-    },
     items: [
         {
             id: 0,

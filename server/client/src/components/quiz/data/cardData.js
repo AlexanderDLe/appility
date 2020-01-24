@@ -136,3 +136,69 @@ export const TypeScriptData = {
         );
     }
 };
+
+export const JavaData = {
+    title: 'Object Orientation With Java',
+    label: 'Java',
+    param: 'java',
+    image: 'Java.jpg',
+    color: '#e5292d',
+    description: 'Test your Java knowledge.',
+    dropdownText: () => {
+        return (
+            <>
+                <h3>This Quiz Covers:</h3>
+                <ul>
+                    <li>Type annotations and inference.</li>
+                    <li>TypeScript configuration.</li>
+                    <li>Features such as generics, interfaces, etc.</li>
+                    <li>Decorators, modules, etc.</li>
+                </ul>
+            </>
+        );
+    }
+};
+
+export const InformationSecurityData = {
+    title: 'Information Security (Unavailable)',
+    label: 'Information Security',
+    param: 'informationsecurity',
+    image: 'InformationSecurity.jpg',
+    color: '#1b61c',
+    description: 'Test your Information Security knowledge.',
+    dropdownText: () => {
+        return (
+            <>
+                <h3>This Quiz Covers:</h3>
+                <ul>
+                    <li>Type annotations and inference.</li>
+                    <li>TypeScript configuration.</li>
+                    <li>Features such as generics, interfaces, etc.</li>
+                    <li>Decorators, modules, etc.</li>
+                </ul>
+            </>
+        );
+    }
+};
+
+export const SystemDesignData = {
+    title: 'System Design (Unavailable)',
+    label: 'System Design',
+    param: 'systemdesign',
+    image: 'SystemDesign.png',
+    color: '#ff7443',
+    description: 'Test your System Design knowledge.',
+    dropdownText: () => {
+        return (
+            <>
+                <h3>This Quiz Covers:</h3>
+                <ul>
+                    <li>Type annotations and inference.</li>
+                    <li>TypeScript configuration.</li>
+                    <li>Features such as generics, interfaces, etc.</li>
+                    <li>Decorators, modules, etc.</li>
+                </ul>
+            </>
+        );
+    }
+};

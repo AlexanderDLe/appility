@@ -6,16 +6,16 @@ import {
     makeStyles,
     ButtonGroup,
     Button,
-    useMediaQuery
+    useMediaQuery,
+    Fab,
+    Modal
 } from '@material-ui/core';
-import { Fab } from '@material-ui/core';
 import {
     ChevronLeft,
     ChevronRight,
     Check,
     ErrorOutline
 } from '@material-ui/icons';
-import { Modal } from '@material-ui/core';
 
 import QuestionPresenter from './QuestionPresenter';
 import QuestionResults from './QuestionResults';
@@ -66,7 +66,8 @@ const dynamicStyles = color => {
             color: 'white',
             fontFamily: 'Audiowide',
             borderBottom: `1px solid ${color}`,
-            textAlign: 'center'
+            textAlign: 'center',
+            fontWeight: 'lighter'
         },
         footer: {
             borderTop: `1px solid ${color}`

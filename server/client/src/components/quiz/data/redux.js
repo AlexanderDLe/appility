@@ -1,25 +1,8 @@
-import React from 'react';
-
 const ReduxData = {
     title: 'React With Redux',
     label: 'Redux',
     param: 'redux',
-    image: 'Redux.png',
     color: '#9d42c3',
-    description: 'Test your knowledge of React & Redux.',
-    dropdownText: () => {
-        return (
-            <>
-                <h3>This Quiz Covers:</h3>
-                <ul>
-                    <li>The redux data flow.</li>
-                    <li>Action creators.</li>
-                    <li>Application state and reducers.</li>
-                    <li>Data immutability.</li>
-                </ul>
-            </>
-        );
-    },
     items: [
         {
             id: 0,

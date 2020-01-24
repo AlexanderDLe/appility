@@ -1,25 +1,8 @@
-import React from 'react';
-
 const GitData = {
     title: 'Version Control With Git',
     label: 'Git',
     param: 'git',
-    image: 'Git.png',
     color: '#f44c28',
-    description: 'Test your git knowledge.',
-    dropdownText: () => {
-        return (
-            <>
-                <h3>This Quiz Covers:</h3>
-                <ul>
-                    <li>Version control systems.</li>
-                    <li>Push and pull requests.</li>
-                    <li>Staging and committing.</li>
-                    <li>Branching and merging.</li>
-                </ul>
-            </>
-        );
-    },
     items: [
         {
             id: 0,

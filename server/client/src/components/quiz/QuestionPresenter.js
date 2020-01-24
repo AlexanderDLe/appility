@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     questionOption: {
         paddingTop: '10px'
     },
-    seeAnswer: {
+    showAnswer: {
         cursor: 'pointer'
     },
     checkbox: {
@@ -57,7 +57,7 @@ const QuizQuestions = ({
                     );
                 })}
             </RadioGroup>
-            <p className={classes.seeAnswer}>
+            <p className={classes.showAnswer}>
                 {showAnswer ? data.answerDescription : ''}
             </p>
         </React.Fragment>

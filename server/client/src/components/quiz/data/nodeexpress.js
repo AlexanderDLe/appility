@@ -1,25 +1,9 @@
-import React from 'react';
-
 const NodeExpressData = {
     title: 'APIs With Node & Express',
     label: 'NodeExpress',
     param: 'nodeexpress',
     image: 'NodeExpress.png',
     color: '#87c643',
-    description: 'Test your Node & Express knowledge.',
-    dropdownText: () => {
-        return (
-            <>
-                <h3>This Quiz Covers:</h3>
-                <ul>
-                    <li>Middlewares.</li>
-                    <li>The request and response cycle.</li>
-                    <li>Cookie/Token authentication.</li>
-                    <li>The Node.js event loop.</li>
-                </ul>
-            </>
-        );
-    },
     items: [
         {
             id: 0,

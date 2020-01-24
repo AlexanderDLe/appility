@@ -1,42 +1,27 @@
-import React from 'react';
-
-const TestData = {
-    title: 'Test JavaScript Fundamentals',
-    label: 'Test',
-    param: 'test',
-    image: 'Test.png',
-    color: '#ffe082',
-    description: 'Test your Test fundamentals with this quiz!',
-    dropdownText: () => {
-        return (
-            <>
-                <h3>This Quiz Covers:</h3>
-                <ul>
-                    <li>
-                        Basics such as variables, functions, arrays, objects,
-                        etc.
-                    </li>
-                    <li>Functional Programming concepts.</li>
-                    <li>Object Orientation concepts.</li>
-                    <li>Promises and Async-Await.</li>
-                </ul>
-            </>
-        );
-    },
+const JavaData = {
+    title: 'Java Fundamentals',
+    label: 'Java',
+    param: 'java',
+    image: 'Java.png',
+    color: '#e5292d',
     items: [
         {
             id: 0,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                'The ___ keyword on line 1 means the class can be used by other classes.',
+            options: ['public', 'private', 'protected', 'static'],
+            answer: 'public',
+            answerDescription:
+                'The public keyword on line 1 means the class can be used by other classes.'
         },
         {
             id: 1,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                "A ___ method is the gateway between the startup of a Java process, which is managed by the Java Virtual Machine (JVM), and the beginning of the programmer's code.",
+            options: ['class()', 'begin()', 'main()', 'run()'],
+            answer: 'main()',
+            answerDescription:
+                "A main() method is the gateway between the startup of a Java process, which is managed by the Java Virtual Machine (JVM), and the beginning of the programmer's code."
         },
         {
             id: 2,
@@ -237,4 +222,4 @@ const TestData = {
     ]
 };
 
-export default TestData;
+export default JavaData;

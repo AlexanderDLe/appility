@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center'
     },
     scoreBody: {
-        // padding: '24px 24px',
         minHeight: '400px',
         color: 'white'
     }

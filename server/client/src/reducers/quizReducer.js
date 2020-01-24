@@ -1,28 +1,19 @@
 import { SET_SCORES, LOGOUT_USER } from '../actions/types';
 
-const initialState = {
-    JavaScript: null,
-    React: null,
-    Redux: null,
-    Git: null,
-    NodeExpress: null,
-    TypeScript: null
-};
+const initialState = {};
 
 export default (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
         case SET_SCORES:
-            return {
-                ...state,
-                JavaScript: payload.JavaScript || null,
-                React: payload.React || null,
-                Redux: payload.Redux || null,
-                Git: payload.Git || null,
-                NodeExpress: payload.NodeExpress || null,
-                TypeScript: payload.TypeScript || null
-            };
-
+            const newScores = {};
+            for (let item in payload) {
+                if (item === '_id' || item === '__v' || item === 'user') {
+                    continue;
+                }
+                newScores[item] = payload[item];
+            }
+            return newScores;
         case LOGOUT_USER:
             return {
                 ...initialState
