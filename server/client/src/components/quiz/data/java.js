@@ -8,11 +8,11 @@ const JavaData = {
         {
             id: 0,
             question:
-                'The ___ keyword on line 1 means the class can be used by other classes.',
+                'The ___ keyword means the class can be used by other classes.',
             options: ['public', 'private', 'protected', 'static'],
             answer: 'public',
             answerDescription:
-                'The public keyword on line 1 means the class can be used by other classes.'
+                'The public keyword means the class can be used by other classes.'
         },
         {
             id: 1,
@@ -48,24 +48,30 @@ const JavaData = {
         },
         {
             id: 4,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                'A ___ type refers to an object (an instance of a class).',
+            options: ['reference', 'primitive', 'static'],
+            answer: 'reference',
+            answerDescription:
+                'A reference type refers to an object (an instance of a class). A reference "points" to an object by storing the memory address where the object is located, a concept referred to as a pointer.'
         },
         {
             id: 5,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___ types in Java can be assigned null, which means they do not currently refer to an object.',
+            options: ['Instance', 'Static', 'Reference', 'Primitive'],
+            answer: 'Reference',
+            answerDescription:
+                'Reference types can be assigned null, which means they do not currently refer to an object. Primitive types will give you a compiler error if you attempt to assign them null.'
         },
         {
             id: 6,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                'Garbage collection refers to the process of automatically freeing memory on the ___ by deleting objects that are no longer reachable in your program.',
+            options: ['heap', 'stack', 'tree', 'class'],
+            answer: 'heap',
+            answerDescription:
+                'Heap. An object will remain on the heap until it is no longer reachable. An object is no longer reachable when one of two situations occurs: The object no longer has any references pointing to it or when all references to the object have gone out of scope.'
         },
         {
             id: 7,

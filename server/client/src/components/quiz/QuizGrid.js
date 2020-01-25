@@ -11,8 +11,8 @@ import {
     NodeExpressData,
     GitData,
     JavaData,
-    InformationSecurityData,
-    SystemDesignData
+    AWSFundamentalsData,
+    AWSAssociatesData
 } from './data/cardData';
 
 const QuizGrid = ({ quiz }) => {
@@ -41,12 +41,12 @@ const QuizGrid = ({ quiz }) => {
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
                 <QuizCard
-                    score={quiz.InformationSecurity}
-                    data={InformationSecurityData}
+                    score={quiz.AWSFundamentals}
+                    data={AWSFundamentalsData}
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-                <QuizCard score={quiz.SystemDesign} data={SystemDesignData} />
+                <QuizCard score={quiz.AWSAssociates} data={AWSAssociatesData} />
             </Grid>
         </React.Fragment>
     );

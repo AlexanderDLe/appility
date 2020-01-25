@@ -1,8 +1,8 @@
-const InformationSecurityData = {
-    title: 'Information Security Fundamentals',
-    label: 'InformationSecurity',
-    param: 'informationsecurity',
-    color: '#1b66c7',
+const AWSAssociatesData = {
+    title: 'AWS Associate Developer',
+    label: 'AWS Associate Developer',
+    param: 'awsassociatedeveloper',
+    color: '#fcb134',
     items: [
         {
             id: 0,
@@ -217,4 +217,4 @@ const InformationSecurityData = {
     ]
 };
 
-export default InformationSecurityData;
+export default AWSAssociatesData;

@@ -159,13 +159,13 @@ export const JavaData = {
     }
 };
 
-export const InformationSecurityData = {
-    title: 'Information Security (Unavailable)',
-    label: 'Information Security',
-    param: 'informationsecurity',
-    image: 'InformationSecurity.jpg',
-    color: '#1b61c',
-    description: 'Test your Information Security knowledge.',
+export const AWSFundamentalsData = {
+    title: 'AWS Fundamentals (Incomplete)',
+    label: 'AWS Fundamentals',
+    param: 'awsfundamentals',
+    image: 'AWS.jpg',
+    color: '#fcb134',
+    description: 'Test your AWS Fundamentals knowledge.',
     dropdownText: () => {
         return (
             <>
@@ -181,13 +181,13 @@ export const InformationSecurityData = {
     }
 };
 
-export const SystemDesignData = {
-    title: 'System Design (Unavailable)',
-    label: 'System Design',
-    param: 'systemdesign',
-    image: 'SystemDesign.png',
-    color: '#ff7443',
-    description: 'Test your System Design knowledge.',
+export const AWSAssociatesData = {
+    title: 'AWS Associate Developer (Incomplete)',
+    label: 'AWS Associate Developer',
+    param: 'awsassociatedeveloper',
+    image: 'AWS.jpg',
+    color: '#fcb134',
+    description: 'Test your AWS Associate Developer knowledge.',
     dropdownText: () => {
         return (
             <>
