@@ -19,7 +19,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles(theme => ({
     card: {
         maxWidth: 345,
-        margin: '0 auto',
+        margin: '15px auto',
         backgroundColor: 'rgb(22, 22, 22)',
         color: 'white'
     },
@@ -50,6 +50,10 @@ const useStyles = makeStyles(theme => ({
 const QuizCard = ({ score, data }) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+    const cardColor = {
+        borderLeft: `2px solid ${data.color}`,
+        borderBottomLeftRadius: '25px'
+    };
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -65,7 +69,7 @@ const QuizCard = ({ score, data }) => {
 
     const param = data.param;
     return (
-        <Card className={classes.card}>
+        <Card style={cardColor} className={classes.card}>
             <CardHeader
                 avatar={
                     <Avatar aria-label="JavaScript" style={avatarStyle}>
