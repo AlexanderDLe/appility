@@ -52,7 +52,7 @@ export const NodeExpressData = {
     label: 'NodeExpress',
     param: 'nodeexpress',
     image: 'NodeExpress.png',
-    color: '#87c643',
+    color: '#4bae4f',
     description: 'Test your Node & Express knowledge.',
     dropdownText: () => {
         return (
@@ -98,7 +98,7 @@ export const ReduxData = {
     label: 'Redux',
     param: 'redux',
     image: 'Redux.png',
-    color: '#9d42c3',
+    color: '#7f42c3',
     description: 'Test your knowledge of React & Redux.',
     dropdownText: () => {
         return (
@@ -149,10 +149,8 @@ export const JavaData = {
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
-                    <li>Type annotations and inference.</li>
-                    <li>TypeScript configuration.</li>
-                    <li>Features such as generics, interfaces, etc.</li>
-                    <li>Decorators, modules, etc.</li>
+                    <li>This quiz is incomplete.</li>
+                    <li>Content will be placed here</li>
                 </ul>
             </>
         );
@@ -160,7 +158,7 @@ export const JavaData = {
 };
 
 export const AWSFundamentalsData = {
-    title: 'AWS Fundamentals (Incomplete)',
+    title: 'AWS Fundamentals',
     label: 'AWS Fundamentals',
     param: 'awsfundamentals',
     image: 'AWS.jpg',
@@ -171,10 +169,11 @@ export const AWSFundamentalsData = {
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
-                    <li>Type annotations and inference.</li>
-                    <li>TypeScript configuration.</li>
-                    <li>Features such as generics, interfaces, etc.</li>
-                    <li>Decorators, modules, etc.</li>
+                    <li>The Pillars of AWS</li>
+                    <li>EC2 Instances</li>
+                    <li>Route 53, RDS, Elasticache.</li>
+                    <li>ELB, ASG, EBS, Target Groups, etc.</li>
+                    <li>S3 Buckets, Policies, Security, and more.</li>
                 </ul>
             </>
         );
@@ -193,10 +192,8 @@ export const AWSAssociatesData = {
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
-                    <li>Type annotations and inference.</li>
-                    <li>TypeScript configuration.</li>
-                    <li>Features such as generics, interfaces, etc.</li>
-                    <li>Decorators, modules, etc.</li>
+                    <li>This quiz is incomplete.</li>
+                    <li>Content will be placed here</li>
                 </ul>
             </>
         );

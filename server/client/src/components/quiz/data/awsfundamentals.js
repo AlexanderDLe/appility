@@ -392,8 +392,14 @@ const AWSFundamentalsData = {
         },
         {
             id: 35,
-            question: 'An ___ is used to match an increased or decreased load.',
-            options: ['', '', 'Auto Scaling Group', ''],
+            question:
+                'An ___ is used to spin EC2s to match an increased or decreased load.',
+            options: [
+                'Load Balancer',
+                'Cloud Front',
+                'Auto Scaling Group',
+                'Target Group'
+            ],
             answer: 'Auto Scaling Group',
             answerDescription:
                 'An Auto Scaling Group (ASG) is used to match an increased (scaling out) or decreased (scaling in) load. It can ensure that you have a maximum and minimum number of machines running. You can also automatically register new instances to a load balancer.'
@@ -402,7 +408,12 @@ const AWSFundamentalsData = {
             id: 36,
             question:
                 '___ are used to monitor traffic and alert the system to scale in or scale out.',
-            options: ['', 'Auto Scaling Alarms', '', ''],
+            options: [
+                'Auto Scaling Group',
+                'Auto Scaling Alarms',
+                'Elastic Load Balancer',
+                'Auto Scale Runner'
+            ],
             answer: 'Auto Scaling Alarms',
             answerDescription:
                 'Auto Scaling Alarms (such as CloudWatch) alarms are used to monitor traffic and alert the system to scale in or scale out. The alarms can monitor various metrics such as average CPU usage, number of request on the ELB per instance, average network in/out, etc.'
@@ -411,7 +422,7 @@ const AWSFundamentalsData = {
             id: 37,
             question:
                 'A/An ___ is a network drive you can attach to your instances while they run. It allows your instances to persist data.',
-            options: ['', '', '', ''],
+            options: ['EBL', 'EBS', 'EMM', 'AEG'],
             answer: 'EBS',
             answerDescription:
                 'A/An EBS (Elastic Block Store) is a network drive you can attach to your instances while they run. It allows your instances to persist data. It uses the network to communicate the instance. Can be detached and attached to EC2 instances quickly. Locked to an AZ (Availability Zone). To move across AZ, you must snapshot. EBS can be attached to only one instance at a time.'
@@ -420,157 +431,340 @@ const AWSFundamentalsData = {
             id: 38,
             question:
                 'Data at rest in an EBS Volume and in flight between a EC2 instances/EBS volumes are ___.',
-            options: ['', '', '', ''],
+            options: ['encrypted', 'unencrypted'],
             answer: 'encrypted',
             answerDescription:
                 'Data at rest and in flight between a EC2 instance and in an EBS volume are encrypted. All snapshots are encrypted. Encryption and decryption are handled transparently (you have nothing to do).'
         },
         {
             id: 39,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question: '___ records should be used over ___ records.',
+            options: [
+                'CNAME, Alias',
+                'CNAME, AAAA',
+                'Alias, AAAA',
+                'Alias, CNAME'
+            ],
+            answer: 'Alias, CNAME',
+            answerDescription:
+                'Alias records should be used over CNAME records for performance reasons. Route 53 can use public domains, private domains, has client load balancing, health checks, and routing policies you can use.'
         },
         {
             id: 40,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___ is a managed DB service for DB which use SQL as a query language.',
+            options: ['S3', 'RDS', 'EC2', 'RMB'],
+            answer: 'RDS',
+            answerDescription:
+                'RDS is a managed DB service for DB which use SQL as a query language. You can create Postgres, Oracle, MySQL, Aurora, etc. You get OS patching, backups, dashboard monitoring, scaling capability, upgrades, read replicas, etc. '
         },
         {
             id: 41,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___ are used to replicate database reads to scale database read utilization.',
+            options: [
+                'Read Replicas',
+                'Write Replicas',
+                'Read Throw',
+                'Scalers'
+            ],
+            answer: 'Read Replicas',
+            answerDescription:
+                'Read Replicas are used to replicate database reads. Replication is ASYNC so reads are eventually consistent with master. Replicas can be promoted to their own DB. Application must update the connection string to leverage read replicas.'
         },
         {
             id: 42,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
+            question:
+                'RDS is encrypted at ___ with AWS KMS AES-256 encryption. SSL certificates encrypt data to RDS in ___ over the network.',
+            options: [
+                'rest, running',
+                'flight, rest',
+                'rest, flight',
+                'flight, run'
+            ],
+            answer: 'rest, flight',
             answerDescription: ''
         },
         {
             id: 43,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                'If you require ___ on a RDS DB, then no user has access to the DB unless they have SSL connection.',
+            options: ['HTML', 'KMS', 'SSL', 'XML'],
+            answer: 'SSL',
+            answerDescription:
+                'If you require SSL on a RDS DB, then no user has access to the DB unless they have SSL connection. TO connect using SSL, provide the SSL Trust Certificate (can be downloaded from AWS) or provide SSL options when connecting to a database. Know the difference between connecting and enforcing SSL.'
         },
         {
             id: 44,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question: 'RDS Databases are usually deployed within a ___ subnet.',
+            options: ['public', 'private', 'protected', 'external'],
+            answer: 'private',
+            answerDescription:
+                'RDS Databases are usually deployed within a private subnet. RDS Security works by leveraging security groups (similar to EC2) - it controls who can communicate with the RDS.'
         },
         {
             id: 45,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___ is used to store data in memory for quick access. It can be used to store data that is frequently retrieved in the database to speed the retrieval process.',
+            options: ['RDS', 'ElastiCache', 'S3', 'EC2'],
+            answer: 'ElastiCache',
+            answerDescription:
+                'ElastiCache is used to store data in memory for quick access. It can be used to store data that is frequently retrieved in the database to speed the retrieval process. Redis has better feature sets than Memcached. Very useful for read-heavy applications, compute-intensive workloads, etc.'
         },
         {
             id: 46,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___ is when you only load data when necessary. Only the requested data is cached.',
+            options: [
+                'Write Through',
+                'Read Through',
+                'Lazy Elastic',
+                'Lazy Loading'
+            ],
+            answer: 'Lazy loading',
+            answerDescription:
+                'Lazy loading is when you only load data when necessary. Only the requested data is cached. Node failures are not fatal. Cache miss penalty results in 3 round trips. Data can be updated in the database and outdated in the cache.'
         },
         {
             id: 47,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question: '___ updates the cache when database is updated.',
+            options: [
+                'Lazy Loading',
+                'Write Through',
+                'Read Through',
+                'Lazy Wire'
+            ],
+            answer: 'Write Through',
+            answerDescription:
+                'Write Through updates the cache when database is updated. Pros: Data in cache is never stale/outdated. Write penalty. Missing data until it is added/updated in the DB. Mitigation is to implement Lazy Loading as well. Cache will have a lot of data that will never be read.'
         },
         {
             id: 48,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question: 'In S3, you place objects into ___.',
+            options: ['Buckets', 'Directories', 'Repositories', 'Containers'],
+            answer: 'Buckets',
+            answerDescription:
+                'In S3, you place objects into Buckets. Buckets must have a globally unique name. Buckets are defined at the regional level.'
         },
         {
             id: 49,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question: 'The key for an Object in S3 is the ___.',
+            options: [
+                'short path',
+                'FULL path',
+                'last parameter',
+                'first portion of the path'
+            ],
+            answer: 'FULL path',
+            answerDescription:
+                "The key for an Object in S3 is the entire FULL path. There's no concept of directories within Buckets - only long key names. Max size is 5GB - more than that will require multi-part upload."
         },
         {
             id: 50,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                'You can enable ___ in S3 at the Bucket level. When you overwrite it an object, the object version will increment.',
+            options: ['networking', 'applications', 'versioning', 'databases'],
+            answer: 'versioning',
+            answerDescription:
+                'You can enable versioning in S3 at the Bucket level. When you overwrite it an object, the object version will increment. It is best practice to version because you can protect against unintended deletes/overwrites. Any file that is not versioned prior to versioning will have version "null".'
         },
         {
             id: 51,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question: 'There are ___ methods of encryption in S3.',
+            options: ['4', '2', '3', '5'],
+            answer: '4',
+            answerDescription:
+                'There are 4 methods of encryption in S3. SSE-S3, SSE-KMS, SSE-C, and Client Side Encryption. It is important to know which ones are adapted.'
         },
         {
             id: 52,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___: Encryption using keys handled & managed by AWS S3. You must set header, "x-amz-server-side-encryption":"AES256" when sending the request over HTTP/S. AWS will see the header and encrypt it server-side.',
+            options: ['SSE-KMS', 'SSE-S3', 'SSE-C', 'Client Side Encryption'],
+            answer: 'SSE-S3',
+            answerDescription:
+                'SSE-S3: Encryption using keys handled & managed by AWS S3. You must set header, "x-amz-server-side-encryption":"AES256" when sending the request over HTTP/S. AWS will see the header and encrypt it server-side.'
         },
         {
             id: 53,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___: Encryption using keys handled & managed by KMS. KMS Advantages: User Control + Audit Trail. Object is encrypted server-side. Must set header: "x-amz-server-side-encryption":"aws:kms". The key used is a KMS that you can manage. Server side.',
+            options: ['SSE-KMS', 'SSE-S3', 'SSE-C', 'Client Side Encryption'],
+            answer: 'SSE-KMS',
+            answerDescription:
+                'SSE-KMS: Encryption using keys handled & managed by KMS. KMS Advantages: User Control + Audit Trail. Object is encrypted server-side. Must set header: "x-amz-server-side-encryption":"aws:kms". The key used is a KMS that you can manage. Server side.'
         },
         {
             id: 54,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___: Server side encryption using data keys fully managed by the customer outside of AWS. Amazon S3 does not store the encryption key you provide. HTTPS must be used. Key must be provided in the HTTP header in every request. AWS will take provided key and encrypt the object.',
+            options: ['SSE-KMS', 'SSE-S3', 'SSE-C', 'Client Side Encryption'],
+            answer: 'SSE-C',
+            answerDescription:
+                'SSE-C: Server side encryption using data keys fully managed by the customer outside of AWS. Amazon S3 does not store the encryption key you provide. HTTPS must be used. Key must be provided in the HTTP header in every request. AWS will take provided key and encrypt the object.'
         },
         {
             id: 55,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___: Client library such as Amazon S3 Encryption Client. Clients must encrypt data themselves before sending to S3. Clients must decrypt data themselves when retrieving from S3. Custoimer manages key and encryption cycle.',
+            options: ['SSE-KMS', 'SSE-S3', 'SSE-C', 'Client Side Encryption'],
+            answer: 'Client Side Encryption',
+            answerDescription:
+                'Client Side Encryption: Client library such as Amazon S3 Encryption Client. Clients must encrypt data themselves before sending to S3. Clients must decrypt data themselves when retrieving from S3. Custoimer manages key and encryption cycle.'
         },
         {
             id: 56,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question: 'Encryption in flight is also called ___/TLS.',
+            options: ['KMS', 'SSL', 'UML', 'AES'],
+            answer: 'SSL',
+            answerDescription: 'Encryption in flight is also called SSL/TLS.'
         },
         {
             id: 57,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___: User Based and Resource Based. User: IAM policies - which API calls should be allowed for a specific user from IAM console. Resource: Bucket Policies - bucket wide rules from the S3 console, allows cross account; Object Access Control List, Bucket Access Control List.',
+            options: [
+                'Role Policies',
+                'Internal Policies',
+                'User Policies',
+                'Two Security Basis'
+            ],
+            answer: 'Two Security Basis',
+            answerDescription:
+                'Two Security Basis: User Based and Resource Based. User: IAM policies - which API calls should be allowed for a specific user from IAM console. Resource: Bucket Policies - bucket wide rules from the S3 console, allows cross account; Object Access Control List, Bucket Access Control List.'
         },
         {
             id: 58,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                '___ utilize JSON based policies. Actions - Set of API to allow/deny. With Bucket policies, you can grant access to buckets, force encryption, or grant acces to another account.',
+            options: [
+                'Role Policies',
+                'Internal Policies',
+                'User Policies',
+                'Bucket Policies'
+            ],
+            answer: 'Bucket Policies',
+            answerDescription:
+                'Bucket Policies: JSON based policies. Actions - Set of API to allow/deny. Principle is the user/account to apply the policy to. With Bucket policies, you can grant access to buckets, force encryption, or grant acces to another account.'
         },
         {
             id: 59,
-            question: '',
-            options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            question:
+                'S3 Networking supports ___ - for instances in VPC without www internet. Your instances can talk to S3 in the internal network.',
+            options: ['EBL', 'AGL', 'AES', 'VPC Endpoints'],
+            answer: 'VPC Endpoints',
+            answerDescription:
+                'S3 Networking supports VPC Endpoints - for instances in VPC without www internet. Your instances can talk to S3 in the internal network.'
+        },
+        {
+            id: 60,
+            question:
+                '___: S3 access logs can be stored in another S3 Bucket. API calls can be logged in AWS CloudTrail.',
+            options: [
+                'Load Balancing',
+                'Logging/Audit',
+                'VPC End Points',
+                'Bucket Policies'
+            ],
+            answer: 'Logging/Audit',
+            answerDescription:
+                'S3 Logging/Audit: S3 access logs can be stored in another S3 Bucket. API calls can be logged in AWS CloudTrail.'
+        },
+        {
+            id: 61,
+            question:
+                'S3 User Security: MFA (Multi-factor authentication) can be required in versioned buckets to delete objects. Signed URLs: URLs that are valid only for a limited time.',
+            options: [
+                'Load Balancing',
+                'Logging/Audit',
+                'VPC End Points',
+                'User Security'
+            ],
+            answer: 'User Security',
+            answerDescription:
+                'S3 User Security: MFA (Multi-factor authentication) can be required in versioned buckets to delete objects. Signed URLs: URLs that are valid only for a limited time.'
+        },
+        {
+            id: 62,
+            question:
+                'If you host a ___ on S3, you will need to enable a read Bucket policy.',
+            options: ['dynamic page', 'application', 'static page', 'database'],
+            answer: 'static page',
+            answerDescription:
+                'If you host a static page on S3, you will need to enable a read Bucket policy.'
+        },
+        {
+            id: 63,
+            question:
+                'If you request data from another S3 bucket, you will need to enable ___',
+            options: ['CORS', 'VPC', 'EBL', 'ASG'],
+            answer: 'CORS',
+            answerDescription:
+                'If you request data from another S3 bucket, you will need to enable CORS (Cross Origin Resource Sharing allows you to limit the number of websites that can request your files in S3 (and limit your costs)). CORS will allow S3 buckets to share data.'
+        },
+        {
+            id: 64,
+            question:
+                'S3 is ___. It takes time for data to update and be consistent across requests.',
+            options: [
+                'Dynamic',
+                'Balance',
+                'Eventually Consistent',
+                'Thorough'
+            ],
+            answer: 'Eventually Consistent',
+            answerDescription:
+                'S3 is Eventually Consistent. It takes time for data to update and be consistent across requests. As soon as an object is written, we can retrieve it EXCEPT if you did a GET before to see if a object existed. If you read an object after updating, you might get older version. If you delete an object, you may still be able to retrieve for a short time.'
+        },
+        {
+            id: 65,
+            question:
+                'Historically and perhaps still on the exam, to optimize for S3 performance, you used to need to ___ in object names. Nowadays, you do not.',
+            options: [
+                'repeat the last character',
+                'suffix your username',
+                'prefix 4 random characters',
+                'prefix your username'
+            ],
+            answer: 'prefix 4 random characters',
+            answerDescription:
+                'Historically and perhaps still on the exam, to optimize for S3 performance, you used to need to prefix 4 random characters in object names. Nowadays, you do not.'
+        },
+        {
+            id: 66,
+            question:
+                'For objects >= ___, use multipart upload for faster upload. Parallizes PUTs for greater throughput.',
+            options: ['10MB', '100MB', '10KB', '1KB'],
+            answer: '100MB',
+            answerDescription:
+                'For objects >= 100MB, use multipart upload for faster upload. Parallizes PUTs for greater throughput. Maximum your network bandwidth and efficiency. Decrease time to retry in case a part fails. MUST use for objects greater than 5GB.'
+        },
+        {
+            id: 67,
+            question:
+                'Use ___ to cache S3 objects around the world to improve reads. Use S3 Transfer Acceleration (use edge locations) - just need to change the endpoint you write to, not the code.',
+            options: ['CloudTrail', 'CloudFront', 'Precipe', 'Consistence'],
+            answer: 'CloudFront',
+            answerDescription:
+                'Use CloudFront to cache S3 objects around the world to improve reads. Use S3 Transfer Acceleration (use edge locations) - just need to change the endpoint you write to, not the code.'
+        },
+        {
+            id: 68,
+            question:
+                'If you have ___ encryption enabled, then writing to S3 may be throttled from encryption. You can adjust KMS limits.',
+            options: ['ASG', 'EBL', 'SSL', 'KMS'],
+            answer: 'KMS',
+            answerDescription:
+                'If you have KMS encryption enabled, then writing to S3 may be throttled from encryption. You can adjust KMS limits.'
+        },
+        {
+            id: 69,
+            question:
+                'Glacier is another S3 Storage tier for long term archival. You can use SQL ___ queries to let S3 or Glacier know exactly which attributes to filter.',
+            options: ['JOIN', 'FROM', 'SELECT', 'AS'],
+            answer: 'SELECT',
+            answerDescription:
+                'Glacier is another S3 Storage tier for long term archival. You can use SQL SELECT queries to let S3 or Glacier know exactly which attributes to filter.'
         }
     ]
 };

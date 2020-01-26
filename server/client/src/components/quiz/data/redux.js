@@ -2,7 +2,7 @@ const ReduxData = {
     title: 'React With Redux',
     label: 'Redux',
     param: 'redux',
-    color: '#9d42c3',
+    color: '#7f42c3',
     items: [
         {
             id: 0,

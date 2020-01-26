@@ -23,6 +23,15 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: 'rgb(22, 22, 22)',
         color: 'white'
     },
+    cardHeader: {
+        padding: '10px'
+    },
+    cardContent: {
+        padding: '16px 0px 0px 16px'
+    },
+    cardActions: {
+        padding: '0px 0px 4x 5px'
+    },
     media: {
         height: 0,
         paddingTop: '50.25%' // 16:9
@@ -52,7 +61,7 @@ const QuizCard = ({ score, data }) => {
     const [expanded, setExpanded] = React.useState(false);
     const cardColor = {
         borderLeft: `2px solid ${data.color}`,
-        borderBottomLeftRadius: '25px'
+        borderBottomLeftRadius: '16px'
     };
 
     const handleExpandClick = () => {
@@ -71,6 +80,7 @@ const QuizCard = ({ score, data }) => {
     return (
         <Card style={cardColor} className={classes.card}>
             <CardHeader
+                className={classes.cardHeader}
                 avatar={
                     <Avatar aria-label="JavaScript" style={avatarStyle}>
                         {scoreLetter ? scoreLetter : '-'}
@@ -83,12 +93,12 @@ const QuizCard = ({ score, data }) => {
                 image={require(`../../img/${data.image}`)}
                 title="JavaScript"
             />
-            <CardContent>
+            <CardContent className={classes.cardContent}>
                 <Typography variant="body2" component="p">
                     {data.description}
                 </Typography>
             </CardContent>
-            <CardActions disableSpacing>
+            <CardActions className={classes.cardActions} disableSpacing>
                 <Button size="large" color="secondary">
                     <Link className={classes.link} to={`/quiz/${param}`}>
                         Take Quiz
