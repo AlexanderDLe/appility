@@ -64,7 +64,7 @@ const AWSFundamentalsData = {
         {
             id: 5,
             question:
-                '___ is the ability to avoid or eliminate unndeeded or suboptimal cost.',
+                '___ is the ability to avoid or eliminate unneeded or suboptimal cost.',
             options: [
                 'Cost optimization',
                 'Reliability',
@@ -73,7 +73,7 @@ const AWSFundamentalsData = {
             ],
             answer: 'Cost optimization',
             answerDescription:
-                'Cost optimization is the ability to avoid or eliminate unndeeded or suboptimal cost.'
+                'Cost optimization is the ability to avoid or eliminate unneeded or suboptimal cost.'
         },
         {
             id: 6,
@@ -141,7 +141,7 @@ const AWSFundamentalsData = {
         {
             id: 11,
             question:
-                'When you restart your EC2 instance with a non-elastic IP public address, your public IP will ___. Therefore, you will need to SSH with the new IP.',
+                'When you restart your EC2 instance with a non-elastic IP public address, your public IP will ___.',
             options: ['remain', 'change'],
             answer: 'change',
             answerDescription:
@@ -177,7 +177,7 @@ const AWSFundamentalsData = {
         {
             id: 15,
             question:
-                '___ is the storage platform of AWS. It is an unlimited "bucket" storage container that can store digital content.',
+                '___ is the storage platform of AWS. It is an "unlimited" storage container that can store digital content.',
             options: ['EC2', 'Bucket', 'RDB', 'S3'],
             answer: 'S3',
             answerDescription:
@@ -186,7 +186,7 @@ const AWSFundamentalsData = {
         {
             id: 16,
             question:
-                'RDS is a relational database service of AWS. It offers database management systems to store relational data.',
+                '___ is a relational database service of AWS. It offers database management systems to store relational data.',
             options: ['S3', 'Dynamo', 'RDS', 'RDM'],
             answer: 'RDS',
             answerDescription:
@@ -204,7 +204,7 @@ const AWSFundamentalsData = {
             ],
             answer: 'Dedicated Hosts',
             answerDescription:
-                'Dedicated Hosts; allow you to book an entire physical server for your use. Full control of EC2 Instance payment. Visibility into the underlying sockets/cores of the hardware. Allocated for your account for a 3 year period reservation.'
+                'Dedicated Hosts; allow you to book an entire physical server for your use. Full control of EC2 Instance placement and utilization.'
         },
         {
             id: 18,
@@ -218,7 +218,7 @@ const AWSFundamentalsData = {
             ],
             answer: 'Convertible Reserved Instances',
             answerDescription:
-                'Convertible Reserved Instances; long workloads with flexible instances. On Demand Instances; Short workload, predictable pricing, pay for what you use. Spot Instances; bid for short workloads, can lose instances.'
+                'Convertible Reserved Instances; long workloads with flexible instances. On Demand Instances: Short workload, predictable pricing, pay for what you use. Spot Instances: bid for short workloads, can lose instances.'
         },
         {
             id: 19,
@@ -521,7 +521,7 @@ const AWSFundamentalsData = {
                 'Lazy Elastic',
                 'Lazy Loading'
             ],
-            answer: 'Lazy loading',
+            answer: 'Lazy Loading',
             answerDescription:
                 'Lazy loading is when you only load data when necessary. Only the requested data is cached. Node failures are not fatal. Cache miss penalty results in 3 round trips. Data can be updated in the database and outdated in the cache.'
         },
@@ -636,7 +636,7 @@ const AWSFundamentalsData = {
         {
             id: 58,
             question:
-                '___ utilize JSON based policies. Actions - Set of API to allow/deny. With Bucket policies, you can grant access to buckets, force encryption, or grant acces to another account.',
+                'S3 ___ utilize JSON based policies. Actions - Set of API to allow/deny. With Bucket policies, you can grant access to buckets, force encryption, or grant acces to another account.',
             options: [
                 'Role Policies',
                 'Internal Policies',
@@ -672,17 +672,16 @@ const AWSFundamentalsData = {
         },
         {
             id: 61,
-            question:
-                'S3 User Security: MFA (Multi-factor authentication) can be required in versioned buckets to delete objects. Signed URLs: URLs that are valid only for a limited time.',
+            question: '___: URLs that are valid only for a limited time.',
             options: [
                 'Load Balancing',
                 'Logging/Audit',
                 'VPC End Points',
-                'User Security'
+                'Signed URLs'
             ],
-            answer: 'User Security',
+            answer: 'Signed URLs',
             answerDescription:
-                'S3 User Security: MFA (Multi-factor authentication) can be required in versioned buckets to delete objects. Signed URLs: URLs that are valid only for a limited time.'
+                'Signed URLs: URLs that are valid only for a limited time.'
         },
         {
             id: 62,

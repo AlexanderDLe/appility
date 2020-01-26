@@ -192,8 +192,11 @@ export const AWSAssociatesData = {
             <>
                 <h3>This Quiz Covers:</h3>
                 <ul>
-                    <li>This quiz is incomplete.</li>
-                    <li>Content will be placed here</li>
+                    <li>AWS CLI, SDK, IAM Roles and Policies.</li>
+                    <li>Elastic Beanstalk</li>
+                    <li>CICD: CodeCommit, CodePipeline, CodeBuild, etc.</li>
+                    <li>CloudFormation</li>
+                    <li>CloudWatch, X-Ray, CloudTrail, and more...</li>
                 </ul>
             </>
         );
