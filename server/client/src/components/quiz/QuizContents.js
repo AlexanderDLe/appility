@@ -64,7 +64,6 @@ const dynamicStyles = color => {
     return {
         header: {
             color: 'white',
-            fontFamily: 'Audiowide',
             borderBottom: `1px solid ${color}`,
             textAlign: 'center',
             fontWeight: 'lighter'

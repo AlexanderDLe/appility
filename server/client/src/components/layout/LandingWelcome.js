@@ -8,13 +8,10 @@ const trans1 = (x, y) => `translate3d(${x / 10}px,${y / 10}px,0)`;
 
 const useStyles = makeStyles(theme => ({
     text: {
+        fontSize: '1.25em',
         textAlign: 'center',
         fontFamily: 'Audiowide',
         color: theme.palette.secondary.main
-    },
-    h3text: {
-        fontFamily: 'Roboto',
-        color: theme.palette.secondary.light
     }
 }));
 
@@ -48,7 +45,6 @@ export default props => {
                         ? ` ${props.auth.username}`
                         : ' to Appility'}
                 </h1>
-                <p className={classes.h3text}>Ready to test your knowledge?</p>
             </div>
         </div>
     );

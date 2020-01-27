@@ -67,11 +67,9 @@ const useStyles = makeStyles(theme =>
             marginRight: theme.spacing(2)
         },
         title: {
-            flexGrow: 1,
-            fontFamily: 'Audiowide'
+            flexGrow: 1
         },
         buttons: {
-            fontFamily: 'Audiowide',
             textDecoration: 'none',
             color: 'white'
         },
@@ -87,7 +85,6 @@ const useStyles = makeStyles(theme =>
             color: 'white'
         },
         menuItem: {
-            fontFamily: 'Audiowide',
             color: 'black',
             textAlign: 'left'
         }
@@ -204,7 +201,7 @@ const NavBar = props => {
                             </Link>
                             <Typography variant="h6" className={classes.title}>
                                 <Link to="/" className={classes.buttons}>
-                                    &lt;APPILITY&gt;
+                                    APPILITY
                                 </Link>
                             </Typography>
                             {navMediaQuery ? renderFullNav() : renderMenuNav()}
