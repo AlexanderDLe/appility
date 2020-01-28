@@ -585,77 +585,88 @@ const AWSAssociatesData = {
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'AWS CloudWatch: Metrics - Collects and track key metrics. Logs - Collect, monitor, and store log files. Events - Send notifications when certain AWS events occur. Monitors almost every metric for AWS.'
         },
         {
             id: 73,
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'X-Ray: Troubleshoot application performance and errors. Distributed tracing of microservices.'
         },
         {
             id: 74,
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'CloudTrail: Internal monitoring of API calls being made. Audit changes to AWS Resources by your users.'
         },
         {
             id: 75,
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'By default, EC2 instance metrics have metrics "every 5 minutes.". With Detailed Monitor (extra coset), you get data every 1 minute. Use detailed monitoring if you want to more promptly scale your ASG.'
         },
         {
             id: 76,
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'By default, metrics have a resolution of 1 minute. However, for higher cost you can get a resolution up to 1 second (StoreResolution API parameter).'
         },
         {
             id: 77,
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'Alarms are used to trigger notifications for any metric. Alarms can go to Auto Scaling, EC2 Actions, SNS notifications, etc.'
         },
         {
             id: 78,
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'X-Ray leverages tracing - which is an end to end way to following a "request". Each component dealing with the request adds its own "trace". Annotations can be added to traces to provide extra information. You can trace every request or a sample of the request.'
         },
         {
             id: 79,
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'To enable X-Ray, your code you must 1) import the X-Ray SDK. Very little code modification but the application SDK will capture calls to AWS, HTTP/HTTPS, database calls, and queue calls. 2) Install the X-Ray daemon or enable X-Ray AWS integration. Each application must have the IAM rights to write data to X-Ray.'
         },
         {
             id: 80,
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'The X-Ray Daemon/Agent has a config to send traces cross account. Make sure the IAM permissions are correct - the agent will assume the role. This allows a central account for all app tracing.'
         },
         {
             id: 81,
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'Each application will send a segment. All segments collected together form an end-to-end trace. Sampling: decrease the amount of request sent to X-Ray to reduce cost. Annotations: key value pairs used to index traces and use with filters. Meta data is not indexed.'
         },
         {
             id: 82,
             question: '',
             options: ['', '', '', ''],
             answer: '',
-            answerDescription: ''
+            answerDescription:
+                'CloudTrail provides governance, compliance, and audit for your AWS Account. Enabled by default. Get a history of events/API calls within your AWS account. If a resource is deleted in AWS, look into CLoudTrail.'
         },
         {
             id: 83,
