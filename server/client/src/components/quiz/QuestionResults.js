@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const QuestionResults = ({ saveScore, data, subject }) => {
+const QuestionResults = ({ auth, saveScore, data, subject }) => {
     const classes = useStyles();
     const corrects = data.reduce((accumulator, item) => {
         return item.correct ? accumulator + 1 : accumulator;
@@ -62,8 +62,8 @@ const QuestionResults = ({ saveScore, data, subject }) => {
     const score = corrects ? Math.floor((corrects / data.length) * 100) : 0;
 
     useEffect(() => {
-        saveScore({ subject, score });
-    }, [subject, score, saveScore]);
+        if (auth.isAuthenticated) saveScore({ subject, score });
+    }, [subject, score, saveScore, auth]);
 
     const spring = useSpring({
         config: {
@@ -157,4 +157,10 @@ const QuestionResults = ({ saveScore, data, subject }) => {
     );
 };
 
-export default connect(null, { saveScore })(QuestionResults);
+const mapStateToProps = state => {
+    return {
+        auth: state.auth
+    };
+};
+
+export default connect(mapStateToProps, { saveScore })(QuestionResults);

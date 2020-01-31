@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import shuffleArray from '../misc/shuffleArray';
 
 import {
@@ -88,26 +87,26 @@ const fetchQuizData = label => {
     else return require(`./data/test`);
 };
 
-const shuffleData = array => {
-    for (let item of array) shuffleArray(item.options);
-    shuffleArray(array);
-};
-
 // Quiz States
 const QUIZ = 'QUIZ';
 const RESULTS = 'RESULTS';
 
-const QuizContents = ({ quiz, param }) => {
+const QuizContents = ({ param }) => {
     const classes = useStyles();
     const data = fetchQuizData(param).default;
     const style = dynamicStyles(data.color);
     const minWidthQuery = useMediaQuery('(min-width: 600px');
     const dynamicPadding = mediaQueryStyles(minWidthQuery);
-    shuffleData(data.items);
-    const [contentState, setContentState] = useState(QUIZ);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showAnswer, setShowAnswer] = useState(false);
-    const [questionCount, setQuestionCount] = useState(0);
+
+    const shuffleData = useCallback(() => {
+        for (let item of data.items) shuffleArray(item.options);
+        shuffleArray(data.items);
+    }, [data.items]);
+
+    useEffect(() => {
+        shuffleData();
+    }, [shuffleData]);
+
     const [answerArray, setAnswerArray] = useState(
         data.items.map(item => {
             return {
@@ -117,6 +116,12 @@ const QuizContents = ({ quiz, param }) => {
             };
         })
     );
+
+    const [contentState, setContentState] = useState(QUIZ);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showAnswer, setShowAnswer] = useState(false);
+    const [questionCount, setQuestionCount] = useState(0);
+
     // Handle Answer Array
     const handleAnswer = (index, answer) => {
         const newArray = [...answerArray];
@@ -252,10 +257,4 @@ const QuizContents = ({ quiz, param }) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        quiz: state.quiz
-    };
-};
-
-export default connect(mapStateToProps)(QuizContents);
+export default QuizContents;

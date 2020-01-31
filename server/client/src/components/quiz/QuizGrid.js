@@ -28,9 +28,9 @@ const QuizGrid = ({ quiz }) => {
         [quiz.AWSDevAssociates, AWSDevAssociatesData]
     ];
     const renderCards = () => {
-        return cardData.map(data => {
+        return cardData.map((data, index) => {
             return (
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid key={index} item xs={12} sm={6} md={4}>
                     <QuizCard score={data[0]} data={data[1]} />
                 </Grid>
             );

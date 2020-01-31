@@ -48,7 +48,7 @@ const QuizQuestions = ({
                                 checked={answer === data.chosenAnswer}
                                 value={answer}
                                 className={classes.checkbox}
-                                onChange={() => handleAnswer(data.id, answer)}
+                                onChange={() => handleAnswer(count, answer)}
                             />
                             <div className={classes.questionOption}>
                                 {answer}
