@@ -180,8 +180,8 @@ export const AWSFundamentalsData = {
     }
 };
 
-export const AWSAssociatesData = {
-    title: 'AWS Associate Developer (Incomplete)',
+export const AWSDevAssociatesData = {
+    title: 'AWS Associate Developer',
     label: 'AWS Associate Developer',
     param: 'awsassociatedeveloper',
     image: 'AWS.jpg',

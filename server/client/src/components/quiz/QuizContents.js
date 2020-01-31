@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import shuffleArray from '../misc/shuffleArray';
 
 import {
     makeStyles,
@@ -87,6 +88,11 @@ const fetchQuizData = label => {
     else return require(`./data/test`);
 };
 
+const shuffleData = array => {
+    for (let item of array) shuffleArray(item.options);
+    shuffleArray(array);
+};
+
 // Quiz States
 const QUIZ = 'QUIZ';
 const RESULTS = 'RESULTS';
@@ -97,7 +103,7 @@ const QuizContents = ({ quiz, param }) => {
     const style = dynamicStyles(data.color);
     const minWidthQuery = useMediaQuery('(min-width: 600px');
     const dynamicPadding = mediaQueryStyles(minWidthQuery);
-
+    shuffleData(data.items);
     const [contentState, setContentState] = useState(QUIZ);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showAnswer, setShowAnswer] = useState(false);
