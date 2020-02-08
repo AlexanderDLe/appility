@@ -8,7 +8,7 @@ import * as actions from '../actions';
 
 const App = props => {
     useEffect(() => {
-        props.fetchUser();
+        // props.fetchUser();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
