@@ -8,6 +8,7 @@ import Landing from './Landing';
 import PrivacyPolicy from '../misc/PrivacyPolicy';
 import QuizSheet from '../quiz/QuizSheet';
 import ScoreSheet from '../scores/ScoreSheet';
+import Redirector from '../misc/Redirector';
 
 const useStyles = makeStyles(theme => ({
     body: {
@@ -59,6 +60,11 @@ const Body = () => {
                             exact
                             path="/quizscores"
                             component={ScoreSheet}
+                        />
+                        <Route
+                            exact
+                            path="/index.html"
+                            component={Redirector}
                         />
                     </Switch>
                 </animated.div>
