@@ -4,7 +4,8 @@ import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core';
 import { registerUser, loginUser } from '../../actions';
 import { removeAlert, setLoading } from '../../actions';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import AuthTextField from './AuthTextField';
 import AuthButton from './AuthButton';
 import AuthHeader from './AuthHeader';
@@ -13,6 +14,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { LinearProgress } from '@material-ui/core';
 import { EmailRegex, PasswordRegex } from '../misc/Regex';
+
+import { Auth } from 'aws-amplify';
 
 const useStyles = makeStyles({
     root: {
@@ -45,7 +48,8 @@ const useStyles = makeStyles({
 
 const auth = {
     LOGIN: 'LOGIN',
-    REGISTER: 'REGISTER'
+    REGISTER: 'REGISTER',
+    CONFIRM: 'CONFIRM'
 };
 
 const AuthForm = props => {
@@ -63,13 +67,26 @@ const AuthForm = props => {
         }
     };
     // Form Submit Handler
-    const onSubmit = data => {
+    const onSubmit = async data => {
         props.removeAlert();
         props.setLoading();
-        if (authState === 'LOGIN') {
+        if (authState === auth.LOGIN) {
             props.loginUser(data);
-        } else {
-            props.registerUser(data);
+        } else if (authState === auth.REGISTER) {
+            //     props.registerUser(data);
+            Auth.signUp({
+                username: data.username,
+                password: data.password,
+                attributes: {
+                    email: data.email
+                }
+            })
+                .then(() => console.log('signed up'))
+                .catch(err => console.log(err));
+        } else if (authState === auth.CONFIRM) {
+            Auth.confirmSignUp(data.username, data.confirmationCode)
+                .then(() => console.log('confirmed'))
+                .catch(err => console.log(err));
         }
     };
     // oAuth Handler
@@ -131,11 +148,11 @@ const AuthForm = props => {
                 case 'required':
                     return 'This field is required.';
                 case 'minLength':
-                    return 'Must be at least 6 characters.';
+                    return 'Must be at least 8 characters.';
                 case 'maxLength':
                     return 'Must be at most 20 characters.';
                 case 'pattern':
-                    return 'Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 digit, 1 special character, and be 6-20 characters.';
+                    return 'Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 digit, 1 special character, and be 8-20 characters.';
                 default:
                     return '';
             }
@@ -156,6 +173,16 @@ const AuthForm = props => {
     const validatePasswordMatch = value => {
         return value === watch('password');
     };
+    const confirmCodeErrorHandler = value => {
+        if (errors.confirmationCode) {
+            switch (errors.confirmationCode.type) {
+                case 'required':
+                    return 'This field is required.';
+                default:
+                    return '';
+            }
+        }
+    };
     // Set Form Variables Based On Login/Register
     let formAction;
     let authText;
@@ -163,29 +190,35 @@ const AuthForm = props => {
     let usernameRegistration;
     let passwordRegistration;
     let confirmPasswordRegistration;
+    let confirmCodeRegistration;
     const setFormVariables = () => {
+        usernameRegistration = {
+            required: true,
+            minLength: 3
+        };
         if (authState === 'LOGIN') {
             formAction = '/api/login';
             authText = 'SIGN IN';
-            emailRegistration = { required: true };
+            // emailRegistration = { required: true };
             passwordRegistration = { required: true };
-        } else {
+        } else if (authState === 'REGISTER') {
             formAction = '/api/register';
             authText = 'REGISTER';
             emailRegistration = { required: true, pattern: EmailRegex };
-            usernameRegistration = {
-                required: true,
-                minLength: 3
-            };
             passwordRegistration = {
                 required: true,
-                minLength: 6,
+                minLength: 8,
                 maxLength: 20,
                 pattern: PasswordRegex
             };
             confirmPasswordRegistration = {
                 required: true,
                 validate: validatePasswordMatch
+            };
+        } else if (authState === 'CONFIRM') {
+            authText = 'CONFIRM';
+            confirmCodeRegistration = {
+                required: true
             };
         }
     };
@@ -196,6 +229,135 @@ const AuthForm = props => {
         return <Redirect to="/" />;
     }
 
+    const renderFormContent = () => {
+        if (authState === auth.LOGIN || authState === auth.REGISTER) {
+            return (
+                <React.Fragment>
+                    {authState === 'REGISTER' ? (
+                        <AuthTextField
+                            registration={register(emailRegistration)}
+                            label="Email"
+                            name="email"
+                            type="text"
+                            error={errors.email ? true : false}
+                            helperText={emailErrorHandler()}
+                        />
+                    ) : (
+                        ''
+                    )}
+                    <AuthTextField
+                        registration={register(passwordRegistration)}
+                        label="Password"
+                        name="password"
+                        type="password"
+                        error={errors.password ? true : false}
+                        helperText={passwordErrorHandler()}
+                    />
+                    {authState === 'REGISTER' ? (
+                        <AuthTextField
+                            registration={register(confirmPasswordRegistration)}
+                            label="Confirm Password"
+                            name="confirmPassword"
+                            type="password"
+                            error={errors.confirmPassword ? true : false}
+                            helperText={confirmPasswordErrorHandler()}
+                        />
+                    ) : (
+                        ''
+                    )}
+                    {dislayAuthError()}
+                    <AuthButton
+                        type="submit"
+                        variant="contained"
+                        color="#7ac57a"
+                    >
+                        <div className={classes.whiteText}>
+                            <div className={classes.iconPadding}>
+                                {authText}
+                            </div>
+                        </div>
+                    </AuthButton>
+                    <AuthButton
+                        onClick={oAuthHandler}
+                        href="/auth/google"
+                        color="#ff6565"
+                    >
+                        <div className={classes.whiteText}>
+                            <FontAwesomeIcon icon={faGoogle} />
+                            <div className={classes.iconPadding}>
+                                {authText} With Google
+                            </div>
+                        </div>
+                    </AuthButton>
+                    <AuthButton
+                        onClick={oAuthHandler}
+                        href="/auth/facebook"
+                        color="#5b5bff"
+                    >
+                        <div className={classes.whiteText}>
+                            <FontAwesomeIcon icon={faFacebookF} />
+                            <div className={classes.iconPadding}>
+                                {authText} With Facebook
+                            </div>
+                        </div>
+                    </AuthButton>
+                    <div
+                        style={{ padding: '20px' }}
+                        className={classes.textColor}
+                    >
+                        {authState === 'LOGIN' ? (
+                            <React.Fragment>
+                                <div
+                                    onClick={changeAuthState}
+                                    className={classes.pointer}
+                                >
+                                    <p>Don't have an account? Register here.</p>
+                                </div>
+                            </React.Fragment>
+                        ) : (
+                            <div
+                                onClick={changeAuthState}
+                                className={classes.pointer}
+                            >
+                                <p>Have an account? Sign in here.</p>
+                            </div>
+                        )}
+                        <Link
+                            className={classes.textColor}
+                            to="/privacy-policy"
+                        >
+                            Click here to read our privacy policy.
+                        </Link>
+                    </div>
+                </React.Fragment>
+            );
+        } else if (authState === auth.CONFIRM) {
+            return (
+                <React.Fragment>
+                    <AuthTextField
+                        registration={register(confirmCodeRegistration)}
+                        label="Confirm Email Code"
+                        name="confirmationCode"
+                        type="text"
+                        error={errors.confirmationCode ? true : false}
+                        helperText={confirmCodeErrorHandler()}
+                    />
+                    {dislayAuthError()}
+                    <AuthButton
+                        type="submit"
+                        variant="contained"
+                        color="#7ac57a"
+                    >
+                        <div className={classes.whiteText}>
+                            <div className={classes.iconPadding}>
+                                {authText}
+                            </div>
+                        </div>
+                    </AuthButton>
+                </React.Fragment>
+            );
+        }
+    };
     return (
         <div className={classes.root}>
             <AuthHeader authState={authState} />
@@ -205,95 +367,15 @@ const AuthForm = props => {
                 method="post"
             >
                 <AuthTextField
-                    registration={register(emailRegistration)}
-                    label="Email"
-                    name="email"
+                    registration={register(usernameRegistration)}
+                    label="Username"
+                    name="username"
                     type="text"
-                    error={errors.email ? true : false}
-                    helperText={emailErrorHandler()}
+                    error={errors.username ? true : false}
+                    helperText={usernameErrorHandler()}
                 />
-                {authState === 'REGISTER' ? (
-                    <AuthTextField
-                        registration={register(usernameRegistration)}
-                        label="Username"
-                        name="username"
-                        type="text"
-                        error={errors.username ? true : false}
-                        helperText={usernameErrorHandler()}
-                    />
-                ) : (
-                    ''
-                )}
-                <AuthTextField
-                    registration={register(passwordRegistration)}
-                    label="Password"
-                    name="password"
-                    type="password"
-                    error={errors.password ? true : false}
-                    helperText={passwordErrorHandler()}
-                />
-                {authState === 'REGISTER' ? (
-                    <AuthTextField
-                        registration={register(confirmPasswordRegistration)}
-                        label="Confirm Password"
-                        name="confirmPassword"
-                        type="password"
-                        error={errors.confirmPassword ? true : false}
-                        helperText={confirmPasswordErrorHandler()}
-                    />
-                ) : (
-                    ''
-                )}
-                {dislayAuthError()}
-                <AuthButton type="submit" variant="contained" color="#7ac57a">
-                    <div className={classes.whiteText}>
-                        <div className={classes.iconPadding}>{authText}</div>
-                    </div>
-                </AuthButton>
+                {renderFormContent()}
             </form>
-            <AuthButton
-                onClick={oAuthHandler}
-                href="/auth/google"
-                color="#ff6565"
-            >
-                <div className={classes.whiteText}>
-                    <FontAwesomeIcon icon={faGoogle} />
-                    <div className={classes.iconPadding}>
-                        {authText} With Google
-                    </div>
-                </div>
-            </AuthButton>
-            <AuthButton
-                onClick={oAuthHandler}
-                href="/auth/facebook"
-                color="#5b5bff"
-            >
-                <div className={classes.whiteText}>
-                    <FontAwesomeIcon icon={faFacebookF} />
-                    <div className={classes.iconPadding}>
-                        {authText} With Facebook
-                    </div>
-                </div>
-            </AuthButton>
-            <div style={{ padding: '20px' }} className={classes.textColor}>
-                {authState === 'LOGIN' ? (
-                    <React.Fragment>
-                        <div
-                            onClick={changeAuthState}
-                            className={classes.pointer}
-                        >
-                            <p>Don't have an account? Register here.</p>
-                        </div>
-                    </React.Fragment>
-                ) : (
-                    <div onClick={changeAuthState} className={classes.pointer}>
-                        <p>Have an account? Sign in here.</p>
-                    </div>
-                )}
-                <Link className={classes.textColor} to="/privacy-policy">
-                    Click here to read our privacy policy.
-                </Link>
-            </div>
             {displayLoadingBar()}
         </div>
     );

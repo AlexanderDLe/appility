@@ -25,7 +25,7 @@ const AuthHeader = props => {
     });
     return (
         <animated.div className={classes.header} style={spring}>
-            {props.authState === 'LOGIN' ? 'SIGN IN' : 'REGISTER'}
+            {props.authState}
         </animated.div>
     );
 };

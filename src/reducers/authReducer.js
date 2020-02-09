@@ -12,7 +12,7 @@ export default function(state = initialState, action) {
         case AUTH_SUCCESS:
             return {
                 ...state,
-                username: payload.username,
+                username: payload,
                 isAuthenticated: true
             };
         case LOGOUT_USER:

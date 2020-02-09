@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { AUTH_SUCCESS, AUTH_FAIL, LOGOUT_USER } from './types';
 import { setAlert } from './feedback';
-import { getScores } from './quiz';
+// import { getScores } from './quiz';
+import { Auth } from 'aws-amplify';
 
 const config = {
     headers: {
@@ -10,25 +11,32 @@ const config = {
 };
 
 export const fetchUser = () => async dispatch => {
-    const response = await axios.get('/api/current_user');
-    if (response.data) {
-        dispatch({ type: AUTH_SUCCESS, payload: response.data });
-        dispatch(getScores());
-    } else {
-        dispatch({ type: AUTH_FAIL });
+    let authenticated = localStorage.getItem('appilityAuth');
+    console.log(authenticated);
+    if (authenticated) {
+        dispatch({
+            type: AUTH_SUCCESS,
+            payload: localStorage.getItem(
+                'CognitoIdentityServiceProvider.qenq8qkqqeqs3vsitn0glheic.LastAuthUser'
+            )
+        });
+        // dispatch(getScores());
     }
 };
 
 export const logoutUser = () => async dispatch => {
-    axios.get('/api/logout');
+    await Auth.signOut();
+    localStorage.removeItem('appilityAuth');
     dispatch({ type: LOGOUT_USER });
 };
 
 export const loginUser = data => async dispatch => {
-    const { email, password } = data;
-    const body = JSON.stringify({ email, password });
     try {
-        await axios.post('/api/login', body, config);
+        await Auth.signIn({
+            username: data.username,
+            password: data.password
+        });
+        localStorage.setItem('appilityAuth', 'true');
         dispatch(fetchUser());
     } catch (error) {
         dispatch({ type: AUTH_FAIL });

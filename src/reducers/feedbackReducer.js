@@ -8,7 +8,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     const { type, payload } = action;
-
+    // console.log(type);
     switch (type) {
         case SET_LOADING:
             return {
@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
         case LOGOUT_USER:
             return {
                 ...state,
+                authError: null,
                 loading: false
             };
         case SET_ALERT:

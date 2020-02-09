@@ -6,9 +6,13 @@ import { Container, CssBaseline } from '@material-ui/core';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
+
 const App = props => {
     useEffect(() => {
-        // props.fetchUser();
+        props.fetchUser();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
