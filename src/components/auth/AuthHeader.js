@@ -1,20 +1,9 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
-import { makeStyles } from '@material-ui/core';
-import { theme } from '../../styles/theme';
-
-const useStyles = makeStyles({
-    header: {
-        fontFamily: 'Audiowide',
-        color: theme.palette.secondary.light,
-        fontSize: '2.5em',
-        fontWeight: 'lighter',
-        padding: '20px'
-    }
-});
+import { authHeaderStyles } from './AuthStyles';
 
 const AuthHeader = props => {
-    const classes = useStyles();
+    const classes = authHeaderStyles();
     const spring = useSpring({
         opacity: 1,
         transform: 'translateY(0%)',

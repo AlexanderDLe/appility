@@ -1,22 +1,10 @@
 import React from 'react';
-import { Grid, Paper, makeStyles } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
+import { authSheetStyles } from './AuthStyles';
 import AuthForm from './AuthForm';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        '& > *': {
-            margin: '0 auto',
-            width: '100%',
-            maxWidth: '450px'
-        }
-    },
-    paper: {
-        backgroundColor: theme.palette.primary.main
-    }
-}));
-
 export default function Authentication() {
-    const classes = useStyles();
+    const classes = authSheetStyles();
 
     return (
         <Grid container spacing={3}>

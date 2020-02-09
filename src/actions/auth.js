@@ -49,7 +49,7 @@ export const loginUser = data => async dispatch => {
     } catch (error) {
         console.log(error);
         if (error.message === 'User is not confirmed.') {
-            dispatch({ type: AUTH_NEED_CONFIRM });
+            dispatch({ type: AUTH_NEED_CONFIRM, payload: data.username });
         } else {
             dispatch(setAlert('Invalid Credentials.'));
             dispatch({ type: AUTH_FAIL });
@@ -67,7 +67,7 @@ export const registerUser = data => async dispatch => {
             }
         });
         console.log(user);
-        dispatch({ type: AUTH_NEED_CONFIRM });
+        dispatch({ type: AUTH_NEED_CONFIRM, payload: data.username });
     } catch (error) {
         console.log(error);
         dispatch({ type: AUTH_FAIL });
@@ -77,7 +77,10 @@ export const registerUser = data => async dispatch => {
 
 export const confirmUser = data => async dispatch => {
     try {
-        const user = Auth.confirmSignUp(data.username, data.confirmationCode);
+        const user = await Auth.confirmSignUp(
+            data.username,
+            data.confirmationCode
+        );
         console.log(user);
         dispatch({ type: AUTH_CONFIRMED });
     } catch (error) {

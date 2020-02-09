@@ -1,6 +1,5 @@
 import {
     AUTH_SUCCESS,
-    AUTH_FAIL,
     AUTH_NEED_CONFIRM,
     AUTH_CONFIRMED,
     LOGOUT_USER
@@ -22,7 +21,6 @@ export default function(state = initialState, action) {
                 isVerified: payload.verified
             };
         case LOGOUT_USER:
-        case AUTH_FAIL:
             return {
                 ...state,
                 username: null,
@@ -31,6 +29,7 @@ export default function(state = initialState, action) {
         case AUTH_NEED_CONFIRM:
             return {
                 ...state,
+                username: payload,
                 isVerified: false
             };
         case AUTH_CONFIRMED:
