@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core';
-import { registerUser, loginUser } from '../../actions';
+import { registerUser, loginUser, confirmUser } from '../../actions';
 import { removeAlert, setLoading } from '../../actions';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
@@ -14,8 +14,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { LinearProgress } from '@material-ui/core';
 import { EmailRegex, PasswordRegex } from '../misc/Regex';
-
-import { Auth } from 'aws-amplify';
 
 const useStyles = makeStyles({
     root: {
@@ -73,20 +71,9 @@ const AuthForm = props => {
         if (authState === auth.LOGIN) {
             props.loginUser(data);
         } else if (authState === auth.REGISTER) {
-            //     props.registerUser(data);
-            Auth.signUp({
-                username: data.username,
-                password: data.password,
-                attributes: {
-                    email: data.email
-                }
-            })
-                .then(() => console.log('signed up'))
-                .catch(err => console.log(err));
+            props.registerUser(data);
         } else if (authState === auth.CONFIRM) {
-            Auth.confirmSignUp(data.username, data.confirmationCode)
-                .then(() => console.log('confirmed'))
-                .catch(err => console.log(err));
+            props.confirmUser(data);
         }
     };
     // oAuth Handler
@@ -225,8 +212,11 @@ const AuthForm = props => {
     setFormVariables();
 
     // Redirect if authenticated
-    if (props.isAuthenticated) {
+    console.log(props.auth);
+    if (localStorage.getItem('appilityAuth') === 'true') {
         return <Redirect to="/" />;
+    } else if (props.auth.isVerified === false && authState !== auth.CONFIRM) {
+        setAuthState(auth.CONFIRM);
     }
 
     const renderFormContent = () => {
@@ -338,7 +328,7 @@ const AuthForm = props => {
                         registration={register(confirmCodeRegistration)}
                         label="Confirm Email Code"
                         name="confirmationCode"
-                        type="text"
+                        type=""
                         error={errors.confirmationCode ? true : false}
                         helperText={confirmCodeErrorHandler()}
                     />
@@ -383,7 +373,7 @@ const AuthForm = props => {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.isAuthenticated,
+        auth: state.auth,
         feedback: state.feedback
     };
 };
@@ -391,6 +381,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
     registerUser,
     loginUser,
+    confirmUser,
     removeAlert,
     setLoading
 })(AuthForm);

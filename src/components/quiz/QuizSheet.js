@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Grid, Paper, makeStyles } from '@material-ui/core';
 
@@ -18,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const QuizSheet = ({ match, auth }) => {
+const QuizSheet = ({ match }) => {
     const classes = useStyles();
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -39,10 +38,4 @@ const QuizSheet = ({ match, auth }) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        auth: state.auth
-    };
-};
-
-export default connect(mapStateToProps)(QuizSheet);
+export default QuizSheet;

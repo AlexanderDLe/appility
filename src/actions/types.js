@@ -4,6 +4,8 @@
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
+export const AUTH_NEED_CONFIRM = 'AUTH_NEED_CONFIRM';
+export const AUTH_CONFIRMED = 'AUTH_CONFIRMED';
 
 /**
  * FEEDBACK TYPES

@@ -1,8 +1,14 @@
-import { AUTH_SUCCESS, AUTH_FAIL, LOGOUT_USER } from '../actions/types';
+import {
+    AUTH_SUCCESS,
+    AUTH_FAIL,
+    AUTH_NEED_CONFIRM,
+    AUTH_CONFIRMED,
+    LOGOUT_USER
+} from '../actions/types';
 
 const initialState = {
     username: null,
-    isAuthenticated: null
+    isVerified: null
 };
 
 export default function(state = initialState, action) {
@@ -12,15 +18,25 @@ export default function(state = initialState, action) {
         case AUTH_SUCCESS:
             return {
                 ...state,
-                username: payload,
-                isAuthenticated: true
+                username: payload.username,
+                isVerified: payload.verified
             };
         case LOGOUT_USER:
         case AUTH_FAIL:
             return {
                 ...state,
                 username: null,
-                isAuthenticated: null
+                isVerified: null
+            };
+        case AUTH_NEED_CONFIRM:
+            return {
+                ...state,
+                isVerified: false
+            };
+        case AUTH_CONFIRMED:
+            return {
+                ...state,
+                isVerified: true
             };
         default:
             return state;
