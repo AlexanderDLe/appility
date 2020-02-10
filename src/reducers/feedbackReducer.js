@@ -2,6 +2,7 @@ import {
     AUTH_SUCCESS,
     AUTH_NEED_CONFIRM,
     AUTH_CONFIRMED,
+    RESEND_CONFIRMATION,
     AUTH_FAIL,
     LOGOUT_USER
 } from '../actions/types';
@@ -35,6 +36,13 @@ export default (state = initialState, action) => {
                 ...state,
                 authError: null,
                 confirmSuccess: 'Confirmed! Please log in.',
+                loading: false
+            };
+        case RESEND_CONFIRMATION:
+            return {
+                ...state,
+                authError: null,
+                confirmSuccess: 'Code resent.',
                 loading: false
             };
         case SET_ALERT:

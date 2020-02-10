@@ -1,21 +1,10 @@
 import React from 'react';
 import { theme } from '../../styles/theme';
-import { makeStyles, TextField } from '@material-ui/core';
-
-const useStyles = makeStyles({
-    textField: {
-        width: '85%',
-        maxWidth: '350px',
-        margin: '10px'
-    },
-    notchedOutline: {
-        borderWidth: '1px',
-        borderColor: theme.palette.secondary.light
-    }
-});
+import { TextField } from '@material-ui/core';
+import { authTextFieldStyles } from './AuthStyles';
 
 export default props => {
-    const classes = useStyles();
+    const classes = authTextFieldStyles();
 
     return (
         <TextField

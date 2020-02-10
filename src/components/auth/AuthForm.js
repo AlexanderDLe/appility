@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { authFormStyles } from './AuthStyles';
-import { registerUser, loginUser, confirmUser } from '../../actions';
+import {
+    registerUser,
+    loginUser,
+    confirmUser,
+    resendConfirmation
+} from '../../actions';
 import { removeAlert, setLoading } from '../../actions';
-import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import AuthTextField from './AuthTextField';
 import AuthButton from './AuthButton';
 import AuthHeader from './AuthHeader';
@@ -29,7 +33,7 @@ const auth = {
 const AuthForm = props => {
     const classes = authFormStyles();
     const [authState, setAuthState] = useState(auth.LOGIN);
-    const { register, handleSubmit, errors, watch } = useForm();
+    const { register, handleSubmit, errors, watch, reset } = useForm();
 
     // Change Auth State Handler
     const changeAuthState = () => {
@@ -41,7 +45,7 @@ const AuthForm = props => {
         }
     };
     // Form Submit Handler
-    const onSubmit = async (data, e) => {
+    const onSubmit = (data, e) => {
         props.removeAlert();
         props.setLoading();
         if (authState === auth.LOGIN) {
@@ -53,6 +57,10 @@ const AuthForm = props => {
             data.username = props.auth.username;
             props.confirmUser(data);
         }
+    };
+    const resendCode = () => {
+        props.setLoading();
+        props.resendConfirmation(props.auth.username);
     };
     // oAuth Handler
     const oAuthHandler = () => {
@@ -96,7 +104,6 @@ const AuthForm = props => {
     };
 
     // Set Form Variables Based On Login/Register
-    let formAction;
     let authText;
     let emailRegistration;
     let usernameRegistration;
@@ -109,11 +116,9 @@ const AuthForm = props => {
             minLength: 3
         };
         if (state === 'LOGIN') {
-            formAction = '/api/login';
             authText = 'SIGN IN';
             passwordRegistration = { required: true };
         } else if (state === 'REGISTER') {
-            formAction = '/api/register';
             authText = 'REGISTER';
             emailRegistration = { required: true, pattern: EmailRegex };
             passwordRegistration = {
@@ -141,7 +146,11 @@ const AuthForm = props => {
     } else if (props.auth.isVerified === true && authState !== auth.LOGIN) {
         setAuthState(auth.LOGIN);
     } else if (props.auth.isVerified === false && authState !== auth.CONFIRM) {
-        setAuthState(auth.CONFIRM);
+        const resetFormOnStateChange = async () => {
+            await setAuthState(auth.CONFIRM);
+            reset();
+        };
+        resetFormOnStateChange();
     }
 
     const renderFormHelpers = () => {
@@ -172,11 +181,7 @@ const AuthForm = props => {
         if (authState === auth.LOGIN || authState === auth.REGISTER) {
             return (
                 <React.Fragment>
-                    <form
-                        action={formAction}
-                        onSubmit={handleSubmit(onSubmit)}
-                        method="post"
-                    >
+                    <form onSubmit={handleSubmit(onSubmit)} method="post">
                         <AuthTextField
                             registration={register(usernameRegistration)}
                             label="Username"
@@ -261,20 +266,27 @@ const AuthForm = props => {
         } else if (authState === auth.CONFIRM) {
             return (
                 <React.Fragment>
-                    <form
-                        action={formAction}
-                        onSubmit={handleSubmit(onSubmit)}
-                        method="post"
-                    >
+                    <form onSubmit={handleSubmit(onSubmit)} method="post">
                         <AuthTextField
                             registration={register(confirmCodeRegistration)}
                             label="Confirm Email Code"
                             name="confirmationCode"
-                            type="number"
+                            type="text"
                             error={errors.confirmationCode ? true : false}
                             helperText={confirmCodeErrorHandler(errors)}
                         />
                         {dislayAuthFeedback()}
+                        <AuthButton
+                            variant="contained"
+                            color="#5b5bff"
+                            onClick={resendCode}
+                        >
+                            <div className={classes.whiteText}>
+                                <div className={classes.iconPadding}>
+                                    RESEND CODE
+                                </div>
+                            </div>
+                        </AuthButton>
                         <AuthButton
                             type="submit"
                             variant="contained"
@@ -312,6 +324,7 @@ export default connect(mapStateToProps, {
     registerUser,
     loginUser,
     confirmUser,
+    resendConfirmation,
     removeAlert,
     setLoading
 })(AuthForm);

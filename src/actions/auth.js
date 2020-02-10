@@ -3,7 +3,8 @@ import {
     AUTH_FAIL,
     AUTH_NEED_CONFIRM,
     AUTH_CONFIRMED,
-    LOGOUT_USER
+    LOGOUT_USER,
+    RESEND_CONFIRMATION
 } from './types';
 import { setAlert } from './feedback';
 import { Auth } from 'aws-amplify';
@@ -87,5 +88,16 @@ export const confirmUser = data => async dispatch => {
         console.log(error);
         dispatch({ type: AUTH_FAIL });
         dispatch(setAlert('Invalid Code.'));
+    }
+};
+
+export const resendConfirmation = username => async dispatch => {
+    try {
+        await Auth.resendSignUp(username);
+        dispatch({ type: RESEND_CONFIRMATION });
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: AUTH_FAIL });
+        dispatch(setAlert('Unable to send code.'));
     }
 };

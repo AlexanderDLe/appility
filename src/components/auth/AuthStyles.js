@@ -52,3 +52,15 @@ export const authSheetStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.primary.main
     }
 }));
+
+export const authTextFieldStyles = makeStyles({
+    textField: {
+        width: '85%',
+        maxWidth: '350px',
+        margin: '10px'
+    },
+    notchedOutline: {
+        borderWidth: '1px',
+        borderColor: theme.palette.secondary.light
+    }
+});
