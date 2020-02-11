@@ -17,8 +17,8 @@ export default function(state = initialState, action) {
         case AUTH_SUCCESS:
             return {
                 ...state,
-                username: payload.username,
-                isVerified: payload.verified
+                username: payload,
+                isVerified: true
             };
         case LOGOUT_USER:
             return {

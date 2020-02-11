@@ -4,7 +4,10 @@ import {
     registerUser,
     confirmUser,
     resendConfirmation,
-    loginUser
+    loginUser,
+    facebookLogin,
+    googleLogin,
+    fetchLocalUser
 } from './auth';
 import { setAlert, removeAlert, setLoading } from './feedback';
 import { saveScore, getScores, resetScore } from './quiz';
@@ -15,7 +18,10 @@ export {
     registerUser,
     confirmUser,
     resendConfirmation,
-    loginUser
+    loginUser,
+    facebookLogin,
+    googleLogin,
+    fetchLocalUser
 };
 export { setAlert, removeAlert, setLoading };
 export { saveScore, getScores, resetScore };

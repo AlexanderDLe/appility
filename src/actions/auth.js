@@ -11,66 +11,70 @@ import { Auth } from 'aws-amplify';
 // import { getScores } from './quiz';
 
 export const fetchUser = () => async dispatch => {
-    let authenticated = localStorage.getItem('appilityAuth');
-    if (authenticated) {
-        const payload = {
-            username: localStorage.getItem(
-                'CognitoIdentityServiceProvider.qenq8qkqqeqs3vsitn0glheic.LastAuthUser'
-            ),
-            verified: localStorage.getItem('appilityVerified')
-        };
+    try {
+        const user = await Auth.currentAuthenticatedUser({
+            bypassCache: true
+        });
+        let name = user.username;
+        if (name.slice(0, 8) === 'Facebook') name = user.attributes.name;
+        if (name.slice(0, 6) === 'Google') name = user.attributes.name;
+        localStorage.setItem('appilityAuth', 'true');
+        localStorage.setItem('appilityUser', name);
         dispatch({
             type: AUTH_SUCCESS,
-            payload: payload
+            payload: name
         });
         // dispatch(getScores());
+    } catch (error) {
+        localStorage.removeItem('appilityAuth');
+        localStorage.removeItem('appilityUser');
+    }
+};
+
+export const fetchLocalUser = () => async dispatch => {
+    if (localStorage.getItem('appilityAuth')) {
+        dispatch({
+            type: AUTH_SUCCESS,
+            payload: localStorage.getItem('appilityUser')
+        });
     }
 };
 
 export const logoutUser = () => async dispatch => {
     await Auth.signOut();
     localStorage.removeItem('appilityAuth');
-    localStorage.removeItem('appilityVerified');
+    localStorage.removeItem('appilityUser');
     dispatch({ type: LOGOUT_USER });
 };
 
 export const loginUser = data => async dispatch => {
     try {
-        const user = await Auth.signIn({
+        await Auth.signIn({
             username: data.username,
             password: data.password
         });
-        console.log(user);
-        localStorage.setItem('appilityAuth', 'true');
-        localStorage.setItem(
-            'appilityVerified',
-            user.attributes.email_verified
-        );
         dispatch(fetchUser());
     } catch (error) {
-        console.log(error);
         if (error.message === 'User is not confirmed.') {
             dispatch({ type: AUTH_NEED_CONFIRM, payload: data.username });
         } else {
-            dispatch(setAlert('Invalid Credentials.'));
             dispatch({ type: AUTH_FAIL });
+            dispatch(setAlert('Invalid Credentials.'));
         }
     }
 };
 
 export const registerUser = data => async dispatch => {
     try {
-        const user = await Auth.signUp({
+        await Auth.signUp({
             username: data.username,
             password: data.password,
             attributes: {
                 email: data.email
             }
         });
-        console.log(user);
         dispatch({ type: AUTH_NEED_CONFIRM, payload: data.username });
     } catch (error) {
-        console.log(error);
         dispatch({ type: AUTH_FAIL });
         dispatch(setAlert('Registration Failed.'));
     }
@@ -78,14 +82,9 @@ export const registerUser = data => async dispatch => {
 
 export const confirmUser = data => async dispatch => {
     try {
-        const user = await Auth.confirmSignUp(
-            data.username,
-            data.confirmationCode
-        );
-        console.log(user);
+        await Auth.confirmSignUp(data.username, data.confirmationCode);
         dispatch({ type: AUTH_CONFIRMED });
     } catch (error) {
-        console.log(error);
         dispatch({ type: AUTH_FAIL });
         dispatch(setAlert('Invalid Code.'));
     }
@@ -96,8 +95,23 @@ export const resendConfirmation = username => async dispatch => {
         await Auth.resendSignUp(username);
         dispatch({ type: RESEND_CONFIRMATION });
     } catch (error) {
-        console.log(error);
         dispatch({ type: AUTH_FAIL });
         dispatch(setAlert('Unable to send code.'));
+    }
+};
+
+export const facebookLogin = () => async () => {
+    try {
+        await Auth.federatedSignIn({ provider: 'facebook' });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const googleLogin = () => async () => {
+    try {
+        await Auth.federatedSignIn({ provider: 'google' });
+    } catch (error) {
+        console.log(error);
     }
 };

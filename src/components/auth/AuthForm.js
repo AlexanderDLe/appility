@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { authFormStyles } from './AuthStyles';
-import {
-    registerUser,
-    loginUser,
-    confirmUser,
-    resendConfirmation
-} from '../../actions';
-import { removeAlert, setLoading } from '../../actions';
+import * as actions from '../../actions';
 import { Link, Redirect } from 'react-router-dom';
 import AuthTextField from './AuthTextField';
 import AuthButton from './AuthButton';
@@ -17,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { LinearProgress } from '@material-ui/core';
 import { EmailRegex, PasswordRegex } from '../misc/Regex';
-import { googleLink, facebookLink } from '../misc/loginLinks';
 
 import { usernameErrorHandler } from './AuthErrorHandlers';
 import { emailErrorHandler } from './AuthErrorHandlers';
@@ -63,11 +56,15 @@ const AuthForm = props => {
         props.setLoading();
         props.resendConfirmation(props.auth.username);
     };
-    // oAuth Handler
-    const oAuthHandler = () => {
+    // oAuth Handlers
+    const facebookLogin = () => {
         props.setLoading();
+        props.facebookLogin();
     };
-
+    const googleLogin = () => {
+        props.setLoading();
+        props.googleLogin();
+    };
     // Handle feedback
     const dislayAuthFeedback = () => {
         if (props.feedback.authError) {
@@ -239,11 +236,7 @@ const AuthForm = props => {
                             </div>
                         </AuthButton>
                     </form>
-                    <AuthButton
-                        onClick={oAuthHandler}
-                        href={googleLink}
-                        color="#ff6565"
-                    >
+                    <AuthButton onClick={googleLogin} color="#ff6565">
                         <div className={classes.whiteText}>
                             <FontAwesomeIcon icon={faGoogle} />
                             <div className={classes.iconPadding}>
@@ -251,11 +244,7 @@ const AuthForm = props => {
                             </div>
                         </div>
                     </AuthButton>
-                    <AuthButton
-                        href={facebookLink}
-                        onClick={oAuthHandler}
-                        color="#5b5bff"
-                    >
+                    <AuthButton onClick={facebookLogin} color="#5b5bff">
                         <div className={classes.whiteText}>
                             <FontAwesomeIcon icon={faFacebookF} />
                             <div className={classes.iconPadding}>
@@ -322,11 +311,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {
-    registerUser,
-    loginUser,
-    confirmUser,
-    resendConfirmation,
-    removeAlert,
-    setLoading
-})(AuthForm);
+export default connect(mapStateToProps, actions)(AuthForm);
