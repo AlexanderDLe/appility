@@ -17,6 +17,7 @@ const App = props => {
         setTimeout(() => {
             props.fetchUser();
         }, 500);
+        console.log(process.env);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
