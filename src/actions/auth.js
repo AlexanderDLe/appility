@@ -8,7 +8,7 @@ import {
 } from './types';
 import { setAlert } from './feedback';
 import { Auth } from 'aws-amplify';
-// import { getScores } from './quiz';
+import { getScores } from './quiz';
 
 export const fetchUser = () => async dispatch => {
     try {
@@ -24,7 +24,7 @@ export const fetchUser = () => async dispatch => {
             type: AUTH_SUCCESS,
             payload: name
         });
-        // dispatch(getScores());
+        dispatch(getScores());
     } catch (error) {
         localStorage.removeItem('appilityAuth');
         localStorage.removeItem('appilityUser');

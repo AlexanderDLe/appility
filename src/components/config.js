@@ -11,14 +11,5 @@ export default {
             redirectSignOut: 'http://localhost:3000/',
             responseType: 'token'
         }
-    },
-    API: {
-        endpoints: [
-            {
-                name: 'AppilityTestAPI',
-                endpoint:
-                    'https://5ogygpk95j.execute-api.us-west-1.amazonaws.com/Dev/my-tester'
-            }
-        ]
     }
 };
