@@ -16,8 +16,7 @@ const App = props => {
         props.fetchLocalUser();
         setTimeout(() => {
             props.fetchUser();
-        }, 350);
-
+        }, 500);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
