@@ -45,7 +45,7 @@ export const ScoreTableStyles = makeStyles(theme => ({
         color: 'white'
     },
     cell: {
-        color: 'white'
+        color: 'white !important'
     },
     resetIcon: {
         cursor: 'pointer'
