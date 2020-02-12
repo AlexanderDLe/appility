@@ -4,7 +4,9 @@ import {
     AUTH_CONFIRMED,
     RESEND_CONFIRMATION,
     AUTH_FAIL,
-    LOGOUT_USER
+    LOGOUT_USER,
+    UNSET_LOADING,
+    SET_SCORES
 } from '../actions/types';
 import { SET_ALERT, REMOVE_ALERT, SET_LOADING } from '../actions/types';
 
@@ -21,6 +23,12 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 loading: true
+            };
+        case SET_SCORES:
+        case UNSET_LOADING:
+            return {
+                ...state,
+                loading: false
             };
         case AUTH_SUCCESS:
         case AUTH_FAIL:

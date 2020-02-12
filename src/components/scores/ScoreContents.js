@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setLoading } from '../../actions';
 import { useMediaQuery } from '@material-ui/core';
 import { ScoreContentStyles } from './ScoreStyles';
+import { LinearProgress } from '@material-ui/core';
 import ScoreTable from './ScoreTable';
 
 const useMinWidthQuery = query => {
@@ -8,10 +11,26 @@ const useMinWidthQuery = query => {
     else return { padding: '6px' };
 };
 
-const ScoreContents = () => {
+const ScoreContents = ({ feedback }) => {
     const classes = ScoreContentStyles();
     const minWidthQuery = useMediaQuery('(min-width:500px)');
     const dynamicPadding = useMinWidthQuery(minWidthQuery);
+
+    const displayLoadingBar = () => {
+        if (feedback.loading) {
+            return (
+                <div
+                    style={{ paddingTop: '24px' }}
+                    className={classes.feedback}
+                >
+                    <LinearProgress
+                        className={classes.loader}
+                        color="primary"
+                    />
+                </div>
+            );
+        }
+    };
 
     return (
         <React.Fragment>
@@ -20,9 +39,16 @@ const ScoreContents = () => {
             </div>
             <div style={dynamicPadding} className={classes.scoreBody}>
                 <ScoreTable />
+                {displayLoadingBar()}
             </div>
         </React.Fragment>
     );
 };
 
-export default ScoreContents;
+const mapStateToProps = state => {
+    return {
+        feedback: state.feedback
+    };
+};
+
+export default connect(mapStateToProps, { setLoading })(ScoreContents);

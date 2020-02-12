@@ -1,14 +1,9 @@
 import axios from 'axios';
-import { SET_SCORES, RESET_SCORE } from './types';
+import { SET_SCORES, UNSET_LOADING } from './types';
 import { Auth } from 'aws-amplify';
 
-const config = {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-};
+const API = 'https://5ogygpk95j.execute-api.us-west-1.amazonaws.com/Dev/scores';
 
-const API_URL = 'https://5ogygpk95j.execute-api.us-west-1.amazonaws.com/Dev';
 const getHeader = async () => {
     try {
         const auth = await Auth.currentAuthenticatedUser();
@@ -26,7 +21,7 @@ const getHeader = async () => {
 export const getScores = () => async dispatch => {
     try {
         let header = await getHeader();
-        const response = await axios.get(`${API_URL}/scores`, header);
+        const response = await axios.get(`${API}`, header);
         console.log(response);
         dispatch({
             type: SET_SCORES,
@@ -44,7 +39,7 @@ export const saveScore = data => async dispatch => {
     };
     try {
         let header = await getHeader();
-        const response = await axios.post(`${API_URL}/scores`, body, header);
+        const response = await axios.post(`${API}`, body, header);
         console.log(response);
         dispatch({
             type: SET_SCORES,
@@ -55,16 +50,17 @@ export const saveScore = data => async dispatch => {
     }
 };
 
-export const resetScore = quiz => async dispatch => {
-    const body = JSON.stringify({ quiz });
+export const resetScore = subject => async dispatch => {
+    const body = { subject: subject };
     try {
-        const response = await axios.put('/scores', body, config);
+        const header = await getHeader();
+        const response = await axios.put(API, body, header);
         dispatch({
             type: SET_SCORES,
             payload: response.data
         });
     } catch (error) {
         console.log(error);
+        dispatch({ type: UNSET_LOADING });
     }
-    dispatch({ type: RESET_SCORE });
 };

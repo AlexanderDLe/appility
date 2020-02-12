@@ -20,6 +20,9 @@ export const ScoreContentStyles = makeStyles(theme => ({
     scoreBody: {
         minHeight: '400px',
         color: 'white'
+    },
+    loader: {
+        backgroundColor: theme.palette.secondary.light
     }
 }));
 

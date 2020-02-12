@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import getScoreGrade from '../misc/getScoreGrade';
-import { resetScore } from '../../actions';
+import { resetScore, setLoading } from '../../actions';
 
 import { ScoreTableStyles } from './ScoreStyles';
 import Table from '@material-ui/core/Table';
@@ -35,12 +35,13 @@ const MyTableCell = ({ children }) => {
     );
 };
 
-const ScoreTable = ({ quiz, resetScore }) => {
+const ScoreTable = ({ quiz, resetScore, setLoading }) => {
     const classes = ScoreTableStyles();
     let rows = createScoreRows(quiz);
 
     const handleResetScore = (quiz, score) => {
         if (score !== null) {
+            setLoading();
             resetScore(quiz);
         }
     };
@@ -94,4 +95,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { resetScore })(ScoreTable);
+export default connect(mapStateToProps, { resetScore, setLoading })(ScoreTable);
