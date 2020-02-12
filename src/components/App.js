@@ -13,6 +13,7 @@ Amplify.configure(awsconfig);
 
 const App = props => {
     useEffect(() => {
+        console.log(process.env);
         props.fetchUser();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

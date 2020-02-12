@@ -12,6 +12,7 @@ import { getScores } from './quiz';
 
 export const fetchUserLogic = user => async dispatch => {
     try {
+        console.log(user);
         let name = user.username;
         if (name.slice(0, 8) === 'Facebook') name = user.attributes.name;
         if (name.slice(0, 6) === 'Google') name = user.attributes.name;
