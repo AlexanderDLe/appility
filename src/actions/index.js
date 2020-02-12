@@ -6,8 +6,7 @@ import {
     resendConfirmation,
     loginUser,
     facebookLogin,
-    googleLogin,
-    fetchLocalUser
+    googleLogin
 } from './auth';
 import { setAlert, removeAlert, setLoading } from './feedback';
 import { saveScore, getScores, resetScore } from './quiz';
@@ -20,8 +19,7 @@ export {
     resendConfirmation,
     loginUser,
     facebookLogin,
-    googleLogin,
-    fetchLocalUser
+    googleLogin
 };
 export { setAlert, removeAlert, setLoading };
 export { saveScore, getScores, resetScore };

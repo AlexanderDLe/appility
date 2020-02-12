@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Switch, __RouterContext } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
-import { makeStyles } from '@material-ui/core';
+import { BodyStyles } from './LayoutStyles';
 
 import AuthSheet from '../auth/AuthSheet';
 import Landing from './Landing';
@@ -10,24 +10,8 @@ import QuizSheet from '../quiz/QuizSheet';
 import ScoreSheet from '../scores/ScoreSheet';
 import Redirector from '../misc/Redirector';
 
-const useStyles = makeStyles(theme => ({
-    body: {
-        minHeight: 'calc(101vh - 64px)',
-        padding: '0px 6px 64px 6px',
-        backgroundColor: 'rgb(31, 31, 31)',
-        boxShadow: '0px 0px 25px -10px #000',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflowX: 'hidden'
-    },
-    div: {
-        width: '100%'
-    }
-}));
-
 const Body = () => {
-    const classes = useStyles();
+    const classes = BodyStyles();
     const { location } = useContext(__RouterContext);
     const transitions = useTransition(location, location => location.pathname, {
         from: {

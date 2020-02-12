@@ -13,10 +13,7 @@ Amplify.configure(awsconfig);
 
 const App = props => {
     useEffect(() => {
-        props.fetchLocalUser();
-        setTimeout(() => {
-            props.fetchUser();
-        }, 500);
+        props.fetchUser();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

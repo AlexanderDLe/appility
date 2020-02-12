@@ -10,11 +10,8 @@ import { setAlert } from './feedback';
 import { Auth } from 'aws-amplify';
 import { getScores } from './quiz';
 
-export const fetchUser = () => async dispatch => {
+export const fetchUserLogic = user => async dispatch => {
     try {
-        const user = await Auth.currentAuthenticatedUser({
-            bypassCache: true
-        });
         let name = user.username;
         if (name.slice(0, 8) === 'Facebook') name = user.attributes.name;
         if (name.slice(0, 6) === 'Google') name = user.attributes.name;
@@ -29,19 +26,55 @@ export const fetchUser = () => async dispatch => {
         });
         dispatch(getScores());
     } catch (error) {
-        localStorage.removeItem('appilityAuth');
-        localStorage.removeItem('appilityUser');
+        console.log(error);
     }
 };
 
-export const fetchLocalUser = () => async dispatch => {
-    if (localStorage.getItem('appilityAuth')) {
-        dispatch({
-            type: AUTH_SUCCESS,
-            payload: localStorage.getItem('appilityUser')
+export const fetchUser = () => async dispatch => {
+    try {
+        const userA = await Auth.currentAuthenticatedUser({
+            bypassCache: true
         });
+        dispatch(fetchUserLogic(userA));
+    } catch (error) {
+        setTimeout(async () => {
+            try {
+                const userB = await Auth.currentAuthenticatedUser({
+                    bypassCache: true
+                });
+                dispatch(fetchUserLogic(userB));
+            } catch (error) {
+                localStorage.removeItem('appilityAuth');
+                localStorage.removeItem('appilityUser');
+            }
+        }, 500);
     }
 };
+// export const fetchUser = () => async dispatch => {
+//     try {
+//         const user = await Auth.currentAuthenticatedUser({
+//             bypassCache: true
+//         });
+//         console.log(user);
+//         let name = user.username;
+//         if (name.slice(0, 8) === 'Facebook') name = user.attributes.name;
+//         if (name.slice(0, 6) === 'Google') name = user.attributes.name;
+//         localStorage.setItem('appilityAuth', 'true');
+//         localStorage.setItem('appilityUser', name);
+//         dispatch({
+//             type: AUTH_SUCCESS,
+//             payload: {
+//                 username: name,
+//                 id: user.attributes.sub
+//             }
+//         });
+//         dispatch(getScores());
+//     } catch (error) {
+//         console.log(error);
+//         localStorage.removeItem('appilityAuth');
+//         localStorage.removeItem('appilityUser');
+//     }
+// };
 
 export const logoutUser = () => async dispatch => {
     await Auth.signOut();

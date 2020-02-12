@@ -1,28 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Grid, makeStyles } from '@material-ui/core';
-
+import { Grid } from '@material-ui/core';
+import { LandingStyles } from './LayoutStyles';
 import LandingWelcome from './LandingWelcome';
 import QuizGrid from '../quiz/QuizGrid';
 
-const useStyles = makeStyles(theme => ({
-    img: {
-        padding: theme.spacing(2),
-        textAlign: 'center'
-    },
-    text: {
-        textAlign: 'center',
-        fontFamily: 'Audiowide',
-        color: theme.palette.secondary.main
-    },
-    h3text: {
-        fontFamily: 'Roboto',
-        color: theme.palette.secondary.light
-    }
-}));
-
 const Landing = props => {
-    const classes = useStyles();
+    const classes = LandingStyles();
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
