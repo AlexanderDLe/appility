@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import getScoreGrade from '../misc/getScoreGrade';
 import { resetScore } from '../../actions';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { ScoreTableStyles } from './ScoreStyles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,22 +12,8 @@ import TableRow from '@material-ui/core/TableRow';
 import LoopIcon from '@material-ui/icons/Loop';
 import { Button } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
-    table: {
-        backgroundColor: theme.palette.primary.main,
-        color: 'white'
-    },
-    cell: {
-        color: 'white'
-    },
-    resetIcon: {
-        cursor: 'pointer'
-    }
-}));
-
 const createScoreRows = data => {
     let result = [];
-
     for (let item in data) {
         const { scoreLetter, color } = getScoreGrade(data[item]);
         result.push({
@@ -50,7 +36,7 @@ const MyTableCell = ({ children }) => {
 };
 
 const ScoreTable = ({ quiz, resetScore }) => {
-    const classes = useStyles();
+    const classes = ScoreTableStyles();
     let rows = createScoreRows(quiz);
 
     const handleResetScore = (quiz, score) => {

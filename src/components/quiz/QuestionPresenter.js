@@ -1,25 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
 import { Radio, RadioGroup } from '@material-ui/core';
-
-const useStyles = makeStyles(theme => ({
-    question: {
-        color: 'white',
-        fontSize: '1.15em',
-        paddingBottom: '10px',
-        display: 'flex',
-        alignItems: 'start'
-    },
-    questionOption: {
-        paddingTop: '10px'
-    },
-    showAnswer: {
-        cursor: 'pointer'
-    },
-    checkbox: {
-        color: 'white'
-    }
-}));
+import { QuizQuestionPresenter } from './QuizStyles';
 
 const QuizQuestions = ({
     count,
@@ -28,7 +9,7 @@ const QuizQuestions = ({
     handleAnswer,
     showAnswer
 }) => {
-    const classes = useStyles();
+    const classes = QuizQuestionPresenter();
 
     return (
         <React.Fragment>

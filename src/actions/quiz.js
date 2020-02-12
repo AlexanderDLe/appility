@@ -9,7 +9,6 @@ const config = {
 };
 
 const API_URL = 'https://5ogygpk95j.execute-api.us-west-1.amazonaws.com/Dev';
-
 const getHeader = async () => {
     try {
         const auth = await Auth.currentAuthenticatedUser();
@@ -27,25 +26,26 @@ const getHeader = async () => {
 export const getScores = () => async dispatch => {
     try {
         let header = await getHeader();
-        const response = await axios.get(`${API_URL}/my-tester`, header);
+        const response = await axios.get(`${API_URL}/scores`, header);
         console.log(response);
+        dispatch({
+            type: SET_SCORES,
+            payload: response.data
+        });
     } catch (error) {
         console.log(error);
     }
-
-    // const response = await axios.get('/scores');
-    // dispatch({
-    //     type: SET_SCORES,
-    //     payload: response.data
-    // });
 };
 
 export const saveScore = data => async dispatch => {
-    const { subject, score } = data;
-    const body = JSON.stringify({ subject, score });
-
+    const body = {
+        subject: data.subject,
+        score: data.score
+    };
     try {
-        const response = await axios.post('/scores', body, config);
+        let header = await getHeader();
+        const response = await axios.post(`${API_URL}/scores`, body, header);
+        console.log(response);
         dispatch({
             type: SET_SCORES,
             payload: response.data

@@ -7,7 +7,8 @@ import {
 
 const initialState = {
     username: null,
-    isVerified: null
+    isVerified: null,
+    id: null
 };
 
 export default function(state = initialState, action) {
@@ -17,7 +18,8 @@ export default function(state = initialState, action) {
         case AUTH_SUCCESS:
             return {
                 ...state,
-                username: payload,
+                username: payload.username,
+                id: payload.id,
                 isVerified: true
             };
         case LOGOUT_USER:

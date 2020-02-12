@@ -1,68 +1,21 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { makeStyles, Radio, RadioGroup } from '@material-ui/core';
+import { Radio, RadioGroup } from '@material-ui/core';
+import { QuizQuestionResults } from './QuizStyles';
 import { Check, Close } from '@material-ui/icons';
 import getScoreGrade from '../misc/getScoreGrade';
 import { saveScore } from '../../actions';
 import { useSpring, animated } from 'react-spring';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-        minHeight: '400px',
-        textAlign: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: 'white',
-        paddingBottom: '10px'
-    },
-    box: {
-        margin: '0 auto',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '150px',
-        width: '150px',
-        border: '3px solid white',
-        borderRadius: '50%'
-    },
-    scoreLetter: {
-        fontFamily: 'Audiowide',
-        fontSize: '5em'
-    },
-    question: {
-        color: 'white',
-        fontSize: '1.15em',
-        paddingBottom: '10px',
-        display: 'flex',
-        alignItems: 'start'
-    },
-    questionOption: {
-        paddingTop: '10px'
-    },
-    seeAnswer: {
-        cursor: 'pointer'
-    },
-    checkbox: {
-        color: 'white'
-    },
-    incorrect: {
-        color: '#ff2525'
-    },
-    correct: {
-        color: '#00ff00'
-    }
-}));
-
 const QuestionResults = ({ auth, saveScore, data, subject }) => {
-    const classes = useStyles();
+    const classes = QuizQuestionResults();
     const corrects = data.reduce((accumulator, item) => {
         return item.correct ? accumulator + 1 : accumulator;
     }, 0);
     const score = corrects ? Math.floor((corrects / data.length) * 100) : 0;
 
     useEffect(() => {
-        if (auth.isAuthenticated) saveScore({ subject, score });
+        if (auth.isVerified) saveScore({ subject, score });
     }, [subject, score, saveScore, auth]);
 
     const spring = useSpring({

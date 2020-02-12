@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import shuffleArray from '../misc/shuffleArray';
-
+import { QuizContentStyles } from './QuizStyles';
 import {
-    makeStyles,
     ButtonGroup,
     Button,
     useMediaQuery,
@@ -19,46 +18,6 @@ import {
 
 import QuestionPresenter from './QuestionPresenter';
 import QuestionResults from './QuestionResults';
-
-const useStyles = makeStyles(theme => ({
-    margin: {
-        margin: theme.spacing(1),
-        textDecoration: 'none'
-    },
-    block: {
-        width: '100%',
-        height: '100px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    submitButton: {
-        margin: theme.spacing(1),
-        backgroundColor: '#87c643',
-        color: 'white'
-    },
-    quizBody: {
-        // padding: '24px 24px',
-        minHeight: '400px',
-        color: 'white'
-    },
-    modal: {
-        backgroundColor: theme.palette.primary.main,
-        color: 'white',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        textAlign: 'center',
-        padding: '24px',
-        transform: 'translate(-50%, -50%)',
-        outline: 'none'
-    },
-    button: {
-        color: 'white',
-        borderColor: 'white',
-        borderWidth: '1px'
-    }
-}));
 
 const dynamicStyles = color => {
     return {
@@ -92,7 +51,7 @@ const QUIZ = 'QUIZ';
 const RESULTS = 'RESULTS';
 
 const QuizContents = ({ param }) => {
-    const classes = useStyles();
+    const classes = QuizContentStyles();
     const data = fetchQuizData(param).default;
     const style = dynamicStyles(data.color);
     const minWidthQuery = useMediaQuery('(min-width: 600px');

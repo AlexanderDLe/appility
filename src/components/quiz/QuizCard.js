@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import getScoreGrade from '../misc/getScoreGrade';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { QuizCardStyles } from './QuizStyles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -16,48 +16,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles(theme => ({
-    card: {
-        maxWidth: 345,
-        margin: '15px auto',
-        backgroundColor: 'rgb(22, 22, 22)',
-        color: 'white'
-    },
-    cardHeader: {
-        padding: '10px'
-    },
-    cardContent: {
-        padding: '16px 0px 0px 16px'
-    },
-    cardActions: {
-        padding: '0px 0px 4x 5px'
-    },
-    media: {
-        height: 0,
-        paddingTop: '50.25%' // 16:9
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest
-        }),
-        color: 'white'
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)'
-    },
-    avatar: {
-        backgroundColor: 'rgb(22, 22, 22)'
-    },
-    link: {
-        textDecoration: 'none',
-        color: theme.palette.secondary.main
-    }
-}));
-
 const QuizCard = ({ score, data }) => {
-    const classes = useStyles();
+    const classes = QuizCardStyles();
     const [expanded, setExpanded] = React.useState(false);
     const cardColor = {
         borderLeft: `2px solid ${data.color}`,

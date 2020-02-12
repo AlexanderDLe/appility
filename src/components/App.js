@@ -5,7 +5,7 @@ import Body from './layout/Body';
 import { Container, CssBaseline } from '@material-ui/core';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-//
+
 import 'crypto-js/lib-typedarrays';
 import Amplify from 'aws-amplify';
 import awsconfig from './config';
@@ -38,5 +38,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, actions)(App);
-
-//https://appilityauth.auth.us-west-2.amazoncognito.com/login?response_type=code&client_id=28tq1a3nmbo4eu2rcjanv4jae0&redirect_uri=http://localhost:3000

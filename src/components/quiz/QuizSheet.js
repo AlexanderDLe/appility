@@ -1,24 +1,12 @@
 import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Grid, Paper, makeStyles } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
+import { QuizSheetStyles } from './QuizStyles';
 
 import QuizContents from './QuizContents';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        '& > *': {
-            margin: '0 auto',
-            width: '100%',
-            maxWidth: '600px'
-        }
-    },
-    paper: {
-        backgroundColor: theme.palette.primary.main
-    }
-}));
-
 const QuizSheet = ({ match }) => {
-    const classes = useStyles();
+    const classes = QuizSheetStyles();
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

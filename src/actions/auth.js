@@ -22,7 +22,10 @@ export const fetchUser = () => async dispatch => {
         localStorage.setItem('appilityUser', name);
         dispatch({
             type: AUTH_SUCCESS,
-            payload: name
+            payload: {
+                username: name,
+                id: user.attributes.sub
+            }
         });
         dispatch(getScores());
     } catch (error) {

@@ -1,32 +1,19 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-// import { Redirect } from 'react-router-dom';
-import { Grid, Paper, makeStyles } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
+import { ScoreSheetStyles } from './ScoreStyles';
+import { Redirect } from 'react-router-dom';
 
 import ScoreContents from './ScoreContents';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        '& > *': {
-            margin: '0 auto',
-            width: '100%',
-            maxWidth: '600px'
-        }
-    },
-    paper: {
-        backgroundColor: theme.palette.primary.main
-    }
-}));
-
-const ScoreSheet = ({ match, auth }) => {
-    const classes = useStyles();
+const ScoreSheet = ({ match }) => {
+    const classes = ScoreSheetStyles();
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    // if (!auth.isAuthenticated) {
-    //     return <Redirect to="/auth" />;
-    // }
+    if (!localStorage.getItem('appilityAuth')) {
+        return <Redirect to="/auth" />;
+    }
 
     return (
         <Grid container spacing={3}>
@@ -39,10 +26,4 @@ const ScoreSheet = ({ match, auth }) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        auth: state.auth
-    };
-};
-
-export default connect(mapStateToProps)(ScoreSheet);
+export default ScoreSheet;
