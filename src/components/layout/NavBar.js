@@ -107,7 +107,7 @@ const NavBar = props => {
     };
 
     const renderFullNav = () => {
-        if (localStorage.getItem('appilityAuth')) {
+        if (props.auth.isVerified) {
             return (
                 <React.Fragment>
                     <Button color="inherit">

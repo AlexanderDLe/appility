@@ -30,6 +30,8 @@ Appility leverages serverless architecture for its backend. The benefits of serv
 
 -   API Gateway - All API services are hosted on API Gateway, which acts as a "front door" for all API requests. API Gateway handles all tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls, CORS support, authorization, etc. I use API Gateway to accept/validate API calls and forward them to Lambda for processing.
 
+-   API Gateway is used to provide authentication in conjunction with AWS Cognito. Currently, all API calls to API Gatway require a user to include a JwtToken provided by AWS Cognito. Without a valid JwtToken, API Gateway blocks the call via the Method Request; if a valid JwtToken is provided, then that the user identifer is extracted from the token within the mapping parameters via "\$context.authorizer.claims.sub" within Integration Request.
+
 <img src="images/Lambda.png" >
 
 -   Lambda - While API Gateway acts as the "front door" to my serverless backend, Lambda does all the heavy lifting when it comes to processing requests, interacting with the database, and returning the appropriate response. An example of my Lambda usage is handling get requests: When API Gateway receives a GET request, it forwards all the relevant information including the user ID to the appropriate Lambda function. The Lambda function then takes the user ID, fetches the data from DynamoDB, then returns the data back to API Gateway, which is returned to the user as a response.
@@ -54,4 +56,10 @@ I leverage AWS' CICD process to seamlessly deploy Appility.
 
 -   S3 - Upon CodeBuild completion, CodeDeploy takes the resulting build directory and stores it in an S3 Bucket that is configured to host websites.
 
+<img src="images/CloudFront.png" >
+
 -   CloudFront - CloudFront is AWS' Content Delivery Network (CDN) service. I leverage CloudFront to distribute the contents of my website contained in the S3 bucket for best performance throughout the network.
+
+<img src="images/ACM.png" >
+
+-   Amazon Certificate Manager - SSL certification is provide freely by ACM; this ensures all information in-flight is sent securely using encryption.
