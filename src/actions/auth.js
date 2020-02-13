@@ -12,7 +12,6 @@ import { getScores } from './quiz';
 
 export const fetchUserLogic = user => async dispatch => {
     try {
-        console.log(user);
         let name = user.username;
         if (name.slice(0, 8) === 'Facebook') name = user.attributes.name;
         if (name.slice(0, 6) === 'Google') name = user.attributes.name;
@@ -45,37 +44,11 @@ export const fetchUser = () => async dispatch => {
                 });
                 dispatch(fetchUserLogic(userB));
             } catch (error) {
-                localStorage.removeItem('appilityAuth');
-                localStorage.removeItem('appilityUser');
+                localStorage.clear();
             }
         }, 500);
     }
 };
-// export const fetchUser = () => async dispatch => {
-//     try {
-//         const user = await Auth.currentAuthenticatedUser({
-//             bypassCache: true
-//         });
-//         console.log(user);
-//         let name = user.username;
-//         if (name.slice(0, 8) === 'Facebook') name = user.attributes.name;
-//         if (name.slice(0, 6) === 'Google') name = user.attributes.name;
-//         localStorage.setItem('appilityAuth', 'true');
-//         localStorage.setItem('appilityUser', name);
-//         dispatch({
-//             type: AUTH_SUCCESS,
-//             payload: {
-//                 username: name,
-//                 id: user.attributes.sub
-//             }
-//         });
-//         dispatch(getScores());
-//     } catch (error) {
-//         console.log(error);
-//         localStorage.removeItem('appilityAuth');
-//         localStorage.removeItem('appilityUser');
-//     }
-// };
 
 export const logoutUser = () => async dispatch => {
     await Auth.signOut();

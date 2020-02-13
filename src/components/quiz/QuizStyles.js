@@ -156,6 +156,6 @@ export const QuizQuestionPresenter = makeStyles(theme => ({
         cursor: 'pointer'
     },
     checkbox: {
-        color: 'white'
+        color: 'white !important'
     }
 }));

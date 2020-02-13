@@ -13,9 +13,6 @@ Amplify.configure(awsconfig);
 
 const App = props => {
     useEffect(() => {
-        console.log(process.env);
-        console.log(awsconfig.Auth.oauth.redirectSignIn);
-        console.log(awsconfig.Auth.oauth.redirectSignOut);
         props.fetchUser();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

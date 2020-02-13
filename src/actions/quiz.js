@@ -22,7 +22,6 @@ export const getScores = () => async dispatch => {
     try {
         let header = await getHeader();
         const response = await axios.get(`${API}`, header);
-        console.log(response);
         dispatch({
             type: SET_SCORES,
             payload: response.data
