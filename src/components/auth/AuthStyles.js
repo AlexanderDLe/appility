@@ -61,6 +61,6 @@ export const authTextFieldStyles = makeStyles({
     },
     notchedOutline: {
         borderWidth: '1px',
-        borderColor: theme.palette.secondary.light
+        borderColor: '#ffecb3 !important'
     }
 });
