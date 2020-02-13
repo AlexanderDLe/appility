@@ -44,6 +44,8 @@ Appility leverages serverless architecture for its backend. The benefits of serv
 
 -   Cognito - Cognito manages authorization via User Pools and User Identities. Appility was formerly built upon a Node Express backend which utilized Passport for cookie-session authentication; while this worked - it required a lot of cost in time and effort to implement the different strategies and validations. With Cognito, the underlying authentication logic is already implemented in their system, thus saving plenty of time that could otherwise be used on other aspects of development. It also offers many features out-of-the-box such as code confirmation, password resets, attribute changes, etc.
 
+-   Cognito also smoothly integrates with other external providers such as Google, Facebook, etc. Once the appropriate application client ids/keys are integrated with Cognito, you can enable a typical oAuth authentication flow.
+
 ### Deployment
 
 I leverage AWS' CICD process to seamlessly deploy Appility.
@@ -52,7 +54,7 @@ I leverage AWS' CICD process to seamlessly deploy Appility.
 
 -   CodePipeline - CodePipeline is the orchestrator of the entire CICD process. The process begins when it detects a push to my Appility Github repository.
 
--   CodeBuild - Once the Github webhook triggers the CICD process, CodeBuild takes the source content within the Appility Github repository and begins the build process. The build process is guided by the buildspec.yml file that contains various instructions for the various build stages. Once the build process is complete, it yields a build directory containing the content for the newly-built application.
+-   CodeBuild - Once Github detects a push on the master branch, it triggers the CICD process on AWS. CodeBuild takes the source content within the Appility Github repository and begins the build process. The build process is guided by the buildspec.yml file that contains various instructions for the various build stages. Once the build process is complete, it yields a build directory containing the content for the newly-built application.
 
 -   S3 - Upon CodeBuild completion, CodeDeploy takes the resulting build directory and stores it in an S3 Bucket that is configured to host websites.
 
