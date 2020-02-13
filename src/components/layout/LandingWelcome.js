@@ -32,8 +32,7 @@ export default props => {
             <div className={classes.text}>
                 <h1>
                     Welcome{' '}
-                    {props.auth.isVerified &&
-                    localStorage.getItem('appilityAuth') === 'true'
+                    {props.auth.isVerified
                         ? ` ${props.auth.username}`
                         : ' to Appility'}
                 </h1>

@@ -26,6 +26,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 username: null,
+                id: null,
                 isVerified: null
             };
         case AUTH_NEED_CONFIRM:

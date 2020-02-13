@@ -1,7 +1,5 @@
 const env = process.env.NODE_ENV;
 let redirectURL;
-// Change Cognito app client redirect URLs depending on dev/prod
-// Cognito App client explicitly redirects to only either localhost:3000 or appility.
 if (env === 'development') redirectURL = 'http://localhost:3000/';
 if (env === 'production') redirectURL = 'https://appility.co/';
 

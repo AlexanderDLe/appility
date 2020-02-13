@@ -140,7 +140,7 @@ const NavBar = props => {
 
     const renderMenuNav = () => {
         const renderMenuItems = () => {
-            if (props.auth.isAuthenticated) {
+            if (props.auth.isVerified) {
                 let navArray = [
                     <MenuItem key={0} onClick={handleClose}>
                         <Link className={classes.menuItem} to="/quizscores">
