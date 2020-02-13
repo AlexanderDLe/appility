@@ -40,7 +40,7 @@ Appility uses serverless architecture to manage its backend. The benefits of ser
 
 <img src="ReadMeImages/Cognito.png" >
 
--   Cognito - Cognito manages authorization via User Pools and User Identities. Appility was formerly built upon a Node Express backend which utilized Passport for cookie-session authentication; while this worked - it requried a lot of cost in time and effort in implementing the different strategies and validations. With Cognito, the underlying authentication logic is already implemented in their system, thus saving plenty of time that could otherwise be used on other aspects of development. It also offers many features out-of-the-box such as code confirmation, password resets, attribute changes, etc.
+-   Cognito - Cognito manages authorization via User Pools and User Identities. Appility was formerly built upon a Node Express backend which utilized Passport for cookie-session authentication; while this worked - it required a lot of cost in time and effort to implement the different strategies and validations. With Cognito, the underlying authentication logic is already implemented in their system, thus saving plenty of time that could otherwise be used on other aspects of development. It also offers many features out-of-the-box such as code confirmation, password resets, attribute changes, etc.
 
 ### Deployment
 
@@ -52,6 +52,6 @@ I leverage AWS' CICD process to seamlessly deploy Appility.
 
 -   CodeBuild - Once the Github webhook triggers the CICD process, CodeBuild takes the source content within the Appility Github repository and begins the build process. The build process is guided by the buildspec.yml file that contains various instructions for the various build stages. Once the build process is complete, it yields a build directory containing the content for the newly-built application.
 
--   CodeDeploy - Upon CodeBuild completion, CodeDeploy takes the resulting build directory and stores it in an S3 Bucket that is configured to host websites.
+-   S3 - Upon CodeBuild completion, CodeDeploy takes the resulting build directory and stores it in an S3 Bucket that is configured to host websites.
 
 -   CloudFront - CloudFront is AWS' Content Delivery Network (CDN) service. I leverage CloudFront to distribute the contents of my website contained in the S3 bucket for best performance throughout the network.
