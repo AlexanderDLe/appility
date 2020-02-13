@@ -1,6 +1,12 @@
+<img src="ReadMeImages/Welcome.png" >
+
 # Welcome to Appility!
 
-Appility is a completely serverless application leveraging AWS. Appility has various quizzes on various technologies ranging from React to AWS itself. It features user authentication, persistent score tracking & updating, responsiveness, and strong performance.
+Appility is a completely serverless application leveraging AWS.
+
+[Please visit the website at appility.co](https://appility.co)
+
+Appility has various quizzes on various technologies ranging from React to AWS itself. It features user authentication, persistent score tracking & updating, responsiveness, and strong performance.
 
 ## Technologies
 
@@ -24,7 +30,7 @@ Appility uses serverless architecture to manage its backend. The benefits of ser
 
 -   DynamoDB - DynamoDB is a NoSQL database that is also serverless. It scales automatically and this lends itself to ease of use and cost savings. I use DynamoDB to store various quiz scores on various user records.
 
--   Cognito - Cognito manages authorization via User Pools.
+-   Cognito - Cognito manages authorization via User Pools and User Identities. Appility was formerly built upon a Node Express backend which utilized Passport for cookie-session authentication; while this worked - it requried a lot of cost in time and effort in implementing the different strategies and validations. With Cognito, the underlying authentication logic is already implemented in their system, thus saving plenty of time that could otherwise be used on other aspects of development.
 
 ### Deployment
 
@@ -36,4 +42,4 @@ I leverage AWS' CICD process to seamlessly deploy Appility.
 
 -   CodeDeploy - Upon CodeBuild completion, CodeDeploy takes the resulting build directory and stores it in an S3 Bucket that is configured to host websites.
 
--   CloudFront - CloudFront is AWS' Content Delivery Network (CDN) service. I leverage CloudFront to distribute the contents of my website contained in the S3 bucket.
+-   CloudFront - CloudFront is AWS' Content Delivery Network (CDN) service. I leverage CloudFront to distribute the contents of my website contained in the S3 bucket for best performance throughout the network.
