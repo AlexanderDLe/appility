@@ -57,7 +57,7 @@ export const authTextFieldStyles = makeStyles({
     textField: {
         width: '85%',
         maxWidth: '350px',
-        margin: '10px'
+        margin: '10px !important'
     },
     notchedOutline: {
         borderWidth: '1px',
