@@ -22,7 +22,7 @@ export const ScoreContentStyles = makeStyles(theme => ({
         color: 'white'
     },
     loader: {
-        backgroundColor: theme.palette.secondary.light
+        backgroundColor: '#ffe082 !important'
     }
 }));
 

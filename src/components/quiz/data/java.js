@@ -75,31 +75,35 @@ const JavaData = {
         },
         {
             id: 7,
-            question: '',
+            question:
+                'A key benefit is that Java code gets compiled once rather than needing to be recompiled for different operating systems. This is known as ___.',
             options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            answer: 'Platform Independence',
+            answerDescription: 'Platform Independence'
         },
         {
             id: 8,
-            question: '',
+            question:
+                '___ occurs when there are different method signatures with the same name but different type parameters.',
             options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            answer: 'Method overloading',
+            answerDescription: 'Method overloading'
         },
         {
             id: 9,
-            question: '',
+            question:
+                'When Java sees the ___ keyword, it allocates memory for the new object. Java also looks for a constructor and calls it.',
             options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            answer: 'new',
+            answerDescription: 'new'
         },
         {
             id: 10,
-            question: '',
+            question:
+                'The ___ keyword tells Java you want to reference an instance variable.',
             options: ['', '', '', ''],
-            answer: '',
-            answerDescription: ''
+            answer: 'this',
+            answerDescription: 'this'
         },
         {
             id: 11,
@@ -229,6 +233,216 @@ const JavaData = {
         },
         {
             id: 29,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 30,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 31,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 32,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 33,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 34,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 35,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 36,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 37,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 38,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 39,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 40,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 41,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 42,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 43,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 44,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 45,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 46,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 47,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 48,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 49,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 50,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 51,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 52,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 53,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 54,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 55,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 56,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 57,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 58,
+            question: '',
+            options: ['', '', '', ''],
+            answer: '',
+            answerDescription: ''
+        },
+        {
+            id: 59,
             question: '',
             options: ['', '', '', ''],
             answer: '',

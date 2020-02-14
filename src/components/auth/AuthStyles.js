@@ -26,7 +26,7 @@ export const authFormStyles = makeStyles({
         maxWidth: '350px'
     },
     loader: {
-        backgroundColor: theme.palette.secondary.light
+        backgroundColor: '#ffe082 !important'
     }
 });
 
