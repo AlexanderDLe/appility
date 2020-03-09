@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import { Grid, Paper } from '@material-ui/core';
 import { QuizSheetStyles } from './QuizStyles';
 
@@ -11,9 +11,9 @@ const QuizSheet = ({ match }) => {
         window.scrollTo(0, 0);
     }, []);
 
-    if (!localStorage.getItem('appilityAuth')) {
-        return <Redirect to="/auth" />;
-    }
+    // if (!localStorage.getItem('appilityAuth')) {
+    //     return <Redirect to="/auth" />;
+    // }
 
     return (
         <Grid container spacing={3}>
